@@ -1,0 +1,192 @@
+{
+ "generatedAt": "2026-11-13",
+ "categories": [
+  {
+   "id": "writing",
+   "zh": "写作与内容",
+   "en": "Writing & Content"
+  }
+ ],
+ "skills": [
+  {
+   "name": "chinese-novelist",
+   "description": "分章节创作引人入胜的中文小说。支持各种题材（悬疑/言情/奇幻/科幻/历史等），支持10-50章长篇创作，每章3000-5000字，结尾设置悬念钩子。强调深度润色去除AI痕迹，确保文字自然流畅。 当用户要求：写小说、创作故事、分章节写作、连续剧情、章节悬念、长篇小说时使用。",
+   "category": "writing",
+   "source": {
+    "label": "penglonghuang/chinese-novelist-skill",
+    "url": "https://github.com/penglonghuang/chinese-novelist-skill"
+   }
+  },
+  {
+   "name": "doc-coauthoring",
+   "description": "Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc works for readers. Trigger when user mentions writing docs, creating proposals, drafting specs, or similar documentation tasks.",
+   "category": "writing",
+   "source": {
+    "label": "未记录",
+    "url": null
+   }
+  },
+  {
+   "name": "humanizer",
+   "description": "Rewrite AI-sounding text so it reads like the writer without changing what it says. Use when editing or reviewing prose for AI tells: not-X-but-Y contrasts, one-line closers, staged openers, forced triads, dashes everywhere, inflated claims, sales language, stock AI words, bold labels, or filler. Based on Wikipedia's \"Signs of AI writing.",
+   "category": "writing",
+   "source": {
+    "label": "未记录",
+    "url": null
+   }
+  },
+  {
+   "name": "internal-comms",
+   "description": "A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).",
+   "category": "writing",
+   "source": {
+    "label": "未记录",
+    "url": null
+   }
+  },
+  {
+   "name": "liurun-bookwriter",
+   "description": "刘润风格的商业专栏创作 skill。基于刘润28年商业写作经验与《我这28年的写作心法》提炼的完整创作框架。 支持3种结构（3段式、10点式、32条）、SCQA 逻辑势能（ASC/CSA/QSCA）、5商派 SCA++ 模板、8 大心法（同理心、对象感、君子自污、逻辑势能、5商派、3 种结构、单反聚焦、用词游标卡尺）、7 种特殊内容块、12 项质量检查。 用途：创作商业评论、商业方法论、案例拆解、热点回应、企业家专访、参访游记等长文 / 商业专栏。当用户说\"写一篇商业评论\"、\"用刘润的风格写\"、\"给我来一篇32条\"、\"写一篇10点式\"、\"做一篇ASC\"时触发。 即使用户说\"帮我写一篇商业洞察文章\"、\"写一篇方法论\"、\"写一篇企业家专访\"，只要涉及商业长文也可触发。 不要在用户只是问\"帮我写个朋友圈文案\"、\"解释一下XX概念\"等短文需求时触发。",
+   "category": "writing",
+   "source": {
+    "label": "未记录",
+    "url": null
+   }
+  },
+  {
+   "name": "luozhenyu-bookwriter",
+   "description": "罗振宇风格的认知/启发/商业长文创作 skill。基于罗振宇 14 年内容创作经验（2012-2026），从《罗辑思维》视频文稿、「罗胖60秒」、出版书（《成大事者不纠结》《阅读的方法》《启发》）、「时间的朋友」跨年演讲（2015至今共11场）、《文明之旅》提炼的完整创作框架。 支持 3 种结构（罗胖60秒 / 罗辑思维长文 / 跨年演讲稿）、3 种 SCQA 变体（TQA 触发-问题-答案 / CAA 具体-抽象-行动 / PEI 现象-解释-启发）、12 大心法（躬身入局、长期主义、启发式输出、一具体就深刻、一行动就创新、一困惑就出门、故事细节、金句主义、打比方、举例降认知、动词驱动、谦卑自嘲）、7 种核心 callout（+6 种扩展）、12 项质量检查。 **核心原则**：学罗振宇的风格，不抄罗振宇的句子。每篇文章的金句、故事、比喻都必须为当前主题现场原创，禁止反复套用代表作原句。 用途：创作商业评论、认知升级文章、个人成长方法论、热点回应、AI时代应对、历史人物拆解、企业家故事、长期主义主张、跨年演讲稿/小型演讲稿、启发式短文等。当用户说\"用罗振宇的风格写\"、\"写一篇60秒\"、\"做一篇跨年演讲体\"、\"写一篇启发\"、\"写一篇认知升级\"时触发。 即使用户说\"写一篇读书分享\"、\"写一篇 AI 时代普通人怎么办\"、\"写一篇个人成长文章\"，只要涉及认知/启发/商业长文也可触发。 不要在用户只是问\"帮我写个朋友圈文案\"、\"解释一下XX概念\"等短文需求时触发。",
+   "category": "writing",
+   "source": {
+    "label": "未记录",
+    "url": null
+   }
+  },
+  {
+   "name": "vibe-knowledge-film",
+   "description": "抖音「Vibe知识大赏」式的无旁白知识短片：2–5 分钟、16:9、没有人声，观众读底部一行字幕，同时看屏上把这句话演出来。 核心是讲解设计：给每个概念找一个外行认得的形象，画得像它本身（不用点、线、圈代替），句子里说到什么屏上就是什么、动词真的发生； 提问、命名、结论不硬配图。全片由代码逐帧画出（Canvas + seek(t) + Playwright + ffmpeg）。 内含四条参考片的逐句拆解、六种画法、找形象的方法、分镜表格式、两套外观、渲染引擎和合成配乐。 用户说\"做一条 vibe 知识大赏的视频\"\"像《信息论·惊奇之学》《运气的形状》《超常刺激》《自指》那样的片子\"\"代码直出的知识短片\"\"没有旁白的字幕科普片\"\"把这个概念直观地讲清楚\"， 或者给了一个题目、一份文案要做成这种片子时使用。只做 16:9 横屏。有人声口播的讲解片不用这个。",
+   "category": "writing",
+   "source": {
+    "label": "HeyChengC/vibe-knowledge-film",
+    "url": "https://github.com/HeyChengC/vibe-knowledge-film"
+   }
+  },
+  {
+   "name": "wewrite",
+   "description": "微信公众号内容主入口：完成选题、素材、写作和审稿，并按用户要求独立追加配图、排版或草稿箱发布。 也负责把风格设置、学习修改、数据复盘和多平台改写分发给对应 wewrite-* 模块。 触发关键词：公众号、微信文章、微信推文、草稿箱、微信排版、写公众号、写一篇。 通用文章、博客、邮件、短视频和网站 SEO 不触发。",
+   "category": "writing",
+   "source": {
+    "label": "未记录",
+    "url": null
+   }
+  },
+  {
+   "name": "wewrite-learn",
+   "description": "WeWrite 自学习模块：从用户的人工修改中学习写作偏好（playbook 飞轮）、导入范文建风格库、 从公众号文章学习排版主题。 触发关键词：学习我的修改、我改了学习一下、导入范文、学习这篇文章、查看范文库、 学习排版、学排版。 不应被通用的\"学习\"、\"总结这篇文章\"触发——需要公众号/WeWrite 上下文。",
+   "category": "writing",
+   "source": {
+    "label": "未记录",
+    "url": null
+   }
+  },
+  {
+   "name": "wewrite-publish",
+   "description": "WeWrite 排版发布模块：把 Markdown 做成微信预览，或在用户明确授权后推入公众号草稿箱； 也支持主题画廊和图片帖。只处理微信公众号。",
+   "category": "writing",
+   "source": {
+    "label": "未记录",
+    "url": null
+   }
+  },
+  {
+   "name": "wewrite-review",
+   "description": "WeWrite 编辑审稿模块：核对任务、事实来源、观点和实用性，必要时直接改稿，只有通过编辑门槛 才生成公众号成稿。也响应“检查这篇文章”。通用代码 review 和网站 SEO 不触发。",
+   "category": "writing",
+   "source": {
+    "label": "未记录",
+    "url": null
+   }
+  },
+  {
+   "name": "wewrite-rewrite",
+   "description": "WeWrite 多平台改写模块：把一篇公众号文章（或指定源稿）内容级真改写成其他平台版本， 当前支持小红书（图文笔记）、抖音（口播脚本），检查编辑质量与源稿相似度。 触发关键词：改写成小红书、小红书版、抖音版、口播稿、多平台分发、一稿多发、平台改写。 不应被\"翻译\"、\"缩写\"、\"换个标题\"触发——那些是单平台编辑动作。",
+   "category": "writing",
+   "source": {
+    "label": "未记录",
+    "url": null
+   }
+  },
+  {
+   "name": "wewrite-stats",
+   "description": "WeWrite 数据复盘模块：拉取微信公众号文章的阅读/分享/点赞数据，回填历史记录并给出 选题、标题、框架的调整建议。 触发关键词：看看文章数据、文章数据怎么样、效果复盘、看看表现、阅读量怎么样。 需要公众号/WeWrite 上下文；不应被通用的\"数据分析\"触发。",
+   "category": "writing",
+   "source": {
+    "label": "未记录",
+    "url": null
+   }
+  },
+  {
+   "name": "wewrite-style",
+   "description": "WeWrite 风格设置模块：首次使用引导（onboard）+ 重设公众号写作风格配置（style.yaml）。 触发关键词：重新设置风格、修改风格配置、设置公众号风格、公众号首次设置、换写作人格、 改排版主题偏好。也由主入口 wewrite 在缺 style.yaml 时自动激活。 不应被通用的\"改文风\"、\"润色\"触发——那是编辑动作，不是配置动作。",
+   "category": "writing",
+   "source": {
+    "label": "未记录",
+    "url": null
+   }
+  },
+  {
+   "name": "wewrite-topic",
+   "description": "WeWrite 选题模块：抓取全网热点 + 垂类高频需求 + 历史表现分析 + 搜索需求，为公众号 生成 10 个评分排序的选题（含高频角度与常青选题）。 触发关键词：公众号选题、找几个选题、今天写什么、热点选题、热搜选题、爆款选题、选题建议。 需要公众号/微信上下文；不应被抖音/短视频/网站的选题需求触发。",
+   "category": "writing",
+   "source": {
+    "label": "未记录",
+    "url": null
+   }
+  },
+  {
+   "name": "wewrite-visual",
+   "description": "WeWrite 视觉模块：为公众号文章生成封面和必要的内文配图，或只交付提示词。触发词： 封面图、公众号配图、给文章配图、换封面。通用绘图和 logo 设计不触发。",
+   "category": "writing",
+   "source": {
+    "label": "未记录",
+    "url": null
+   }
+  },
+  {
+   "name": "wewrite-write",
+   "description": "WeWrite 写作模块：在公众号选题明确后完成文章任务书、主张与证据、素材和初稿。由主流程调用， 或响应“就这个选题写正文”。通用写作、博客和短视频文案不触发。",
+   "category": "writing",
+   "source": {
+    "label": "未记录",
+    "url": null
+   }
+  },
+  {
+   "name": "writing-beats",
+   "description": "Writing, exploit; assemble raw material into a journey of beats, grounding each term before a beat leans on it.",
+   "category": "writing",
+   "source": {
+    "label": "mattpocock/skills",
+    "url": "https://github.com/mattpocock/skills"
+   }
+  },
+  {
+   "name": "writing-fragments",
+   "description": "Writing, explore: mine raw fragments, no structure yet.",
+   "category": "writing",
+   "source": {
+    "label": "mattpocock/skills",
+    "url": "https://github.com/mattpocock/skills"
+   }
+  },
+  {
+   "name": "writing-shape",
+   "description": "Writing, exploit: shape raw material into an article, paragraph by paragraph.",
+   "category": "writing",
+   "source": {
+    "label": "mattpocock/skills",
+    "url": "https://github.com/mattpocock/skills"
+   }
+  }
+ ]
+}

@@ -1,0 +1,7 @@
+inventory*.json
+inventory-review.md
+node_modules/
+.vercel/
+.DS_Store
+TASK.md
+tools/private-skills.local.json

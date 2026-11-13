@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Skill Shelf — a personal collection of locally used AI agent skills, browsable by category and searchable by name or description.">
+  <meta name="theme-color" content="#f6f5f0">
+  <title>Skill Shelf</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23245047'/%3E%3Cpath d='M16 17h8v29h-8zm12 0h8v29h-8zm12 3 7-2 8 28-7 2z' fill='%23f6f5f0'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to skills</a>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="masthead">
+        <span class="wordmark"><span class="shelf-mark" aria-hidden="true">▥</span> Skill Shelf</span>
+        <div class="preferences">
+          <button id="language-toggle" type="button" aria-label="切换到中文">中 <span aria-hidden="true">/</span> EN</button>
+          <button id="theme-toggle" type="button" aria-label="Switch to dark theme"><span id="theme-icon" aria-hidden="true">◐</span> <span id="theme-label">Dark</span></button>
+        </div>
+      </div>
+      <div class="intro">
+        <p class="eyebrow" data-i18n="eyebrow">A PERSONAL COLLECTION</p>
+        <h1>Skill Shelf<span class="title-dot" aria-hidden="true">.</span></h1>
+        <p class="subtitle" data-i18n="subtitle">AI agent skills I use locally</p>
+        <div class="metadata"><span id="skill-count">—</span><span class="meta-divider" aria-hidden="true"></span><span><span data-i18n="updated">Updated</span> <time id="generated-date">—</time></span></div>
+      </div>
+    </header>
+    <main id="main">
+      <section class="browse-controls" aria-label="Browse skills" id="browse-controls">
+        <div class="section-heading"><h2 data-i18n="collection">The collection</h2><span class="section-rule" aria-hidden="true"></span></div>
+        <div class="filter-row">
+          <div id="category-tabs" class="category-tabs" role="tablist" aria-label="Skill categories"></div>
+          <div class="search-field"><label for="search" data-i18n="searchLabel">Search skills</label><div class="search-input"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search name or description…" autocomplete="off" aria-controls="skills-panel"></div></div>
+        </div>
+      </section>
+      <p id="results-status" class="results-status" role="status" aria-live="polite">Loading skills…</p>
+      <div id="skills-panel" role="tabpanel" tabindex="0" aria-busy="true">
+        <div id="skills-grid" class="skills-grid"></div>
+        <div id="empty-state" class="message-state" hidden><span aria-hidden="true">∅</span><h2 data-i18n="emptyTitle">No skills found</h2><p data-i18n="emptyBody">Try another keyword or category.</p><button id="reset-filters" type="button" data-i18n="reset">Clear filters</button></div>
+        <div id="error-state" class="message-state error-state" role="alert" hidden><h2 data-i18n="errorTitle">The shelf could not be loaded</h2><p data-i18n="errorBody">Please refresh to try again. If previewing locally, serve this folder with python3 -m http.server.</p></div>
+      </div>
+      <noscript><p class="message-state">请启用 JavaScript 以加载技能列表。 / Enable JavaScript to load the skill collection.</p></noscript>
+    </main>
+    <footer><p data-i18n="footer">Built from local skill metadata. Descriptions belong to their authors.</p><a href="https://github.com/suzy56/skill-showcase" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></footer>
+  </div>
+</body>
+</html>
