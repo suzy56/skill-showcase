@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Skill Shelf — a personal collection of locally used AI agent skills, browsable by category and searchable by name or description.">
-  <meta name="theme-color" content="#f6f5f0">
+  <meta name="theme-color" content="#F3F5FA">
   <title>Skill Shelf</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23245047'/%3E%3Cpath d='M16 17h8v29h-8zm12 0h8v29h-8zm12 3 7-2 8 28-7 2z' fill='%23f6f5f0'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23FFC53D' stroke='%230B0B0F' stroke-width='5' d='M3 3h58v58H3z'/%3E%3Cpath d='M16 17h8v29h-8zm12 0h8v29h-8zm12 3 7-2 8 28-7 2z' fill='%230B0B0F'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
 </head>
@@ -15,17 +15,25 @@
   <div class="page-shell">
     <header class="site-header">
       <div class="masthead">
-        <span class="wordmark"><span class="shelf-mark" aria-hidden="true">▥</span> Skill Shelf</span>
+        <span class="wordmark"><svg class="shelf-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 5h5v20H5zm9 0h5v20h-5zm9 2 4-1 4 18-4 1z" fill="currentColor"/></svg> Skill Shelf</span>
         <div class="preferences">
           <button id="language-toggle" type="button" aria-label="切换到中文">中 <span aria-hidden="true">/</span> EN</button>
           <button id="theme-toggle" type="button" aria-label="Switch to dark theme"><span id="theme-icon" aria-hidden="true">◐</span> <span id="theme-label">Dark</span></button>
         </div>
       </div>
       <div class="intro">
-        <p class="eyebrow" data-i18n="eyebrow">A PERSONAL COLLECTION</p>
-        <h1>Skill Shelf<span class="title-dot" aria-hidden="true">.</span></h1>
-        <p class="subtitle" data-i18n="subtitle">AI agent skills I use locally</p>
-        <div class="metadata"><span id="skill-count">—</span><span class="meta-divider" aria-hidden="true"></span><span><span data-i18n="updated">Updated</span> <time id="generated-date">—</time></span></div>
+        <div class="hero-copy">
+          <p class="eyebrow" data-i18n="eyebrow">A PERSONAL COLLECTION</p>
+          <h1 class="hero-title"><span data-i18n="headline">Give your agent</span><br><span class="title-highlight" data-i18n="headlineAccent">a skill shelf.</span></h1>
+          <p class="subtitle" data-i18n="subtitle">AI agent skills I use locally</p>
+          <p class="metadata"><span data-i18n="updated">Updated</span> <time id="generated-date">—</time></p>
+        </div>
+        <dl id="hero-stats" class="hero-stats" aria-label="Collection statistics">
+          <div class="stat-card"><dt data-i18n="statSkills">SKILLS</dt><dd id="skill-count">—</dd></div>
+          <div class="stat-card"><dt data-i18n="statCategories">CATEGORIES</dt><dd id="category-count">—</dd></div>
+          <div class="stat-card"><dt data-i18n="statCircuits">CIRCUITS</dt><dd id="circuit-count">—</dd></div>
+          <div class="stat-card"><dt data-i18n="statRepos">UPSTREAM REPOS</dt><dd id="repo-count">—</dd></div>
+        </dl>
       </div>
     </header>
     <main id="main">
@@ -33,7 +41,7 @@
         <div class="section-heading"><h2 data-i18n="collection">The collection</h2><span class="section-rule" aria-hidden="true"></span></div>
         <div class="filter-row">
           <div id="category-tabs" class="category-tabs" role="tablist" aria-label="Skill categories"></div>
-          <div class="search-field"><label for="search" data-i18n="searchLabel">Search skills</label><div class="search-input"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search name or description…" autocomplete="off" aria-controls="skills-panel"></div></div>
+          <div class="search-field"><div class="search-heading"><label for="search" data-i18n="searchLabel">Search skills</label><span class="hits">HITS: <span id="hits-count">—</span></span></div><div class="search-input"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search name or description…" autocomplete="off" aria-controls="skills-panel"></div></div>
         </div>
       </section>
       <p id="results-status" class="results-status" role="status" aria-live="polite">Loading skills…</p>

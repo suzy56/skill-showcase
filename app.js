@@ -3,6 +3,9 @@
 const text = {
   en: {
     skip: 'Skip to skills', eyebrow: 'A PERSONAL COLLECTION', subtitle: 'AI agent skills I use locally',
+    headline: 'Give your agent', headlineAccent: 'a skill shelf.',
+    statSkills: 'SKILLS', statCategories: 'CATEGORIES', statCircuits: 'CIRCUITS', statRepos: 'UPSTREAM REPOS', stats: 'Collection statistics',
+    badge: 'CIRCUIT',
     updated: 'Updated', collection: 'The collection', searchLabel: 'Search skills',
     searchPlaceholder: 'Search name or description…', all: 'All', skills: 'skills',
     loading: 'Loading skills…', emptyTitle: 'No skills found', emptyBody: 'Try another keyword or category.',
@@ -17,6 +20,9 @@ const text = {
   },
   zh: {
     skip: '跳至技能列表', eyebrow: '我的本地技能收藏', subtitle: '我在本地使用的 AI Agent Skills',
+    headline: '给 AI Agent', headlineAccent: '加点技能。',
+    statSkills: '个技能', statCategories: '个分类', statCircuits: '已出图', statRepos: '上游仓库', stats: '技能收藏统计',
+    badge: '已出图',
     updated: '更新于', collection: '技能收藏', searchLabel: '搜索技能',
     searchPlaceholder: '搜索名称或描述…', all: '全部', skills: '个技能',
     loading: '正在加载技能…', emptyTitle: '没有找到技能', emptyBody: '试试其他关键词或分类。',
@@ -66,7 +72,7 @@ function applyTheme() {
   const dark = (theme || (systemTheme.matches ? 'dark' : 'light')) === 'dark';
   document.querySelector('#theme-label').textContent = dark ? t().light : t().dark;
   document.querySelector('#theme-toggle').setAttribute('aria-label', dark ? t().themeLight : t().themeDark);
-  document.querySelector('meta[name="theme-color"]').content = dark ? '#171c19' : '#f6f5f0';
+  document.querySelector('meta[name="theme-color"]').content = dark ? '#0B0B0F' : '#F3F5FA';
 }
 
 function applyLanguage() {
@@ -76,9 +82,13 @@ function applyLanguage() {
   tabs.setAttribute('aria-label', t().categories);
   document.querySelector('#browse-controls').setAttribute('aria-label', t().browse);
   document.querySelector('#language-toggle').setAttribute('aria-label', t().language);
+  document.querySelector('#hero-stats').setAttribute('aria-label', t().stats);
   applyTheme();
   if (data) {
-    document.querySelector('#skill-count').textContent = `${data.skills.length} ${t().skills}`;
+    document.querySelector('#skill-count').textContent = data.skills.length;
+    document.querySelector('#category-count').textContent = data.categories.length;
+    document.querySelector('#circuit-count').textContent = data.skills.filter(skill => skill.circuit).length;
+    document.querySelector('#repo-count').textContent = new Set(data.skills.filter(skill => skill.source.url).map(skill => skill.source.label)).size;
     renderTabs();
     renderSkills();
   } else {
@@ -175,10 +185,12 @@ function makeCard(skill) {
   }
   const parts = [top, title, description, more];
   if (skill.circuit) {
+    card.classList.add('has-circuit');
+    parts.unshift(element('span', 'circuit-badge', t().badge));
     const circuit = element('a', 'circuit-link');
     circuit.href = skill.circuit.href;
-    circuit.append(element('span', 'circuit-label', t().circuit), element('span', 'circuit-meta', t().circuitMeta(skill.circuit.nodes, skill.circuit.edges, skill.circuit.warnings)));
-    parts.push(circuit);
+    circuit.append(element('span', 'circuit-label', t().circuit));
+    parts.push(circuit, element('p', 'circuit-meta', t().circuitMeta(skill.circuit.nodes, skill.circuit.edges, skill.circuit.warnings)));
   }
   card.append(...parts, source);
   return card;
@@ -221,6 +233,7 @@ function renderSkills() {
   panel.setAttribute('aria-labelledby', tabs.querySelector('[aria-selected="true"]').id);
   document.querySelector('#empty-state').hidden = visible.length !== 0;
   status.textContent = t().results(visible.length, data.skills.length);
+  document.querySelector('#hits-count').textContent = visible.length;
   requestAnimationFrame(updateOverflow);
 }
 
