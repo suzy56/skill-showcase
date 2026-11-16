@@ -10,6 +10,7 @@ const text = {
     errorBody: 'Please refresh to try again. If previewing locally, serve this folder with python3 -m http.server.',
     footer: 'Built from local skill metadata. Descriptions belong to their authors.',
     more: 'More', less: 'Less', missing: 'Source not recorded', family: 'family',
+    circuit: 'View logic circuit', circuitMeta: (n, e, w) => `${n} nodes · ${e} edges · ${w} gaps`,
     categories: 'Skill categories', browse: 'Browse skills', dark: 'Dark', light: 'Light',
     themeDark: 'Switch to dark theme', themeLight: 'Switch to light theme', language: '切换到中文',
     results: (count, total) => `Showing ${count} of ${total} skills`,
@@ -23,6 +24,7 @@ const text = {
     errorBody: '请刷新页面重试。本地预览时，请在此目录运行 python3 -m http.server。',
     footer: '基于本地技能元数据构建。描述版权归各自作者所有。',
     more: '展开', less: '收起', missing: '来源未记录', family: '系列',
+    circuit: '查看逻辑电路图', circuitMeta: (n, e, w) => `${n} 节点 · ${e} 连线 · ${w} 处缺口`,
     categories: '技能分类', browse: '浏览技能', dark: '深色', light: '浅色',
     themeDark: '切换到深色主题', themeLight: '切换到浅色主题', language: 'Switch to English',
     results: (count, total) => `显示 ${count} / ${total} 个技能`,
@@ -167,10 +169,18 @@ function makeCard(skill) {
     arrow.setAttribute('aria-hidden', 'true');
     link.append(arrow);
     source.append(link);
+    if (skill.circuit?.license) source.append(element('span', 'source-license', ` · ${skill.circuit.license}`));
   } else {
     source.append(element('span', 'source-missing', t().missing));
   }
-  card.append(top, title, description, more, source);
+  const parts = [top, title, description, more];
+  if (skill.circuit) {
+    const circuit = element('a', 'circuit-link');
+    circuit.href = skill.circuit.href;
+    circuit.append(element('span', 'circuit-label', t().circuit), element('span', 'circuit-meta', t().circuitMeta(skill.circuit.nodes, skill.circuit.edges, skill.circuit.warnings)));
+    parts.push(circuit);
+  }
+  card.append(...parts, source);
   return card;
 }
 

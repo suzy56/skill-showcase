@@ -1,0 +1,712 @@
+{
+  "title": "writing-shape — 源文档审计语义图",
+  "description": "把用户给定的只读原始素材塑造成独立文章：先确认读者前置知识和开头，再逐块协商、即时落盘，由用户决定何时完成。图中仅保留原文明确的顺序、条件与循环；保存路径、缺料和改写的未说明衔接保留为缺口，不代表已执行写作。",
+  "sourceMarkdown": "---\r\nname: writing-shape\r\ndescription: \"Writing, exploit: shape raw material into an article, paragraph by paragraph.\"\r\ndisable-model-invocation: true\r\n---\r\n\r\n<what-to-do>\r\n\r\nThe user has passed (or will pass) a markdown file of raw material. Treat it as the input pile: anything from a tidy list of fragments to a wall of unstructured prose to a transcript. The format does not matter. Read it end-to-end before doing anything else.\r\n\r\nThen run a shaping session that produces a separate article document. This is **exploit**: the exploring is done, the pile is fixed: commit to a structure and mine the pile to fill it. Do not edit the raw material file: it is read-only to this skill.\r\n\r\nIf the user did not say where to save the article, ask once and remember the path.\r\n\r\n</what-to-do>\r\n\r\n<supporting-info>\r\n\r\n## The loop\r\n\r\n1. **Read the pile.** Read the input file in full. Form a sense of what's in it.\r\n2. **Establish the prerequisites.** Settle with the user what the reader knows walking in: the concepts that are **grounded** from the start. Everything else must be grounded by a block before a later block can lean on it. See [Grounding](#grounding).\r\n3. **Draft 2–3 candidate openings.** Each opening should imply a different thesis or angle for the article. Show all of them. Force the user to pick or compose a hybrid. The chosen opening defines what the rest of the article must do.\r\n4. **Grow paragraph by paragraph.** After the opening lands, ask \"given this opening, what does the reader need to hear next?\" Pull material from the pile to answer. The next block may only lean on grounded concepts, and grounds new ones as it lands. Argue about the form the next block takes: a paragraph, a list, a table, a callout, a quote, a code block. Each format choice should be deliberate and defensible.\r\n5. **Append to the article file as you go.** Don't batch. Write each agreed paragraph or block immediately so the user can see the article taking shape.\r\n6. **Loop step 4 until the article is done.** The user decides when it's done.\r\n\r\n## Grounding\r\n\r\nEvery **concept** has to be **grounded** before a block can lean on it: the reader either walked in knowing it or met it in an earlier block. A block that reaches for an ungrounded concept loses the reader. The unit is the concept, not the word for it: a block can lean on an idea the reader lacks even with no jargon in sight. Where a concept has a name (a **term**), grounding it means landing the idea and the term together.\r\n\r\nA concept gets grounded one of two ways:\r\n\r\n- **Prerequisite**: grounded before the opening. The reader brings it. Fixed at the start.\r\n- **Introduced**: a block establishes it, and from then on it's grounded for the rest of the article.\r\n\r\nKeep a running list of what's grounded. When you ask \"what does the reader need to hear next?\", an ungrounded concept the next move needs is itself the answer: ground it first (here or in an earlier block) or you can't make the move. This is the gap-naming of [Pulling from the pile](#pulling-from-the-pile) one level up: there the pile is missing material; here the article is missing a foundation.\r\n\r\nThe lever is what you make a prerequisite versus what you ground inside the article. Demand too much up front and you shut readers out; ground too much inside and the opening drowns in definitions. Settle it with the user when you establish prerequisites.\r\n\r\n## Conversational feel\r\n\r\nThis is a grilling session inverted. In ideation, the question was \"what are you actually noticing?\" Here it's \"what is this article actually arguing, and in what order does the reader need to hear it?\" Push back. Refuse to let weak transitions slide. If a paragraph doesn't earn its place, cut it.\r\n\r\nSpecific moves to keep using:\r\n\r\n- \"What does this paragraph do for the reader that the previous one didn't?\"\r\n- \"If I cut this, what breaks?\"\r\n- \"Is this prose, or should it be a list? Why prose?\"\r\n- \"This sentence is doing two jobs: split it or pick one.\"\r\n- \"The opening promised X. We've drifted to Y. Either re-thread it or change the opening.\"\r\n\r\n## Pulling from the pile\r\n\r\nTreat the raw material as a quarry, not a script. Pull a fragment, rework it to fit the surrounding paragraph, and place it. A fragment may be split across multiple paragraphs, merged with another, or paraphrased. The pile's job is to be mined; the article's job is to read as one voice.\r\n\r\nIf the pile lacks something the article needs, name the gap explicitly: \"We need an example here and the pile doesn't have one. Give me one now or we cut this section.\"\r\n\r\n## Format arguments to actually have\r\n\r\nWhen choosing how to render a block, weigh these tradeoffs out loud with the user, not silently:\r\n\r\n- **Prose vs. list.** Prose carries argument; lists carry parallel items. If items aren't truly parallel, prose is better. If they are, a list is faster to scan.\r\n- **Inline vs. callout.** Tips, warnings, and asides go in callouts (`> [!TIP]`, `> [!NOTE]`), but only if they'd genuinely derail the main argument inline. Otherwise leave them inline.\r\n- **Table vs. repeated structure.** If the same shape repeats 3+ times with the same fields, a table. Otherwise prose with bold leads.\r\n- **Quote vs. paraphrase.** Quote when the original wording is the point. Paraphrase when only the idea matters.\r\n- **Code block vs. inline code.** Multi-line, runnable, or illustrative → block. Single token or identifier → inline.\r\n\r\n## Writing rhythm\r\n\r\nAppend to the article file as each block is agreed. Re-read the file from disk before every write: the user may have edited between turns. Never overwrite blindly. If the user wants a paragraph rewritten, edit that specific paragraph in place; leave the rest alone.\r\n\r\n## Out of scope\r\n\r\n- Mining for new fragments that aren't in the pile (handle gaps as in \"Pulling from the pile\").\r\n- Editing the raw material file.\r\n- Publishing, formatting for a specific platform, or adding frontmatter the user didn't ask for.\r\n\r\n</supporting-info>\r\n",
+  "provenance": {
+    "kind": "semantic",
+    "mode": "逐行审计完整 79 行单文件快照；按语义动作拆分编号循环，将跨阶段规则保留为约束，未定义的路由不补线。",
+    "sourceSha256": "c13cbc364fbceefce654d9a4b0331113ff47efe90ce2523c2de23ecef63fefbd",
+    "url": "https://github.com/mattpocock/skills"
+  },
+  "recommendationsRequested": false,
+  "nodes": [
+    {
+      "id": "pile",
+      "kind": "input",
+      "label": "用户给定的 Markdown 素材",
+      "description": "输入可以是片段清单、未组织长文或逐字稿；形式不限，用户可能已提供或稍后提供。",
+      "basis": "source",
+      "evidence": "SKILL.md:9-9\nThe user has passed (or will pass) a markdown file of raw material. Treat it as the input pile: anything from a tidy list of fragments to a wall of unstructured prose to a transcript. The format does not matter. Read it end-to-end before doing anything else."
+    },
+    {
+      "id": "read",
+      "kind": "processing",
+      "label": "先完整读完素材",
+      "description": "在任何其他动作之前从头到尾读完输入文件，形成对素材内容的整体认识。完成标准：已读完全部输入。",
+      "basis": "source",
+      "evidence": "SKILL.md:9-21\nThe user has passed (or will pass) a markdown file of raw material. Treat it as the input pile: anything from a tidy list of fragments to a wall of unstructured prose to a transcript. The format does not matter. Read it end-to-end before doing anything else.\n\nThen run a shaping session that produces a separate article document. This is **exploit**: the exploring is done, the pile is fixed: commit to a structure and mine the pile to fill it. Do not edit the raw material file: it is read-only to this skill.\n\nIf the user did not say where to save the article, ask once and remember the path.\n\n</what-to-do>\n\n<supporting-info>\n\n## The loop\n\n1. **Read the pile.** Read the input file in full. Form a sense of what's in it."
+    },
+    {
+      "id": "prerequisites",
+      "kind": "processing",
+      "label": "与用户确定读者的前置知识",
+      "description": "共同确定读者进入文章时已理解的概念，并在开头前固定这些前提；权衡前提过多排斥读者、文内解释过多淹没开头。完成标准：与用户明确前置概念。",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:22-39\n2. **Establish the prerequisites.** Settle with the user what the reader knows walking in: the concepts that are **grounded** from the start. Everything else must be grounded by a block before a later block can lean on it. See [Grounding](#grounding).\n3. **Draft 2–3 candidate openings.** Each opening should imply a different thesis or angle for the article. Show all of them. Force the user to pick or compose a hybrid. The chosen opening defines what the rest of the article must do.\n4. **Grow paragraph by paragraph.** After the opening lands, ask \"given this opening, what does the reader need to hear next?\" Pull material from the pile to answer. The next block may only lean on grounded concepts, and grounds new ones as it lands. Argue about the form the next block takes: a paragraph, a list, a table, a callout, a quote, a code block. Each format choice should be deliberate and defensible.\n5. **Append to the article file as you go.** Don't batch. Write each agreed paragraph or block immediately so the user can see the article taking shape.\n6. **Loop step 4 until the article is done.** The user decides when it's done.\n\n## Grounding\n\nEvery **concept** has to be **grounded** before a block can lean on it: the reader either walked in knowing it or met it in an earlier block. A block that reaches for an ungrounded concept loses the reader. The unit is the concept, not the word for it: a block can lean on an idea the reader lacks even with no jargon in sight. Where a concept has a name (a **term**), grounding it means landing the idea and the term together.\n\nA concept gets grounded one of two ways:\n\n- **Prerequisite**: grounded before the opening. The reader brings it. Fixed at the start.\n- **Introduced**: a block establishes it, and from then on it's grounded for the rest of the article.\n\nKeep a running list of what's grounded. When you ask \"what does the reader need to hear next?\", an ungrounded concept the next move needs is itself the answer: ground it first (here or in an earlier block) or you can't make the move. This is the gap-naming of [Pulling from the pile](#pulling-from-the-pile) one level up: there the pile is missing material; here the article is missing a foundation.\n\nThe lever is what you make a prerequisite versus what you ground inside the article. Demand too much up front and you shut readers out; ground too much inside and the opening drowns in definitions. Settle it with the user when you establish prerequisites.",
+      "rationale": "将循环第 2 步与 Grounding 对同一动作的解释合并；不把整个 Grounding 小节重排成独立步骤。"
+    },
+    {
+      "id": "openings",
+      "kind": "processing",
+      "label": "给出 2–3 个开头并请用户选定",
+      "description": "每个开头体现不同论点或角度，全部展示；要求用户选一个或组合成混合版本。选定开头规定后文应完成的任务。完成标准：开头已经落定。",
+      "basis": "source",
+      "evidence": "SKILL.md:23-23\n3. **Draft 2–3 candidate openings.** Each opening should imply a different thesis or angle for the article. Show all of them. Force the user to pick or compose a hybrid. The chosen opening defines what the rest of the article must do."
+    },
+    {
+      "id": "grow",
+      "kind": "processing",
+      "label": "协商下一块内容与形式",
+      "description": "开头落定后，追问读者接下来需要听什么；从素材抽取内容，讨论这一块应是段落、列表、表格、提示框、引文还是代码块。新块只能依赖已奠基概念，也会建立新概念；获得用户认可的块才进入即时写入。完成标准：本块的内容和形式达成一致。",
+      "basis": "source",
+      "evidence": "SKILL.md:24-25\n4. **Grow paragraph by paragraph.** After the opening lands, ask \"given this opening, what does the reader need to hear next?\" Pull material from the pile to answer. The next block may only lean on grounded concepts, and grounds new ones as it lands. Argue about the form the next block takes: a paragraph, a list, a table, a callout, a quote, a code block. Each format choice should be deliberate and defensible.\n5. **Append to the article file as you go.** Don't batch. Write each agreed paragraph or block immediately so the user can see the article taking shape."
+    },
+    {
+      "id": "reread",
+      "kind": "processing",
+      "label": "本块写入前重读文章文件",
+      "description": "每次写入前从磁盘重新读文章文件，因为用户可能在两轮之间修改。完成标准：本次写入依据最新磁盘内容；首次文件尚不存在时原文未规定处理。",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:71-71\nAppend to the article file as each block is agreed. Re-read the file from disk before every write: the user may have edited between turns. Never overwrite blindly. If the user wants a paragraph rewritten, edit that specific paragraph in place; leave the rest alone.",
+      "rationale": "从 Writing rhythm 拆出每次写入前的独立动作，插入循环的写入环节；不补充文件创建或不存在时的策略。"
+    },
+    {
+      "id": "append",
+      "kind": "processing",
+      "label": "立即追加已认可的块",
+      "description": "每个段落或块一经同意立即追加到独立文章文件，不积攒批次，让用户看到文章逐渐成形。完成标准：当前认可块已落盘。",
+      "basis": "source",
+      "evidence": "SKILL.md:25-25\n5. **Append to the article file as you go.** Don't batch. Write each agreed paragraph or block immediately so the user can see the article taking shape."
+    },
+    {
+      "id": "done",
+      "kind": "decision",
+      "label": "文章是否完成，由用户决定",
+      "description": "循环第 4 步直到文章完成；完成与否由用户决定，而不是由 Agent 自行判定。",
+      "basis": "source",
+      "evidence": "SKILL.md:26-26\n6. **Loop step 4 until the article is done.** The user decides when it's done."
+    },
+    {
+      "id": "article",
+      "kind": "output",
+      "label": "独立文章文档",
+      "description": "塑形会话的产物是与素材文件分开的文章文档；用户决定完成时结束逐块增长。",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:11-26\nThen run a shaping session that produces a separate article document. This is **exploit**: the exploring is done, the pile is fixed: commit to a structure and mine the pile to fill it. Do not edit the raw material file: it is read-only to this skill.\n\nIf the user did not say where to save the article, ask once and remember the path.\n\n</what-to-do>\n\n<supporting-info>\n\n## The loop\n\n1. **Read the pile.** Read the input file in full. Form a sense of what's in it.\n2. **Establish the prerequisites.** Settle with the user what the reader knows walking in: the concepts that are **grounded** from the start. Everything else must be grounded by a block before a later block can lean on it. See [Grounding](#grounding).\n3. **Draft 2–3 candidate openings.** Each opening should imply a different thesis or angle for the article. Show all of them. Force the user to pick or compose a hybrid. The chosen opening defines what the rest of the article must do.\n4. **Grow paragraph by paragraph.** After the opening lands, ask \"given this opening, what does the reader need to hear next?\" Pull material from the pile to answer. The next block may only lean on grounded concepts, and grounds new ones as it lands. Argue about the form the next block takes: a paragraph, a list, a table, a callout, a quote, a code block. Each format choice should be deliberate and defensible.\n5. **Append to the article file as you go.** Don't batch. Write each agreed paragraph or block immediately so the user can see the article taking shape.\n6. **Loop step 4 until the article is done.** The user decides when it's done.",
+      "rationale": "将第 11 行声明的产物与第 26 行的循环终止条件合并成输出节点，不增加发布或平台格式化动作。"
+    },
+    {
+      "id": "path-needed",
+      "kind": "decision",
+      "label": "用户未说明文章保存位置？",
+      "description": "原文仅规定保存路径未给出时要问一次，没有规定本检查与编号循环的具体衔接时点。",
+      "basis": "source",
+      "evidence": "SKILL.md:13-13\nIf the user did not say where to save the article, ask once and remember the path."
+    },
+    {
+      "id": "ask-path",
+      "kind": "processing",
+      "label": "询问一次并记住文章路径",
+      "description": "只在用户没有说明保存位置时询问一次并记住路径；不新增重问或默认路径。完成标准：本次询问已进行且路径已记住。",
+      "basis": "source",
+      "evidence": "SKILL.md:13-13\nIf the user did not say where to save the article, ask once and remember the path."
+    },
+    {
+      "id": "reread-rewrite",
+      "kind": "processing",
+      "label": "定点改写前重读文章文件",
+      "description": "用户要求重写某段时，本次写入前同样先从磁盘重读文章，保留用户可能已经做的修改。完成标准：已读取本次修改所依据的最新文章。",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:71-71\nAppend to the article file as each block is agreed. Re-read the file from disk before every write: the user may have edited between turns. Never overwrite blindly. If the user wants a paragraph rewritten, edit that specific paragraph in place; leave the rest alone.",
+      "rationale": "把每次写入前重读的通用要求应用到同一句给出的定点重写动作；只拆分顺序，不增加重写后的返回路由。"
+    },
+    {
+      "id": "rewrite",
+      "kind": "processing",
+      "label": "只原位改写用户指定的段落",
+      "description": "用户要求某段重写时，仅在原处编辑该段，其余部分保持不动。完成标准：指定段落已改写且其他段落未动；之后回到哪里原文未说明。",
+      "basis": "source",
+      "evidence": "SKILL.md:71-71\nAppend to the article file as each block is agreed. Re-read the file from disk before every write: the user may have edited between turns. Never overwrite blindly. If the user wants a paragraph rewritten, edit that specific paragraph in place; leave the rest alone."
+    },
+    {
+      "id": "c-fixed-pile",
+      "kind": "config",
+      "label": "素材固定只读，文章另存",
+      "description": "这是 exploit 而非继续探索：素材堆固定，承诺一种结构并据此开采素材；不得编辑原始素材，文章是独立文档。",
+      "basis": "source",
+      "evidence": "SKILL.md:11-11\nThen run a shaping session that produces a separate article document. This is **exploit**: the exploring is done, the pile is fixed: commit to a structure and mine the pile to fill it. Do not edit the raw material file: it is read-only to this skill."
+    },
+    {
+      "id": "c-grounding",
+      "kind": "config",
+      "label": "先奠基概念，再依赖概念",
+      "description": "奠基单位是概念而非词语；有术语时须让概念和术语一起落地。概念要么是开头前固定的读者前置知识，要么由前文块引入并从此可用。维护已奠基概念清单；下一步需要未奠基概念时，必须先在此处或更早的块奠基，否则不能推进。",
+      "basis": "source",
+      "evidence": "SKILL.md:30-37\nEvery **concept** has to be **grounded** before a block can lean on it: the reader either walked in knowing it or met it in an earlier block. A block that reaches for an ungrounded concept loses the reader. The unit is the concept, not the word for it: a block can lean on an idea the reader lacks even with no jargon in sight. Where a concept has a name (a **term**), grounding it means landing the idea and the term together.\n\nA concept gets grounded one of two ways:\n\n- **Prerequisite**: grounded before the opening. The reader brings it. Fixed at the start.\n- **Introduced**: a block establishes it, and from then on it's grounded for the rest of the article.\n\nKeep a running list of what's grounded. When you ask \"what does the reader need to hear next?\", an ungrounded concept the next move needs is itself the answer: ground it first (here or in an earlier block) or you can't make the move. This is the gap-naming of [Pulling from the pile](#pulling-from-the-pile) one level up: there the pile is missing material; here the article is missing a foundation."
+    },
+    {
+      "id": "c-conversation",
+      "kind": "config",
+      "label": "质疑论证、过渡与段落价值",
+      "description": "持续追问文章究竟在论证什么、读者应按什么顺序听；不放过薄弱过渡，无存在价值的段落应删。反复检验本段相对前段的作用、删去会损失什么、为何不用列表、一句两职是否该拆分，以及偏离开头承诺时应重接论证还是更换开头。问句是讨论范例，不是五个顺序步骤。",
+      "basis": "source",
+      "evidence": "SKILL.md:43-51\nThis is a grilling session inverted. In ideation, the question was \"what are you actually noticing?\" Here it's \"what is this article actually arguing, and in what order does the reader need to hear it?\" Push back. Refuse to let weak transitions slide. If a paragraph doesn't earn its place, cut it.\n\nSpecific moves to keep using:\n\n- \"What does this paragraph do for the reader that the previous one didn't?\"\n- \"If I cut this, what breaks?\"\n- \"Is this prose, or should it be a list? Why prose?\"\n- \"This sentence is doing two jobs: split it or pick one.\"\n- \"The opening promised X. We've drifted to Y. Either re-thread it or change the opening.\""
+    },
+    {
+      "id": "c-quarry",
+      "kind": "config",
+      "label": "开采并重塑素材，不照抄脚本",
+      "description": "片段可以按上下文重写、拆到多个段落、与其他片段合并或意译；素材供开采，文章必须读起来像同一声音。",
+      "basis": "source",
+      "evidence": "SKILL.md:55-55\nTreat the raw material as a quarry, not a script. Pull a fragment, rework it to fit the surrounding paragraph, and place it. A fragment may be split across multiple paragraphs, merged with another, or paraphrased. The pile's job is to be mined; the article's job is to read as one voice."
+    },
+    {
+      "id": "c-material-gap",
+      "kind": "config",
+      "label": "缺料时明确指出并向用户索取或删节",
+      "description": "素材缺少文章所需内容时明确点出缺口，例如缺少例子时让用户现在提供，否则删除这一节；不自行挖掘素材堆外的新片段。原文未说明用户补料或删节后返回哪个动作。",
+      "basis": "source",
+      "evidence": "SKILL.md:57-57\nIf the pile lacks something the article needs, name the gap explicitly: \"We need an example here and the pile doesn't have one. Give me one now or we cut this section.\""
+    },
+    {
+      "id": "c-format",
+      "kind": "config",
+      "label": "与用户公开权衡块的形式",
+      "description": "不得默默决定形式。散文承载论证，真正平行的条目用列表；提示、警告和旁枝仅在内联会打断主论证时放入 > [!TIP] / > [!NOTE] 提示框，否则内联；相同字段的结构重复至少 3 次用表格，否则用粗体引导的散文；措辞本身重要时引用，只有意思重要时意译；多行、可运行或示意代码用块，单个 token 或标识符用行内代码。",
+      "basis": "source",
+      "evidence": "SKILL.md:61-67\nWhen choosing how to render a block, weigh these tradeoffs out loud with the user, not silently:\n\n- **Prose vs. list.** Prose carries argument; lists carry parallel items. If items aren't truly parallel, prose is better. If they are, a list is faster to scan.\n- **Inline vs. callout.** Tips, warnings, and asides go in callouts (`> [!TIP]`, `> [!NOTE]`), but only if they'd genuinely derail the main argument inline. Otherwise leave them inline.\n- **Table vs. repeated structure.** If the same shape repeats 3+ times with the same fields, a table. Otherwise prose with bold leads.\n- **Quote vs. paraphrase.** Quote when the original wording is the point. Paraphrase when only the idea matters.\n- **Code block vs. inline code.** Multi-line, runnable, or illustrative → block. Single token or identifier → inline."
+    },
+    {
+      "id": "c-write",
+      "kind": "config",
+      "label": "不攒批、不盲写、不改无关段落",
+      "description": "认可一个块就立即追加；每次写前重读磁盘文件，不得盲目覆盖。用户要求改写某段时只动该段，其余保持不变。",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:25-71\n5. **Append to the article file as you go.** Don't batch. Write each agreed paragraph or block immediately so the user can see the article taking shape.\n6. **Loop step 4 until the article is done.** The user decides when it's done.\n\n## Grounding\n\nEvery **concept** has to be **grounded** before a block can lean on it: the reader either walked in knowing it or met it in an earlier block. A block that reaches for an ungrounded concept loses the reader. The unit is the concept, not the word for it: a block can lean on an idea the reader lacks even with no jargon in sight. Where a concept has a name (a **term**), grounding it means landing the idea and the term together.\n\nA concept gets grounded one of two ways:\n\n- **Prerequisite**: grounded before the opening. The reader brings it. Fixed at the start.\n- **Introduced**: a block establishes it, and from then on it's grounded for the rest of the article.\n\nKeep a running list of what's grounded. When you ask \"what does the reader need to hear next?\", an ungrounded concept the next move needs is itself the answer: ground it first (here or in an earlier block) or you can't make the move. This is the gap-naming of [Pulling from the pile](#pulling-from-the-pile) one level up: there the pile is missing material; here the article is missing a foundation.\n\nThe lever is what you make a prerequisite versus what you ground inside the article. Demand too much up front and you shut readers out; ground too much inside and the opening drowns in definitions. Settle it with the user when you establish prerequisites.\n\n## Conversational feel\n\nThis is a grilling session inverted. In ideation, the question was \"what are you actually noticing?\" Here it's \"what is this article actually arguing, and in what order does the reader need to hear it?\" Push back. Refuse to let weak transitions slide. If a paragraph doesn't earn its place, cut it.\n\nSpecific moves to keep using:\n\n- \"What does this paragraph do for the reader that the previous one didn't?\"\n- \"If I cut this, what breaks?\"\n- \"Is this prose, or should it be a list? Why prose?\"\n- \"This sentence is doing two jobs: split it or pick one.\"\n- \"The opening promised X. We've drifted to Y. Either re-thread it or change the opening.\"\n\n## Pulling from the pile\n\nTreat the raw material as a quarry, not a script. Pull a fragment, rework it to fit the surrounding paragraph, and place it. A fragment may be split across multiple paragraphs, merged with another, or paraphrased. The pile's job is to be mined; the article's job is to read as one voice.\n\nIf the pile lacks something the article needs, name the gap explicitly: \"We need an example here and the pile doesn't have one. Give me one now or we cut this section.\"\n\n## Format arguments to actually have\n\nWhen choosing how to render a block, weigh these tradeoffs out loud with the user, not silently:\n\n- **Prose vs. list.** Prose carries argument; lists carry parallel items. If items aren't truly parallel, prose is better. If they are, a list is faster to scan.\n- **Inline vs. callout.** Tips, warnings, and asides go in callouts (`> [!TIP]`, `> [!NOTE]`), but only if they'd genuinely derail the main argument inline. Otherwise leave them inline.\n- **Table vs. repeated structure.** If the same shape repeats 3+ times with the same fields, a table. Otherwise prose with bold leads.\n- **Quote vs. paraphrase.** Quote when the original wording is the point. Paraphrase when only the idea matters.\n- **Code block vs. inline code.** Multi-line, runnable, or illustrative → block. Single token or identifier → inline.\n\n## Writing rhythm\n\nAppend to the article file as each block is agreed. Re-read the file from disk before every write: the user may have edited between turns. Never overwrite blindly. If the user wants a paragraph rewritten, edit that specific paragraph in place; leave the rest alone.",
+      "rationale": "合并第 25 行的即时写入约束和第 71 行对同一写入动作的并发编辑保护；不将中间各节当作写入步骤。"
+    },
+    {
+      "id": "c-scope",
+      "kind": "config",
+      "label": "不扩展素材、不擅自发布或加格式",
+      "description": "不挖掘固定素材之外的新片段（缺料按 Pulling from the pile 处理）；不编辑素材文件；不发布、不做特定平台格式化，也不添加用户没有要求的 frontmatter。",
+      "basis": "source",
+      "evidence": "SKILL.md:75-77\n- Mining for new fragments that aren't in the pile (handle gaps as in \"Pulling from the pile\").\n- Editing the raw material file.\n- Publishing, formatting for a specific platform, or adding frontmatter the user didn't ask for."
+    }
+  ],
+  "edges": [
+    {
+      "id": "f-read",
+      "source": "pile",
+      "target": "read",
+      "label": "先从头到尾读完",
+      "relation": "flow",
+      "basis": "source",
+      "evidence": "SKILL.md:9-9\nThe user has passed (or will pass) a markdown file of raw material. Treat it as the input pile: anything from a tidy list of fragments to a wall of unstructured prose to a transcript. The format does not matter. Read it end-to-end before doing anything else."
+    },
+    {
+      "id": "f-prerequisites",
+      "source": "read",
+      "target": "prerequisites",
+      "label": "读完后确定前置知识",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:21-22\n1. **Read the pile.** Read the input file in full. Form a sense of what's in it.\n2. **Establish the prerequisites.** Settle with the user what the reader knows walking in: the concepts that are **grounded** from the start. Everything else must be grounded by a block before a later block can lean on it. See [Grounding](#grounding).",
+      "rationale": "保留编号循环第 1→2 步的顺序，不添加路径询问的时点。"
+    },
+    {
+      "id": "f-openings",
+      "source": "prerequisites",
+      "target": "openings",
+      "label": "前提确定后拟定开头",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:22-23\n2. **Establish the prerequisites.** Settle with the user what the reader knows walking in: the concepts that are **grounded** from the start. Everything else must be grounded by a block before a later block can lean on it. See [Grounding](#grounding).\n3. **Draft 2–3 candidate openings.** Each opening should imply a different thesis or angle for the article. Show all of them. Force the user to pick or compose a hybrid. The chosen opening defines what the rest of the article must do.",
+      "rationale": "保留同一编号列表第 2→3 步的顺序。"
+    },
+    {
+      "id": "f-grow",
+      "source": "openings",
+      "target": "grow",
+      "label": "开头落定后",
+      "relation": "flow",
+      "basis": "source",
+      "evidence": "SKILL.md:23-24\n3. **Draft 2–3 candidate openings.** Each opening should imply a different thesis or angle for the article. Show all of them. Force the user to pick or compose a hybrid. The chosen opening defines what the rest of the article must do.\n4. **Grow paragraph by paragraph.** After the opening lands, ask \"given this opening, what does the reader need to hear next?\" Pull material from the pile to answer. The next block may only lean on grounded concepts, and grounds new ones as it lands. Argue about the form the next block takes: a paragraph, a list, a table, a callout, a quote, a code block. Each format choice should be deliberate and defensible."
+    },
+    {
+      "id": "f-reread",
+      "source": "grow",
+      "target": "reread",
+      "label": "每块达成一致后，写入前重读",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:71-71\nAppend to the article file as each block is agreed. Re-read the file from disk before every write: the user may have edited between turns. Never overwrite blindly. If the user wants a paragraph rewritten, edit that specific paragraph in place; leave the rest alone.",
+      "rationale": "用每块认可后追加、每次写前重读的同句指令拆出写入前动作，认可保留为前置条件。"
+    },
+    {
+      "id": "f-append",
+      "source": "reread",
+      "target": "append",
+      "label": "重读后立即追加认可块",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:71-71\nAppend to the article file as each block is agreed. Re-read the file from disk before every write: the user may have edited between turns. Never overwrite blindly. If the user wants a paragraph rewritten, edit that specific paragraph in place; leave the rest alone.",
+      "rationale": "将每次写前重读的明确先后约束用于已认可块的追加；未补充首次文件创建动作。"
+    },
+    {
+      "id": "f-done",
+      "source": "append",
+      "target": "done",
+      "label": "写入后按用户决定是否结束",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:25-26\n5. **Append to the article file as you go.** Don't batch. Write each agreed paragraph or block immediately so the user can see the article taking shape.\n6. **Loop step 4 until the article is done.** The user decides when it's done.",
+      "rationale": "把编号第 6 步的循环终止条件从控制语句拆成判断节点，位置仍在第 5 步写入之后。"
+    },
+    {
+      "id": "f-loop",
+      "source": "done",
+      "target": "grow",
+      "label": "until the article is done（尚未完成）",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:26-26\n6. **Loop step 4 until the article is done.** The user decides when it's done.",
+      "rationale": "将 until 的继续条件显式表达为尚未完成并返回原文指定的 step 4；不新增是否完成的判断标准。"
+    },
+    {
+      "id": "f-output",
+      "source": "done",
+      "target": "article",
+      "label": "the article is done（用户决定完成）",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:26-26\n6. **Loop step 4 until the article is done.** The user decides when it's done.",
+      "rationale": "将 until 的终止条件连到原文已声明的文章产物，不新增后续发布动作。"
+    },
+    {
+      "id": "f-path",
+      "source": "path-needed",
+      "target": "ask-path",
+      "label": "If the user did not say where to save the article",
+      "relation": "flow",
+      "basis": "source",
+      "evidence": "SKILL.md:13-13\nIf the user did not say where to save the article, ask once and remember the path."
+    },
+    {
+      "id": "f-rewrite",
+      "source": "reread-rewrite",
+      "target": "rewrite",
+      "label": "每次写入前已重读",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:71-71\nAppend to the article file as each block is agreed. Re-read the file from disk before every write: the user may have edited between turns. Never overwrite blindly. If the user wants a paragraph rewritten, edit that specific paragraph in place; leave the rest alone.",
+      "rationale": "把同句的通用每次写前重读要求和特定段落重写分开表示顺序。"
+    },
+    {
+      "id": "k-fixed-read",
+      "source": "c-fixed-pile",
+      "target": "read",
+      "label": "只读素材文件",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:11-11\nThen run a shaping session that produces a separate article document. This is **exploit**: the exploring is done, the pile is fixed: commit to a structure and mine the pile to fill it. Do not edit the raw material file: it is read-only to this skill."
+    },
+    {
+      "id": "k-fixed-grow",
+      "source": "c-fixed-pile",
+      "target": "grow",
+      "label": "固定素材上承诺结构并开采",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:11-11\nThen run a shaping session that produces a separate article document. This is **exploit**: the exploring is done, the pile is fixed: commit to a structure and mine the pile to fill it. Do not edit the raw material file: it is read-only to this skill."
+    },
+    {
+      "id": "k-grounding-prerequisites",
+      "source": "c-grounding",
+      "target": "prerequisites",
+      "label": "开头前固定读者已有概念",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:34-34\n- **Prerequisite**: grounded before the opening. The reader brings it. Fixed at the start."
+    },
+    {
+      "id": "k-grounding-grow",
+      "source": "c-grounding",
+      "target": "grow",
+      "label": "维护清单，先奠基再依赖",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:30-37\nEvery **concept** has to be **grounded** before a block can lean on it: the reader either walked in knowing it or met it in an earlier block. A block that reaches for an ungrounded concept loses the reader. The unit is the concept, not the word for it: a block can lean on an idea the reader lacks even with no jargon in sight. Where a concept has a name (a **term**), grounding it means landing the idea and the term together.\n\nA concept gets grounded one of two ways:\n\n- **Prerequisite**: grounded before the opening. The reader brings it. Fixed at the start.\n- **Introduced**: a block establishes it, and from then on it's grounded for the rest of the article.\n\nKeep a running list of what's grounded. When you ask \"what does the reader need to hear next?\", an ungrounded concept the next move needs is itself the answer: ground it first (here or in an earlier block) or you can't make the move. This is the gap-naming of [Pulling from the pile](#pulling-from-the-pile) one level up: there the pile is missing material; here the article is missing a foundation."
+    },
+    {
+      "id": "k-conversation",
+      "source": "c-conversation",
+      "target": "grow",
+      "label": "质疑薄弱过渡，删去无价值段落",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:43-51\nThis is a grilling session inverted. In ideation, the question was \"what are you actually noticing?\" Here it's \"what is this article actually arguing, and in what order does the reader need to hear it?\" Push back. Refuse to let weak transitions slide. If a paragraph doesn't earn its place, cut it.\n\nSpecific moves to keep using:\n\n- \"What does this paragraph do for the reader that the previous one didn't?\"\n- \"If I cut this, what breaks?\"\n- \"Is this prose, or should it be a list? Why prose?\"\n- \"This sentence is doing two jobs: split it or pick one.\"\n- \"The opening promised X. We've drifted to Y. Either re-thread it or change the opening.\""
+    },
+    {
+      "id": "k-quarry",
+      "source": "c-quarry",
+      "target": "grow",
+      "label": "片段可重写、拆分、合并或意译",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:55-55\nTreat the raw material as a quarry, not a script. Pull a fragment, rework it to fit the surrounding paragraph, and place it. A fragment may be split across multiple paragraphs, merged with another, or paraphrased. The pile's job is to be mined; the article's job is to read as one voice."
+    },
+    {
+      "id": "k-gap",
+      "source": "c-material-gap",
+      "target": "grow",
+      "label": "缺料时点名缺口，索取或删节",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:57-57\nIf the pile lacks something the article needs, name the gap explicitly: \"We need an example here and the pile doesn't have one. Give me one now or we cut this section.\""
+    },
+    {
+      "id": "k-format",
+      "source": "c-format",
+      "target": "grow",
+      "label": "与用户公开权衡形式",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:61-67\nWhen choosing how to render a block, weigh these tradeoffs out loud with the user, not silently:\n\n- **Prose vs. list.** Prose carries argument; lists carry parallel items. If items aren't truly parallel, prose is better. If they are, a list is faster to scan.\n- **Inline vs. callout.** Tips, warnings, and asides go in callouts (`> [!TIP]`, `> [!NOTE]`), but only if they'd genuinely derail the main argument inline. Otherwise leave them inline.\n- **Table vs. repeated structure.** If the same shape repeats 3+ times with the same fields, a table. Otherwise prose with bold leads.\n- **Quote vs. paraphrase.** Quote when the original wording is the point. Paraphrase when only the idea matters.\n- **Code block vs. inline code.** Multi-line, runnable, or illustrative → block. Single token or identifier → inline."
+    },
+    {
+      "id": "k-append",
+      "source": "c-write",
+      "target": "append",
+      "label": "即时写入，不批量攒稿",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:25-25\n5. **Append to the article file as you go.** Don't batch. Write each agreed paragraph or block immediately so the user can see the article taking shape."
+    },
+    {
+      "id": "k-reread",
+      "source": "c-write",
+      "target": "reread",
+      "label": "每次写前重读，禁止盲目覆盖",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:71-71\nAppend to the article file as each block is agreed. Re-read the file from disk before every write: the user may have edited between turns. Never overwrite blindly. If the user wants a paragraph rewritten, edit that specific paragraph in place; leave the rest alone."
+    },
+    {
+      "id": "k-rewrite",
+      "source": "c-write",
+      "target": "rewrite",
+      "label": "只改指定段，其余不动",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:71-71\nAppend to the article file as each block is agreed. Re-read the file from disk before every write: the user may have edited between turns. Never overwrite blindly. If the user wants a paragraph rewritten, edit that specific paragraph in place; leave the rest alone."
+    },
+    {
+      "id": "k-scope-grow",
+      "source": "c-scope",
+      "target": "grow",
+      "label": "不从素材外挖掘新片段",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:75-75\n- Mining for new fragments that aren't in the pile (handle gaps as in \"Pulling from the pile\")."
+    },
+    {
+      "id": "k-scope-output",
+      "source": "c-scope",
+      "target": "article",
+      "label": "不发布或做平台格式化，不擅加 frontmatter",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:77-77\n- Publishing, formatting for a specific platform, or adding frontmatter the user didn't ask for."
+    }
+  ],
+  "warnings": [
+    "保存路径规则（13）仅写未给位置时问一次并记住；未写该检查与编号循环的衔接、已给路径分支或询问后的返回位置，因此路径判断保留为未连接主流程的条件片段，不补入边或返回边。",
+    "素材缺料（57）要求明确指出并让用户补充或删节，但没有规定补料、拒绝或删节后的返回步骤；保留为生长阶段约束，不臆造重试路径。",
+    "定点重写规则（71）只说用户要求改写时仅原位修改指定段落、且每次写前重读；原文既没说明改写请求出现在流程中的哪个时点，也没说明改写后返回逐块增长、完成判断还是结束，因此改写支路保留为两端都不连接主流程的条件片段。",
+    "首次写入的文件生命周期未说明：文章应另存（11），每次写前须从磁盘重读（71），但文件尚不存在时如何创建或重读没有规定；保留重读要求，不补创建或跳过策略。",
+    "用户未选开头或未认可当前块时（23–25）原文没有超时、拒绝、修订或恢复路由；保留用户选定和认可为前置条件，不自动代选或补循环。"
+  ],
+  "coverage": {
+    "sourceSha256": "c13cbc364fbceefce654d9a4b0331113ff47efe90ce2523c2de23ecef63fefbd",
+    "entries": [
+      {
+        "startLine": 1,
+        "endLine": 5,
+        "treatment": "context",
+        "reason": "包名、描述与 disable-model-invocation 元数据保持为源文档背景；不是正文工作流动作。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 7,
+        "endLine": 7,
+        "treatment": "context",
+        "reason": "what-to-do 容器标记。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 9,
+        "endLine": 9,
+        "treatment": "represented",
+        "reason": "输入形态与先完整读取的全局要求。",
+        "nodeIds": [
+          "pile",
+          "read"
+        ],
+        "edgeIds": [
+          "f-read"
+        ]
+      },
+      {
+        "startLine": 11,
+        "endLine": 11,
+        "treatment": "represented",
+        "reason": "独立文章输出、固定素材、只读与 exploit 范围。",
+        "nodeIds": [
+          "c-fixed-pile",
+          "article"
+        ],
+        "edgeIds": [
+          "k-fixed-read",
+          "k-fixed-grow"
+        ]
+      },
+      {
+        "startLine": 13,
+        "endLine": 13,
+        "treatment": "represented",
+        "reason": "只画原文的缺路径条件和一次询问；未明衔接已记 warning。",
+        "nodeIds": [
+          "path-needed",
+          "ask-path"
+        ],
+        "edgeIds": [
+          "f-path"
+        ]
+      },
+      {
+        "startLine": 15,
+        "endLine": 19,
+        "treatment": "context",
+        "reason": "容器边界与 The loop 标题，不额外增加执行语义。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 21,
+        "endLine": 22,
+        "treatment": "grouped",
+        "reason": "完整读取到确定前提的编号顺序；与第 9 行的读取合并而非重复执行。",
+        "nodeIds": [
+          "read",
+          "prerequisites"
+        ],
+        "edgeIds": [
+          "f-prerequisites"
+        ]
+      },
+      {
+        "startLine": 22,
+        "endLine": 23,
+        "treatment": "represented",
+        "reason": "第 2→3 步顺序，展示不同开头并由用户选择或组合。",
+        "nodeIds": [
+          "openings"
+        ],
+        "edgeIds": [
+          "f-openings"
+        ]
+      },
+      {
+        "startLine": 24,
+        "endLine": 25,
+        "treatment": "represented",
+        "reason": "开头落定才增长；认可当前块才立即追加。",
+        "nodeIds": [
+          "grow",
+          "append"
+        ],
+        "edgeIds": [
+          "f-grow",
+          "k-append"
+        ]
+      },
+      {
+        "startLine": 25,
+        "endLine": 26,
+        "treatment": "represented",
+        "reason": "写入后用户决定是否完成；未完成回 step 4，完成则留下独立文章产物。",
+        "nodeIds": [
+          "done",
+          "article"
+        ],
+        "edgeIds": [
+          "f-done",
+          "f-loop",
+          "f-output"
+        ]
+      },
+      {
+        "startLine": 28,
+        "endLine": 28,
+        "treatment": "context",
+        "reason": "Grounding 标题。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 30,
+        "endLine": 37,
+        "treatment": "grouped",
+        "reason": "概念先奠基、前提或正文引入两种来源、术语与概念一起建立和持续清单，均为规则而非附加顺序。",
+        "nodeIds": [
+          "c-grounding"
+        ],
+        "edgeIds": [
+          "k-grounding-prerequisites",
+          "k-grounding-grow"
+        ]
+      },
+      {
+        "startLine": 39,
+        "endLine": 39,
+        "treatment": "grouped",
+        "reason": "前提过多与正文解释过多的权衡并入与用户确定前提动作。",
+        "nodeIds": [
+          "prerequisites"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 41,
+        "endLine": 41,
+        "treatment": "context",
+        "reason": "Conversational feel 标题。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 43,
+        "endLine": 43,
+        "treatment": "represented",
+        "reason": "保留推敲论点、反驳薄弱过渡和删除无价值段落的讨论约束。",
+        "nodeIds": [
+          "c-conversation"
+        ],
+        "edgeIds": [
+          "k-conversation"
+        ]
+      },
+      {
+        "startLine": 45,
+        "endLine": 51,
+        "treatment": "grouped",
+        "reason": "五句反复使用的讨论范例全部概括进约束说明，不误当顺序步骤或真实当前文章事实。",
+        "nodeIds": [
+          "c-conversation"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 53,
+        "endLine": 53,
+        "treatment": "context",
+        "reason": "Pulling from the pile 标题。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 55,
+        "endLine": 55,
+        "treatment": "represented",
+        "reason": "开采而非照搬，允许拆并与意译，同时维持文章同一声音。",
+        "nodeIds": [
+          "c-quarry"
+        ],
+        "edgeIds": [
+          "k-quarry"
+        ]
+      },
+      {
+        "startLine": 57,
+        "endLine": 57,
+        "treatment": "represented",
+        "reason": "点名缺料、向用户索取或删节；未指定后续路由列入 warning。",
+        "nodeIds": [
+          "c-material-gap"
+        ],
+        "edgeIds": [
+          "k-gap"
+        ]
+      },
+      {
+        "startLine": 59,
+        "endLine": 59,
+        "treatment": "context",
+        "reason": "Format arguments 标题。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 61,
+        "endLine": 67,
+        "treatment": "grouped",
+        "reason": "公开协商形式与五组完整权衡保留在 config 详情，不把选择示例改画为工作流分支。",
+        "nodeIds": [
+          "c-format"
+        ],
+        "edgeIds": [
+          "k-format"
+        ]
+      },
+      {
+        "startLine": 69,
+        "endLine": 69,
+        "treatment": "context",
+        "reason": "Writing rhythm 标题。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 71,
+        "endLine": 71,
+        "treatment": "represented",
+        "reason": "每块认可即追加、每次写前重读、禁止盲写和指定段落原位改写；拆出重读动作，不补重写返回去向。",
+        "nodeIds": [
+          "reread",
+          "reread-rewrite",
+          "rewrite",
+          "c-write"
+        ],
+        "edgeIds": [
+          "f-reread",
+          "f-append",
+          "f-rewrite",
+          "k-reread",
+          "k-rewrite"
+        ]
+      },
+      {
+        "startLine": 73,
+        "endLine": 73,
+        "treatment": "context",
+        "reason": "Out of scope 标题。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 75,
+        "endLine": 77,
+        "treatment": "represented",
+        "reason": "三项范围限制及缺料内部链接保留为约束；不解析成外部资源或实际命令。",
+        "nodeIds": [
+          "c-scope"
+        ],
+        "edgeIds": [
+          "k-scope-grow",
+          "k-scope-output"
+        ]
+      },
+      {
+        "startLine": 79,
+        "endLine": 79,
+        "treatment": "context",
+        "reason": "supporting-info 关闭标记。",
+        "nodeIds": [],
+        "edgeIds": []
+      }
+    ]
+  }
+}

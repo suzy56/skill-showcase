@@ -96,6 +96,12 @@ input:focus-visible { outline-offset: 0; }
 .card-source a { text-decoration: none; }
 .card-source a:hover { text-decoration: underline; }
 .source-missing { color: var(--muted); }
+.source-license { color: var(--muted); }
+.circuit-link { display: flex; flex-direction: column; gap: 2px; margin-top: 16px; padding: 10px 12px; border: 1px solid currentColor; border-radius: 6px; text-decoration: none; }
+.circuit-link:hover, .circuit-link:focus-visible { background: color-mix(in srgb, currentColor 8%, transparent); }
+.circuit-label { font-weight: 600; font-size: 13px; }
+.circuit-label::after { content: " →"; }
+.circuit-meta { font-size: 11px; color: var(--muted); }
 .family-label { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; margin: 20px 0 0; color: var(--muted); font-size: 11px; font-weight: 500; letter-spacing: .5px; }
 .family-label::after { content: ""; height: 1px; background: var(--border); flex: 1; }
 .family-label code { color: var(--accent); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }

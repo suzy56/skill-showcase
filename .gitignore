@@ -7,3 +7,5 @@ TASK.md
 tools/private-skills.local.json
 .vercel
 .env*
+work/
+docs/tasks/

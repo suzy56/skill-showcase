@@ -1,0 +1,292 @@
+{
+  "sourceSha256": "c13cbc364fbceefce654d9a4b0331113ff47efe90ce2523c2de23ecef63fefbd",
+  "entries": [
+    {
+      "startLine": 1,
+      "endLine": 5,
+      "treatment": "context",
+      "reason": "包名、描述与 disable-model-invocation 元数据保持为源文档背景；不是正文工作流动作。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 7,
+      "endLine": 7,
+      "treatment": "context",
+      "reason": "what-to-do 容器标记。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 9,
+      "endLine": 9,
+      "treatment": "represented",
+      "reason": "输入形态与先完整读取的全局要求。",
+      "nodeIds": [
+        "pile",
+        "read"
+      ],
+      "edgeIds": [
+        "f-read"
+      ]
+    },
+    {
+      "startLine": 11,
+      "endLine": 11,
+      "treatment": "represented",
+      "reason": "独立文章输出、固定素材、只读与 exploit 范围。",
+      "nodeIds": [
+        "c-fixed-pile",
+        "article"
+      ],
+      "edgeIds": [
+        "k-fixed-read",
+        "k-fixed-grow"
+      ]
+    },
+    {
+      "startLine": 13,
+      "endLine": 13,
+      "treatment": "represented",
+      "reason": "只画原文的缺路径条件和一次询问；未明衔接已记 warning。",
+      "nodeIds": [
+        "path-needed",
+        "ask-path"
+      ],
+      "edgeIds": [
+        "f-path"
+      ]
+    },
+    {
+      "startLine": 15,
+      "endLine": 19,
+      "treatment": "context",
+      "reason": "容器边界与 The loop 标题，不额外增加执行语义。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 21,
+      "endLine": 22,
+      "treatment": "grouped",
+      "reason": "完整读取到确定前提的编号顺序；与第 9 行的读取合并而非重复执行。",
+      "nodeIds": [
+        "read",
+        "prerequisites"
+      ],
+      "edgeIds": [
+        "f-prerequisites"
+      ]
+    },
+    {
+      "startLine": 22,
+      "endLine": 23,
+      "treatment": "represented",
+      "reason": "第 2→3 步顺序，展示不同开头并由用户选择或组合。",
+      "nodeIds": [
+        "openings"
+      ],
+      "edgeIds": [
+        "f-openings"
+      ]
+    },
+    {
+      "startLine": 24,
+      "endLine": 25,
+      "treatment": "represented",
+      "reason": "开头落定才增长；认可当前块才立即追加。",
+      "nodeIds": [
+        "grow",
+        "append"
+      ],
+      "edgeIds": [
+        "f-grow",
+        "k-append"
+      ]
+    },
+    {
+      "startLine": 25,
+      "endLine": 26,
+      "treatment": "represented",
+      "reason": "写入后用户决定是否完成；未完成回 step 4，完成则留下独立文章产物。",
+      "nodeIds": [
+        "done",
+        "article"
+      ],
+      "edgeIds": [
+        "f-done",
+        "f-loop",
+        "f-output"
+      ]
+    },
+    {
+      "startLine": 28,
+      "endLine": 28,
+      "treatment": "context",
+      "reason": "Grounding 标题。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 30,
+      "endLine": 37,
+      "treatment": "grouped",
+      "reason": "概念先奠基、前提或正文引入两种来源、术语与概念一起建立和持续清单，均为规则而非附加顺序。",
+      "nodeIds": [
+        "c-grounding"
+      ],
+      "edgeIds": [
+        "k-grounding-prerequisites",
+        "k-grounding-grow"
+      ]
+    },
+    {
+      "startLine": 39,
+      "endLine": 39,
+      "treatment": "grouped",
+      "reason": "前提过多与正文解释过多的权衡并入与用户确定前提动作。",
+      "nodeIds": [
+        "prerequisites"
+      ],
+      "edgeIds": []
+    },
+    {
+      "startLine": 41,
+      "endLine": 41,
+      "treatment": "context",
+      "reason": "Conversational feel 标题。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 43,
+      "endLine": 43,
+      "treatment": "represented",
+      "reason": "保留推敲论点、反驳薄弱过渡和删除无价值段落的讨论约束。",
+      "nodeIds": [
+        "c-conversation"
+      ],
+      "edgeIds": [
+        "k-conversation"
+      ]
+    },
+    {
+      "startLine": 45,
+      "endLine": 51,
+      "treatment": "grouped",
+      "reason": "五句反复使用的讨论范例全部概括进约束说明，不误当顺序步骤或真实当前文章事实。",
+      "nodeIds": [
+        "c-conversation"
+      ],
+      "edgeIds": []
+    },
+    {
+      "startLine": 53,
+      "endLine": 53,
+      "treatment": "context",
+      "reason": "Pulling from the pile 标题。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 55,
+      "endLine": 55,
+      "treatment": "represented",
+      "reason": "开采而非照搬，允许拆并与意译，同时维持文章同一声音。",
+      "nodeIds": [
+        "c-quarry"
+      ],
+      "edgeIds": [
+        "k-quarry"
+      ]
+    },
+    {
+      "startLine": 57,
+      "endLine": 57,
+      "treatment": "represented",
+      "reason": "点名缺料、向用户索取或删节；未指定后续路由列入 warning。",
+      "nodeIds": [
+        "c-material-gap"
+      ],
+      "edgeIds": [
+        "k-gap"
+      ]
+    },
+    {
+      "startLine": 59,
+      "endLine": 59,
+      "treatment": "context",
+      "reason": "Format arguments 标题。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 61,
+      "endLine": 67,
+      "treatment": "grouped",
+      "reason": "公开协商形式与五组完整权衡保留在 config 详情，不把选择示例改画为工作流分支。",
+      "nodeIds": [
+        "c-format"
+      ],
+      "edgeIds": [
+        "k-format"
+      ]
+    },
+    {
+      "startLine": 69,
+      "endLine": 69,
+      "treatment": "context",
+      "reason": "Writing rhythm 标题。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 71,
+      "endLine": 71,
+      "treatment": "represented",
+      "reason": "每块认可即追加、每次写前重读、禁止盲写和指定段落原位改写；拆出重读动作，不补重写返回去向。",
+      "nodeIds": [
+        "reread",
+        "reread-rewrite",
+        "rewrite",
+        "c-write"
+      ],
+      "edgeIds": [
+        "f-reread",
+        "f-append",
+        "f-rewrite",
+        "k-reread",
+        "k-rewrite"
+      ]
+    },
+    {
+      "startLine": 73,
+      "endLine": 73,
+      "treatment": "context",
+      "reason": "Out of scope 标题。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 75,
+      "endLine": 77,
+      "treatment": "represented",
+      "reason": "三项范围限制及缺料内部链接保留为约束；不解析成外部资源或实际命令。",
+      "nodeIds": [
+        "c-scope"
+      ],
+      "edgeIds": [
+        "k-scope-grow",
+        "k-scope-output"
+      ]
+    },
+    {
+      "startLine": 79,
+      "endLine": 79,
+      "treatment": "context",
+      "reason": "supporting-info 关闭标记。",
+      "nodeIds": [],
+      "edgeIds": []
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "skill": "writing-shape",
+  "source": {
+    "repo": "mattpocock/skills",
+    "url": "https://github.com/mattpocock/skills",
+    "license": "MIT"
+  },
+  "sourceSha256": "c13cbc364fbceefce654d9a4b0331113ff47efe90ce2523c2de23ecef63fefbd",
+  "nodes": 21,
+  "edges": 24,
+  "warnings": 5,
+  "auditedAt": "2026-11-15",
+  "auditedBy": "omp",
+  "reviewedBy": "claude",
+  "reviewedAt": "2026-11-15",
+  "reviewNotes": "Removed f-rewrite-request: the source does not state when a rewrite request enters the loop; the rewrite branch is kept as an unconnected conditional fragment with a warning."
+}

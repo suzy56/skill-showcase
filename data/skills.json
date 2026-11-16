@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-13",
+ "generatedAt": "2026-11-16",
  "categories": [
   {
    "id": "writing",
@@ -186,6 +186,13 @@
    "source": {
     "label": "mattpocock/skills",
     "url": "https://github.com/mattpocock/skills"
+   },
+   "circuit": {
+    "href": "circuits/writing-shape/",
+    "nodes": 21,
+    "edges": 24,
+    "warnings": 5,
+    "license": "MIT"
    }
   }
  ]
