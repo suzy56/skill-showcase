@@ -1,0 +1,209 @@
+{
+  "sourceSha256": "3be6ffe9386ddd6de8b320c331295953995792fd65d0972aa2a28524ead73e90",
+  "entries": [
+    {
+      "startLine": 1,
+      "endLine": 7,
+      "treatment": "context",
+      "reason": "技能名称、探索用途、禁用模型自动调用的包配置及区段标记；不当作文档输出元数据或运行步骤。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 9,
+      "endLine": 9,
+      "treatment": "represented",
+      "reason": "持续访谈与纯探索边界；输入到访谈不代表捕捉和访谈的先后顺序。",
+      "nodeIds": [
+        "grill",
+        "explore-only"
+      ],
+      "edgeIds": [
+        "f-initial-grill",
+        "c-explore"
+      ]
+    },
+    {
+      "startLine": 11,
+      "endLine": 11,
+      "treatment": "represented",
+      "reason": "双方片段涌现即追加到同一 Markdown；初始捕捉也是该通用规则的实例。",
+      "nodeIds": [
+        "append",
+        "document"
+      ],
+      "edgeIds": [
+        "f-capture-append",
+        "f-grill-append",
+        "r-append-file"
+      ]
+    },
+    {
+      "startLine": 13,
+      "endLine": 13,
+      "treatment": "represented",
+      "reason": "只问一次缺失路径并记住；未知入口、另一条件结果及返回位置见 warning，不补主流程边。",
+      "nodeIds": [
+        "missing-path",
+        "ask-path"
+      ],
+      "edgeIds": [
+        "f-missing-ask"
+      ]
+    },
+    {
+      "startLine": 15,
+      "endLine": 15,
+      "treatment": "represented",
+      "reason": "初始提示即开始捕捉，不把捕捉延后到访谈中途。",
+      "nodeIds": [
+        "initial",
+        "capture"
+      ],
+      "edgeIds": [
+        "f-initial-capture"
+      ]
+    },
+    {
+      "startLine": 17,
+      "endLine": 17,
+      "treatment": "represented",
+      "reason": "首次写入条件、顶部单个可变工作标题与禁止其他初始化内容；精确边界和前后顺序未指定，见 warning。",
+      "nodeIds": [
+        "first-write",
+        "working-title",
+        "initial-format"
+      ],
+      "edgeIds": [
+        "f-first-title",
+        "c-initial-title",
+        "r-title-file"
+      ]
+    },
+    {
+      "startLine": 19,
+      "endLine": 23,
+      "treatment": "context",
+      "reason": "区段标记与片段定义标题只是源文档组织，不建立阶段顺序。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 25,
+      "endLine": 25,
+      "treatment": "represented",
+      "reason": "作者可读、无须对陌生读者自足的片段质量门槛。",
+      "nodeIds": [
+        "fragment-bar"
+      ],
+      "edgeIds": [
+        "c-quality"
+      ]
+    },
+    {
+      "startLine": 27,
+      "endLine": 35,
+      "treatment": "example",
+      "reason": "异质片段示例：锐句、简要论据、场景或代码或类比、半成想法、引语或对白、观察列表、抱怨自白与包袱；不是顺序阶段、必要清单或穷尽分支。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 36,
+      "endLine": 38,
+      "treatment": "represented",
+      "reason": "主导词的定义和优先价值，以及反复想法出现时推动造词的条件；不把后续 exploit 收益变成当前动作。",
+      "nodeIds": [
+        "recurring",
+        "coin"
+      ],
+      "edgeIds": [
+        "f-recurring-coin"
+      ]
+    },
+    {
+      "startLine": 40,
+      "endLine": 42,
+      "treatment": "context",
+      "reason": "小说家日记是长期无结构观察的类比，不是多年等待步骤；文件格式标题不是执行阶段。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 44,
+      "endLine": 67,
+      "treatment": "example",
+      "reason": "Markdown 样例保留在原文；演示工作 H1、自然多段、列表、代码、引文及横线分隔，不执行、不复制为实际初始化内容。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 69,
+      "endLine": 69,
+      "treatment": "represented",
+      "reason": "横线分隔、无正文标题/标签及只保留追加次序的格式约束；格式节点包含上文示例允许的自然形态。",
+      "nodeIds": [
+        "body-format"
+      ],
+      "edgeIds": [
+        "c-body"
+      ]
+    },
+    {
+      "startLine": 71,
+      "endLine": 71,
+      "treatment": "context",
+      "reason": "写入节奏标题不建立访谈之后的独立执行阶段。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 73,
+      "endLine": 73,
+      "treatment": "represented",
+      "reason": "静默追加、不逐片请示但可顺口提及保存，不用保存对话打断访谈。",
+      "nodeIds": [
+        "silent"
+      ],
+      "edgeIds": [
+        "c-silent"
+      ]
+    },
+    {
+      "startLine": 75,
+      "endLine": 75,
+      "treatment": "represented",
+      "reason": "所有写入前从磁盘重读，保留用户编辑/重排/删除；仅追加与按请求定点编辑的例外，作为前置约束而非任意流程位置。初次文件不存在的缺口见 warning。",
+      "nodeIds": [
+        "reread"
+      ],
+      "edgeIds": [
+        "c-reread-append",
+        "c-reread-title",
+        "c-reread-edit",
+        "r-edit-file"
+      ]
+    },
+    {
+      "startLine": 77,
+      "endLine": 77,
+      "treatment": "represented",
+      "reason": "随时剪裁、改写、合并是一等指令，独立请求入口与具体编辑；未知完成后返回路线见 warning。",
+      "nodeIds": [
+        "edit-request",
+        "specific-edit"
+      ],
+      "edgeIds": [
+        "f-request-edit"
+      ]
+    },
+    {
+      "startLine": 79,
+      "endLine": 79,
+      "treatment": "context",
+      "reason": "源文档区段结束标记，不是访谈结束条件。",
+      "nodeIds": [],
+      "edgeIds": []
+    }
+  ]
+}

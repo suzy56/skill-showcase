@@ -1,0 +1,707 @@
+{
+  "title": "writing-beats — 源文档审计语义图",
+  "description": "从固定素材中逐拍构建文章：先与用户约定读者已知概念，再选择起始拍、每次只写一拍、从磁盘重读并提供可达的下一拍，直到旅程自然结束。概念扎根、用户修改和逐次写入规则以约束呈现；未说明位置的条件片段不补入口或返回线。",
+  "sourceMarkdown": "---\r\nname: writing-beats\r\ndescription: Writing, exploit; assemble raw material into a journey of beats, grounding each term before a beat leans on it.\r\ndisable-model-invocation: true\r\n---\r\n\r\n<what-to-do>\r\n\r\nThe user has passed (or will pass) a markdown file of raw material. This is **exploit**: the exploring is done, the pile is fixed. Commit to a path through it and mine the pile to fill each beat.\r\n\r\nIf the user did not say where to save the article, ask once and remember the path.\r\n\r\nThen run a beat-by-beat journey, choose-your-own-adventure style:\r\n\r\n1. **Establish the prerequisites.** Before any beats, settle with the user what the audience already knows walking in: the concepts that are **grounded** from the start. Everything else must be grounded by a beat before a later beat can use it. See [Grounding](#grounding).\r\n2. Write 2–3 candidate **starting beats**, drawn from the raw material. Each is a different entry point into the article. Each may only lean on grounded concepts; note what new concepts each one grounds. Show the user the beats before writing to the article file. The user picks one. Preview what beats that pick unlocks, as if the user is seeing a little way down the path.\r\n3. Once the user picks a starting beat, write **only that beat** to the article file. A beat may be one sentence or several paragraphs, whatever that beat naturally is. Stop there.\r\n4. Re-read the article file from disk. Then offer 2–3 candidate **next beats**: different directions the journey could pivot to from where the article now stands. Each must be reachable from the current grounded set; note what each one grounds.\r\n5. Loop steps 3–5 until the article reaches a natural end.\r\n\r\n</what-to-do>\r\n\r\n<supporting-info>\r\n\r\n## Grounding\r\n\r\nEvery **concept** has to be **grounded** before a beat can lean on it: the audience either walked in knowing it or met it in an earlier beat. A beat that reaches for an ungrounded concept loses the reader; that is the one move the journey can't make. The unit is the concept, not the word for it: a beat can lean on an idea the reader lacks even with no jargon in sight. Where a concept has a name (a **term**), grounding it means landing the idea and the term together.\r\n\r\nA concept gets grounded one of two ways:\r\n\r\n- **Prerequisite**: grounded before the first beat. The audience brings it. Fixed at the start.\r\n- **Introduced**: a beat establishes it, and from then on it's grounded for every later beat.\r\n\r\nSo each beat does two jobs: it **requires** concepts that are already grounded, and it **grounds** new ones. Keep a running list of what's grounded so far, and update it each time a beat lands.\r\n\r\nThis is what shapes the choose-your-own-adventure. A candidate beat is only reachable if everything it requires is already grounded; picking a beat that grounds concept X unlocks every beat that was waiting on X. When you offer next beats, they must all be reachable from the current grounded set, and say what each one grounds, so the user can see which paths it opens.\r\n\r\nThe big lever is what you make a prerequisite versus what you ground inside the piece. Demand too much up front and you shut out readers who don't have it; ground too much inside and the early beats drown in definitions. Settle this with the user when you establish prerequisites, and revisit it whenever a tempting beat turns out to require a concept nothing has grounded yet: the fix is either a grounding beat before it, or promoting the concept to a prerequisite.\r\n\r\n## What is a beat\r\n\r\nA beat is one move in the journey. It does one thing: sets a scene, lands a point, asks a question, drops an aside, twists the angle. Then it stops, leaving the reader at a place where the next beat can pivot.\r\n\r\nA beat is sized by what it needs:\r\n\r\n- A single sentence if that's all the move is (\"And then nothing happened for three weeks.\").\r\n- A short paragraph if the move needs setup.\r\n- Multiple paragraphs if the beat is a self-contained vignette, argument, or example.\r\n\r\nIf a \"beat\" needs five paragraphs and three subheadings, it's not a beat; it's two beats glued together. Split it.\r\n\r\n## Pulling from the pile\r\n\r\nPull material from the raw pile to populate each beat. You can paraphrase, split, recombine, or quote. The pile is a quarry.\r\n\r\n## Ending the journey\r\n\r\nThe article ends when the journey is complete, not when the pile is empty. Most piles will have leftover fragments that don't make it in. That is fine; that is the point of having more raw material than you need.\r\n\r\n## Writing rhythm\r\n\r\n- Append one beat at a time. Never write ahead.\r\n- Re-read the article file from disk before every write. Preserve user edits absolutely.\r\n- If the user edits a previous beat substantially, let it change what comes next.\r\n- If the user says \"rewrite that beat\" or \"go back and try a different beat 3\", do it: edit in place, leave the rest alone.\r\n\r\n</supporting-info>\r\n",
+  "provenance": {
+    "kind": "semantic",
+    "mode": "对完整 67 行 SKILL.md 逐行审计；编号工作流保留顺序与循环，条件重写及路径询问不补未说明的入口或返回。",
+    "sourceSha256": "b23f7851987dab7828c83d42df98090ccebff586b64908ce6a5e772440214621",
+    "url": "https://github.com/mattpocock/skills"
+  },
+  "recommendationsRequested": false,
+  "nodes": [
+    {
+      "id": "material",
+      "kind": "input",
+      "label": "用户的固定素材",
+      "description": "用户已经或将会提供原始素材 Markdown 文件；探索已经结束，选择一条路径并从这堆固定素材中取材。",
+      "basis": "source",
+      "evidence": "SKILL.md:9-9\nThe user has passed (or will pass) a markdown file of raw material. This is **exploit**: the exploring is done, the pile is fixed. Commit to a path through it and mine the pile to fill each beat."
+    },
+    {
+      "id": "prerequisites",
+      "kind": "processing",
+      "label": "1 · 与用户确定先验知识",
+      "description": "在任何拍之前，与用户约定读者入场时已经扎根的概念；完成标志是明确先验概念集合。",
+      "basis": "source",
+      "evidence": "SKILL.md:15-15\n1. **Establish the prerequisites.** Before any beats, settle with the user what the audience already knows walking in: the concepts that are **grounded** from the start. Everything else must be grounded by a beat before a later beat can use it. See [Grounding](#grounding)."
+    },
+    {
+      "id": "starting-beats",
+      "kind": "processing",
+      "label": "2 · 展示起始候选并让用户选择",
+      "description": "从素材写出 2–3 个不同入口的起始拍，只依赖已扎根概念，并标注各自建立的新概念；在写入文章前先展示给用户。用户选一个后，预览它解锁的后续拍。完成标志是用户已选择并看到后续可能性。",
+      "basis": "source",
+      "evidence": "SKILL.md:16-16\n2. Write 2–3 candidate **starting beats**, drawn from the raw material. Each is a different entry point into the article. Each may only lean on grounded concepts; note what new concepts each one grounds. Show the user the beats before writing to the article file. The user picks one. Preview what beats that pick unlocks, as if the user is seeing a little way down the path."
+    },
+    {
+      "id": "write-one",
+      "kind": "processing",
+      "label": "3 · 只追加选中的一拍，然后停下",
+      "description": "用户选中后，仅把该拍写入文章文件，不提前写后续拍；一拍可以是一句或多段，按其自然需求决定。首次明确为起始拍；后续执行由第 5 步返回第 3 步。",
+      "basis": "source",
+      "evidence": "SKILL.md:17-17\n3. Once the user picks a starting beat, write **only that beat** to the article file. A beat may be one sentence or several paragraphs, whatever that beat naturally is. Stop there."
+    },
+    {
+      "id": "disk-reread",
+      "kind": "processing",
+      "label": "4a · 从磁盘重读文章",
+      "description": "一拍写入后，从磁盘重新读取文章文件，再据文章此时的状态提出下一拍。此处是第 4 步的写后重读；所有写入前另有重读约束。",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:18-18\n4. Re-read the article file from disk. Then offer 2–3 candidate **next beats**: different directions the journey could pivot to from where the article now stands. Each must be reachable from the current grounded set; note what each one grounds.",
+      "rationale": "把第 4 步的“重读，然后提供候选”拆为两个可检查动作，保持原顺序，不把写后重读当成每次写前重读的替代。"
+    },
+    {
+      "id": "next-beats",
+      "kind": "processing",
+      "label": "4b · 提供 2–3 个下一拍",
+      "description": "根据文章当前落点提出不同转向的下一拍；每个候选都必须从当前扎根集合可达，并注明它新建立的概念。",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:18-18\n4. Re-read the article file from disk. Then offer 2–3 candidate **next beats**: different directions the journey could pivot to from where the article now stands. Each must be reachable from the current grounded set; note what each one grounds.",
+      "rationale": "第 4 步的候选提供动作独立呈现，保留数量、方向、可达性与新概念要求。"
+    },
+    {
+      "id": "natural-end",
+      "kind": "decision",
+      "label": "5 · 文章已自然结束？",
+      "description": "按第 5 步循环第 3–5 步，直到文章自然结束；没有新增按素材耗尽判断的规则，也不另设用户审批出口。",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:19-19\n5. Loop steps 3–5 until the article reaches a natural end.",
+      "rationale": "把 until 的停止条件显式化；位置沿用第 4 步后接第 5 步的编号顺序，判定细节未被原文定义。"
+    },
+    {
+      "id": "finished",
+      "kind": "output",
+      "label": "文章旅程完成",
+      "description": "文章在旅程完整时结束，不要求用完素材；未使用的碎片可以留在素材堆中。",
+      "basis": "source",
+      "evidence": "SKILL.md:58-58\nThe article ends when the journey is complete, not when the pile is empty. Most piles will have leftover fragments that don't make it in. That is fine; that is the point of having more raw material than you need."
+    },
+    {
+      "id": "ask-path",
+      "kind": "processing",
+      "label": "未告知保存路径时：只问一次并记住",
+      "description": "如果用户没有说明文章保存位置，询问一次并记住路径。原文没有明确此条件片段如何进入主图或已提供路径时如何绕行，不补线。",
+      "basis": "source",
+      "evidence": "SKILL.md:11-11\nIf the user did not say where to save the article, ask once and remember the path."
+    },
+    {
+      "id": "rewrite",
+      "kind": "processing",
+      "label": "收到改写要求时：原位修改指定拍",
+      "description": "用户要求重写某拍或回头换第 3 拍时，原位修改该拍，其余部分保持不变。该请求可能在何时发生、改后回到哪里，原文未说明；不连接主流程。",
+      "basis": "source",
+      "evidence": "SKILL.md:65-65\n- If the user says \"rewrite that beat\" or \"go back and try a different beat 3\", do it: edit in place, leave the rest alone."
+    },
+    {
+      "id": "article-file",
+      "kind": "resource",
+      "label": "文章磁盘文件",
+      "description": "每拍写入与重读的文章文件；保存路径由用户告知，若缺失则只问一次并记住。",
+      "basis": "source",
+      "evidence": "SKILL.md:11-18\nIf the user did not say where to save the article, ask once and remember the path.\n\nThen run a beat-by-beat journey, choose-your-own-adventure style:\n\n1. **Establish the prerequisites.** Before any beats, settle with the user what the audience already knows walking in: the concepts that are **grounded** from the start. Everything else must be grounded by a beat before a later beat can use it. See [Grounding](#grounding).\n2. Write 2–3 candidate **starting beats**, drawn from the raw material. Each is a different entry point into the article. Each may only lean on grounded concepts; note what new concepts each one grounds. Show the user the beats before writing to the article file. The user picks one. Preview what beats that pick unlocks, as if the user is seeing a little way down the path.\n3. Once the user picks a starting beat, write **only that beat** to the article file. A beat may be one sentence or several paragraphs, whatever that beat naturally is. Stop there.\n4. Re-read the article file from disk. Then offer 2–3 candidate **next beats**: different directions the journey could pivot to from where the article now stands. Each must be reachable from the current grounded set; note what each one grounds."
+    },
+    {
+      "id": "fixed-pile",
+      "kind": "config",
+      "label": "素材堆固定：这是利用阶段",
+      "description": "探索已完成；承诺沿一条路径写作，从固定素材堆中挖掘每一拍的内容，不扩展成探索流程。",
+      "basis": "source",
+      "evidence": "SKILL.md:9-9\nThe user has passed (or will pass) a markdown file of raw material. This is **exploit**: the exploring is done, the pile is fixed. Commit to a path through it and mine the pile to fill each beat."
+    },
+    {
+      "id": "grounding",
+      "kind": "config",
+      "label": "使用前先扎根：概念与术语一起落地",
+      "description": "每个被依赖的概念必须先由读者自带知识或更早一拍建立；无术语也可能依赖读者尚无的概念。概念有名称时，必须把想法与术语同时讲清。",
+      "basis": "source",
+      "evidence": "SKILL.md:27-32\nEvery **concept** has to be **grounded** before a beat can lean on it: the audience either walked in knowing it or met it in an earlier beat. A beat that reaches for an ungrounded concept loses the reader; that is the one move the journey can't make. The unit is the concept, not the word for it: a beat can lean on an idea the reader lacks even with no jargon in sight. Where a concept has a name (a **term**), grounding it means landing the idea and the term together.\n\nA concept gets grounded one of two ways:\n\n- **Prerequisite**: grounded before the first beat. The audience brings it. Fixed at the start.\n- **Introduced**: a beat establishes it, and from then on it's grounded for every later beat."
+    },
+    {
+      "id": "grounded-set",
+      "kind": "config",
+      "label": "维护并更新已扎根集合",
+      "description": "每拍同时有已扎根的依赖与新建立的概念。先验知识在起始时固定；某拍引入的概念此后供后续拍使用。持续记录扎根集合，每落地一拍就更新。",
+      "basis": "source",
+      "evidence": "SKILL.md:31-34\n- **Prerequisite**: grounded before the first beat. The audience brings it. Fixed at the start.\n- **Introduced**: a beat establishes it, and from then on it's grounded for every later beat.\n\nSo each beat does two jobs: it **requires** concepts that are already grounded, and it **grounds** new ones. Keep a running list of what's grounded so far, and update it each time a beat lands."
+    },
+    {
+      "id": "reachable",
+      "kind": "config",
+      "label": "候选必须可达，并说明解锁效果",
+      "description": "候选的所有依赖都已扎根才可达；选择建立 X 的拍会解锁等待 X 的拍。提供下一拍时全部必须可达，并说明每个候选建立什么。",
+      "basis": "source",
+      "evidence": "SKILL.md:36-36\nThis is what shapes the choose-your-own-adventure. A candidate beat is only reachable if everything it requires is already grounded; picking a beat that grounds concept X unlocks every beat that was waiting on X. When you offer next beats, they must all be reachable from the current grounded set, and say what each one grounds, so the user can see which paths it opens."
+    },
+    {
+      "id": "prerequisite-balance",
+      "kind": "config",
+      "label": "先验与文内扎根的取舍和修复",
+      "description": "与用户确定先验时平衡门槛：先验太多排除读者，文内定义太多淹没开头。遇到想写但依赖尚未扎根概念的拍时，重新讨论：要么先加一拍建立概念，要么把概念提升为先验。原文未指明从哪个候选阶段进入或修复后回到哪一步，不补执行线。",
+      "basis": "source",
+      "evidence": "SKILL.md:38-38\nThe big lever is what you make a prerequisite versus what you ground inside the piece. Demand too much up front and you shut out readers who don't have it; ground too much inside and the early beats drown in definitions. Settle this with the user when you establish prerequisites, and revisit it whenever a tempting beat turns out to require a concept nothing has grounded yet: the fix is either a grounding beat before it, or promoting the concept to a prerequisite."
+    },
+    {
+      "id": "beat-unit",
+      "kind": "config",
+      "label": "一拍只做一个动作；过大则拆开",
+      "description": "一拍可以设场景、落论点、提问题、插旁白或转角度，完成一个动作就停。长度按需求可为一句、短段或多段。若需要五段和三个子标题，那是两拍粘在一起，必须拆分。",
+      "basis": "source",
+      "evidence": "SKILL.md:42-50\nA beat is one move in the journey. It does one thing: sets a scene, lands a point, asks a question, drops an aside, twists the angle. Then it stops, leaving the reader at a place where the next beat can pivot.\n\nA beat is sized by what it needs:\n\n- A single sentence if that's all the move is (\"And then nothing happened for three weeks.\").\n- A short paragraph if the move needs setup.\n- Multiple paragraphs if the beat is a self-contained vignette, argument, or example.\n\nIf a \"beat\" needs five paragraphs and three subheadings, it's not a beat; it's two beats glued together. Split it."
+    },
+    {
+      "id": "quarry",
+      "kind": "config",
+      "label": "用素材填充每拍",
+      "description": "从原素材堆取材；允许转述、拆分、重组和引用。素材是采石场而不是必须逐项清空的清单。",
+      "basis": "source",
+      "evidence": "SKILL.md:54-54\nPull material from the raw pile to populate each beat. You can paraphrase, split, recombine, or quote. The pile is a quarry."
+    },
+    {
+      "id": "ending-rule",
+      "kind": "config",
+      "label": "完成旅程，不必清空素材",
+      "description": "结束条件是旅程完整，不是素材耗尽；大多数素材堆会有未进入文章的碎片，这是允许且预期的。",
+      "basis": "source",
+      "evidence": "SKILL.md:58-58\nThe article ends when the journey is complete, not when the pile is empty. Most piles will have leftover fragments that don't make it in. That is fine; that is the point of having more raw material than you need."
+    },
+    {
+      "id": "write-rhythm",
+      "kind": "config",
+      "label": "每次写前磁盘重读；只写一拍",
+      "description": "一次追加一拍，绝不抢写。在每次写入前从磁盘重读文章，绝对保留用户修改；也适用于收到指令后的原位改写。",
+      "basis": "source",
+      "evidence": "SKILL.md:62-63\n- Append one beat at a time. Never write ahead.\n- Re-read the article file from disk before every write. Preserve user edits absolutely."
+    },
+    {
+      "id": "user-edits",
+      "kind": "config",
+      "label": "用户大幅改动会改变后续",
+      "description": "绝对保留用户改动；用户大幅修改之前某拍时，让该改动影响之后写什么，不固守旧候选。",
+      "basis": "source",
+      "evidence": "SKILL.md:63-64\n- Re-read the article file from disk before every write. Preserve user edits absolutely.\n- If the user edits a previous beat substantially, let it change what comes next."
+    }
+  ],
+  "edges": [
+    {
+      "id": "f-start",
+      "source": "material",
+      "target": "prerequisites",
+      "label": "开始逐拍旅程：先定先验",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:13-15\nThen run a beat-by-beat journey, choose-your-own-adventure style:\n\n1. **Establish the prerequisites.** Before any beats, settle with the user what the audience already knows walking in: the concepts that are **grounded** from the start. Everything else must be grounded by a beat before a later beat can use it. See [Grounding](#grounding).",
+      "rationale": "“Then run”开启旅程，第 1 步明确在任何拍之前确定先验；未添加读取文件或新的探索步骤。"
+    },
+    {
+      "id": "f-prereq-starts",
+      "source": "prerequisites",
+      "target": "starting-beats",
+      "label": "先定先验，再写起始候选",
+      "relation": "flow",
+      "basis": "source",
+      "evidence": "SKILL.md:15-16\n1. **Establish the prerequisites.** Before any beats, settle with the user what the audience already knows walking in: the concepts that are **grounded** from the start. Everything else must be grounded by a beat before a later beat can use it. See [Grounding](#grounding).\n2. Write 2–3 candidate **starting beats**, drawn from the raw material. Each is a different entry point into the article. Each may only lean on grounded concepts; note what new concepts each one grounds. Show the user the beats before writing to the article file. The user picks one. Preview what beats that pick unlocks, as if the user is seeing a little way down the path."
+    },
+    {
+      "id": "f-chosen-write",
+      "source": "starting-beats",
+      "target": "write-one",
+      "label": "用户选中起始拍后，仅写该拍",
+      "relation": "flow",
+      "basis": "source",
+      "evidence": "SKILL.md:16-17\n2. Write 2–3 candidate **starting beats**, drawn from the raw material. Each is a different entry point into the article. Each may only lean on grounded concepts; note what new concepts each one grounds. Show the user the beats before writing to the article file. The user picks one. Preview what beats that pick unlocks, as if the user is seeing a little way down the path.\n3. Once the user picks a starting beat, write **only that beat** to the article file. A beat may be one sentence or several paragraphs, whatever that beat naturally is. Stop there."
+    },
+    {
+      "id": "f-write-reread",
+      "source": "write-one",
+      "target": "disk-reread",
+      "label": "写一拍停下，再从磁盘重读",
+      "relation": "flow",
+      "basis": "source",
+      "evidence": "SKILL.md:17-18\n3. Once the user picks a starting beat, write **only that beat** to the article file. A beat may be one sentence or several paragraphs, whatever that beat naturally is. Stop there.\n4. Re-read the article file from disk. Then offer 2–3 candidate **next beats**: different directions the journey could pivot to from where the article now stands. Each must be reachable from the current grounded set; note what each one grounds."
+    },
+    {
+      "id": "f-reread-next",
+      "source": "disk-reread",
+      "target": "next-beats",
+      "label": "重读之后提供下一拍",
+      "relation": "flow",
+      "basis": "source",
+      "evidence": "SKILL.md:18-18\n4. Re-read the article file from disk. Then offer 2–3 candidate **next beats**: different directions the journey could pivot to from where the article now stands. Each must be reachable from the current grounded set; note what each one grounds."
+    },
+    {
+      "id": "f-next-check",
+      "source": "next-beats",
+      "target": "natural-end",
+      "label": "第 4 步后进入第 5 步",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:18-19\n4. Re-read the article file from disk. Then offer 2–3 candidate **next beats**: different directions the journey could pivot to from where the article now stands. Each must be reachable from the current grounded set; note what each one grounds.\n5. Loop steps 3–5 until the article reaches a natural end.",
+      "rationale": "编号 4 后为循环控制第 5 步；只显式化 until 条件，没有添加原文之外的检查时机。"
+    },
+    {
+      "id": "f-loop",
+      "source": "natural-end",
+      "target": "write-one",
+      "label": "尚未自然结束：循环第 3–5 步",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:17-19\n3. Once the user picks a starting beat, write **only that beat** to the article file. A beat may be one sentence or several paragraphs, whatever that beat naturally is. Stop there.\n4. Re-read the article file from disk. Then offer 2–3 candidate **next beats**: different directions the journey could pivot to from where the article now stands. Each must be reachable from the current grounded set; note what each one grounds.\n5. Loop steps 3–5 until the article reaches a natural end.",
+      "rationale": "第 5 步要求重复第 3–5 步，第 3 步保留用户选择后仅写一拍的授权；对后续拍复用此动作，不假设自动替用户选拍。"
+    },
+    {
+      "id": "f-end",
+      "source": "natural-end",
+      "target": "finished",
+      "label": "文章达到自然终点",
+      "relation": "flow",
+      "basis": "source",
+      "evidence": "SKILL.md:19-19\n5. Loop steps 3–5 until the article reaches a natural end."
+    },
+    {
+      "id": "r-write-file",
+      "source": "write-one",
+      "target": "article-file",
+      "label": "仅写选中拍到文章文件",
+      "relation": "resource",
+      "basis": "source",
+      "evidence": "SKILL.md:17-17\n3. Once the user picks a starting beat, write **only that beat** to the article file. A beat may be one sentence or several paragraphs, whatever that beat naturally is. Stop there."
+    },
+    {
+      "id": "r-read-file",
+      "source": "disk-reread",
+      "target": "article-file",
+      "label": "从磁盘重读",
+      "relation": "resource",
+      "basis": "source",
+      "evidence": "SKILL.md:18-18\n4. Re-read the article file from disk. Then offer 2–3 candidate **next beats**: different directions the journey could pivot to from where the article now stands. Each must be reachable from the current grounded set; note what each one grounds."
+    },
+    {
+      "id": "r-rewrite-file",
+      "source": "rewrite",
+      "target": "article-file",
+      "label": "原位改写，其余不动",
+      "relation": "resource",
+      "basis": "source",
+      "evidence": "SKILL.md:65-65\n- If the user says \"rewrite that beat\" or \"go back and try a different beat 3\", do it: edit in place, leave the rest alone."
+    },
+    {
+      "id": "c-fixed-start",
+      "source": "fixed-pile",
+      "target": "starting-beats",
+      "label": "起始候选取自固定素材",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:9-9\nThe user has passed (or will pass) a markdown file of raw material. This is **exploit**: the exploring is done, the pile is fixed. Commit to a path through it and mine the pile to fill each beat."
+    },
+    {
+      "id": "c-ground-start",
+      "source": "grounding",
+      "target": "starting-beats",
+      "label": "只能依赖已扎根概念",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:16-16\n2. Write 2–3 candidate **starting beats**, drawn from the raw material. Each is a different entry point into the article. Each may only lean on grounded concepts; note what new concepts each one grounds. Show the user the beats before writing to the article file. The user picks one. Preview what beats that pick unlocks, as if the user is seeing a little way down the path."
+    },
+    {
+      "id": "c-ground-next",
+      "source": "grounding",
+      "target": "next-beats",
+      "label": "先扎根才能依赖",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:27-27\nEvery **concept** has to be **grounded** before a beat can lean on it: the audience either walked in knowing it or met it in an earlier beat. A beat that reaches for an ungrounded concept loses the reader; that is the one move the journey can't make. The unit is the concept, not the word for it: a beat can lean on an idea the reader lacks even with no jargon in sight. Where a concept has a name (a **term**), grounding it means landing the idea and the term together."
+    },
+    {
+      "id": "c-set-prereq",
+      "source": "grounded-set",
+      "target": "prerequisites",
+      "label": "初始集合来自先验",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:31-31\n- **Prerequisite**: grounded before the first beat. The audience brings it. Fixed at the start."
+    },
+    {
+      "id": "c-set-write",
+      "source": "grounded-set",
+      "target": "write-one",
+      "label": "每落地一拍更新集合",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:34-34\nSo each beat does two jobs: it **requires** concepts that are already grounded, and it **grounds** new ones. Keep a running list of what's grounded so far, and update it each time a beat lands."
+    },
+    {
+      "id": "c-reach-next",
+      "source": "reachable",
+      "target": "next-beats",
+      "label": "全部可达并标注所建立概念",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:36-36\nThis is what shapes the choose-your-own-adventure. A candidate beat is only reachable if everything it requires is already grounded; picking a beat that grounds concept X unlocks every beat that was waiting on X. When you offer next beats, they must all be reachable from the current grounded set, and say what each one grounds, so the user can see which paths it opens."
+    },
+    {
+      "id": "c-balance-prereq",
+      "source": "prerequisite-balance",
+      "target": "prerequisites",
+      "label": "与用户平衡先验和文内定义",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:38-38\nThe big lever is what you make a prerequisite versus what you ground inside the piece. Demand too much up front and you shut out readers who don't have it; ground too much inside and the early beats drown in definitions. Settle this with the user when you establish prerequisites, and revisit it whenever a tempting beat turns out to require a concept nothing has grounded yet: the fix is either a grounding beat before it, or promoting the concept to a prerequisite."
+    },
+    {
+      "id": "c-balance-next",
+      "source": "prerequisite-balance",
+      "target": "next-beats",
+      "label": "遇到未扎根依赖：先铺垫或提升先验",
+      "relation": "constraint",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:38-38\nThe big lever is what you make a prerequisite versus what you ground inside the piece. Demand too much up front and you shut out readers who don't have it; ground too much inside and the early beats drown in definitions. Settle this with the user when you establish prerequisites, and revisit it whenever a tempting beat turns out to require a concept nothing has grounded yet: the fix is either a grounding beat before it, or promoting the concept to a prerequisite.",
+      "rationale": "该条件规则约束候选的可达性，不声称它只在下一拍阶段触发，也不赋予修复后的跳转。"
+    },
+    {
+      "id": "c-unit-write",
+      "source": "beat-unit",
+      "target": "write-one",
+      "label": "一拍一动作；过大必须拆",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:42-50\nA beat is one move in the journey. It does one thing: sets a scene, lands a point, asks a question, drops an aside, twists the angle. Then it stops, leaving the reader at a place where the next beat can pivot.\n\nA beat is sized by what it needs:\n\n- A single sentence if that's all the move is (\"And then nothing happened for three weeks.\").\n- A short paragraph if the move needs setup.\n- Multiple paragraphs if the beat is a self-contained vignette, argument, or example.\n\nIf a \"beat\" needs five paragraphs and three subheadings, it's not a beat; it's two beats glued together. Split it."
+    },
+    {
+      "id": "c-quarry-write",
+      "source": "quarry",
+      "target": "write-one",
+      "label": "转述、拆分、重组或引用素材",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:54-54\nPull material from the raw pile to populate each beat. You can paraphrase, split, recombine, or quote. The pile is a quarry."
+    },
+    {
+      "id": "c-end-test",
+      "source": "ending-rule",
+      "target": "natural-end",
+      "label": "按旅程完成判断，不按素材耗尽",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:58-58\nThe article ends when the journey is complete, not when the pile is empty. Most piles will have leftover fragments that don't make it in. That is fine; that is the point of having more raw material than you need."
+    },
+    {
+      "id": "c-rhythm-write",
+      "source": "write-rhythm",
+      "target": "write-one",
+      "label": "每次写前重读；禁止抢写",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:62-63\n- Append one beat at a time. Never write ahead.\n- Re-read the article file from disk before every write. Preserve user edits absolutely."
+    },
+    {
+      "id": "c-rhythm-rewrite",
+      "source": "write-rhythm",
+      "target": "rewrite",
+      "label": "每次写入前都重读并保留用户改动",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:63-63\n- Re-read the article file from disk before every write. Preserve user edits absolutely."
+    },
+    {
+      "id": "c-edits-next",
+      "source": "user-edits",
+      "target": "next-beats",
+      "label": "用户大改前拍会改变后续",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:64-64\n- If the user edits a previous beat substantially, let it change what comes next."
+    }
+  ],
+  "warnings": [
+    "SKILL.md:11：保存路径缺失时只问一次并记住，但原文未定义已提供路径的显式旁路和该条件片段的精确主流程接入点；询问节点不补入口或返回线。",
+    "SKILL.md:65：定点改写仅在用户提出要求时执行，原文未指定请求发生在哪一步或改写后的返回位置；改写节点没有任何执行流入口或出口，仅保留文件关联与写前重读约束。",
+    "SKILL.md:38：遇到未扎根概念时可先写铺垫拍或提升为先验，但触发所在候选阶段和修复后的返回位置未明确；保留条件约束，不添加回退或插入执行线。",
+    "SKILL.md:19：原文写“Loop steps 3–5”，其中第 3 步的字面对象仍称起始拍；图以源保持抽象将同一“用户选中后只写一拍”动作复用于下一拍，不添加自动选择、未选中循环或拒绝路线。",
+    "SKILL.md:19,58：自然结束的具体判定方法未定义；仅呈现编号第 5 步的 until 条件和旅程完成标准，不补评分、素材耗尽或额外用户审批。"
+  ],
+  "coverage": {
+    "sourceSha256": "b23f7851987dab7828c83d42df98090ccebff586b64908ce6a5e772440214621",
+    "entries": [
+      {
+        "startLine": 1,
+        "endLine": 5,
+        "treatment": "context",
+        "reason": "YAML 标识、用途概述与禁用自动模型调用元数据；不是文章写作阶段。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 7,
+        "endLine": 7,
+        "treatment": "context",
+        "reason": "what-to-do 结构标记。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 9,
+        "endLine": 9,
+        "treatment": "represented",
+        "reason": "固定素材输入与利用阶段约束；不执行源指令。",
+        "nodeIds": [
+          "material",
+          "fixed-pile"
+        ],
+        "edgeIds": [
+          "c-fixed-start"
+        ]
+      },
+      {
+        "startLine": 11,
+        "endLine": 11,
+        "treatment": "represented",
+        "reason": "路径缺失时询问一次并记住；未说明接入点见 warning。",
+        "nodeIds": [
+          "ask-path"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 13,
+        "endLine": 15,
+        "treatment": "represented",
+        "reason": "旅程引导与第 1 步先验协商。",
+        "nodeIds": [
+          "prerequisites"
+        ],
+        "edgeIds": [
+          "f-start"
+        ]
+      },
+      {
+        "startLine": 16,
+        "endLine": 16,
+        "treatment": "represented",
+        "reason": "起始候选、展示、用户选择、后续预览，保留先验约束。",
+        "nodeIds": [
+          "starting-beats"
+        ],
+        "edgeIds": [
+          "f-prereq-starts",
+          "c-ground-start"
+        ]
+      },
+      {
+        "startLine": 17,
+        "endLine": 17,
+        "treatment": "represented",
+        "reason": "只写选中的一拍到文章文件，然后停止。",
+        "nodeIds": [
+          "write-one"
+        ],
+        "edgeIds": [
+          "f-chosen-write",
+          "r-write-file"
+        ]
+      },
+      {
+        "startLine": 18,
+        "endLine": 18,
+        "treatment": "represented",
+        "reason": "写后磁盘重读，再给出可达的下一拍。",
+        "nodeIds": [
+          "disk-reread",
+          "next-beats",
+          "article-file"
+        ],
+        "edgeIds": [
+          "f-write-reread",
+          "f-reread-next",
+          "r-read-file"
+        ]
+      },
+      {
+        "startLine": 19,
+        "endLine": 19,
+        "treatment": "represented",
+        "reason": "按第 5 步循环第 3–5 步直到自然结束；后续拍授权复用为有理由抽象。",
+        "nodeIds": [
+          "natural-end"
+        ],
+        "edgeIds": [
+          "f-next-check",
+          "f-loop",
+          "f-end"
+        ]
+      },
+      {
+        "startLine": 21,
+        "endLine": 25,
+        "treatment": "context",
+        "reason": "结构结束/开始标记及 Grounding 标题；不是执行步骤。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 27,
+        "endLine": 32,
+        "treatment": "represented",
+        "reason": "按概念而非术语判断已知；先验与引入两种扎根方式。",
+        "nodeIds": [
+          "grounding"
+        ],
+        "edgeIds": [
+          "c-ground-next",
+          "c-set-prereq"
+        ]
+      },
+      {
+        "startLine": 34,
+        "endLine": 34,
+        "treatment": "represented",
+        "reason": "每拍的依赖与新增概念、持续集合和每次落地后的更新。",
+        "nodeIds": [
+          "grounded-set"
+        ],
+        "edgeIds": [
+          "c-set-write"
+        ]
+      },
+      {
+        "startLine": 36,
+        "endLine": 36,
+        "treatment": "represented",
+        "reason": "候选可达及每拍解锁关系；不额外画概念级执行流。",
+        "nodeIds": [
+          "reachable"
+        ],
+        "edgeIds": [
+          "c-reach-next"
+        ]
+      },
+      {
+        "startLine": 38,
+        "endLine": 38,
+        "treatment": "represented",
+        "reason": "先验取舍与未扎根依赖修复；触发和回程未知，不补执行路由。",
+        "nodeIds": [
+          "prerequisite-balance"
+        ],
+        "edgeIds": [
+          "c-balance-prereq",
+          "c-balance-next"
+        ]
+      },
+      {
+        "startLine": 40,
+        "endLine": 40,
+        "treatment": "context",
+        "reason": "一拍定义的标题。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 42,
+        "endLine": 50,
+        "treatment": "grouped",
+        "reason": "一拍一动作、三种长度与必须拆分的反例；其中示例句作为定义细节而非执行操作。",
+        "nodeIds": [
+          "beat-unit"
+        ],
+        "edgeIds": [
+          "c-unit-write"
+        ]
+      },
+      {
+        "startLine": 52,
+        "endLine": 52,
+        "treatment": "context",
+        "reason": "从素材堆取材的标题。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 54,
+        "endLine": 54,
+        "treatment": "represented",
+        "reason": "转述、拆分、重组、引用均可用于填充拍。",
+        "nodeIds": [
+          "quarry"
+        ],
+        "edgeIds": [
+          "c-quarry-write"
+        ]
+      },
+      {
+        "startLine": 56,
+        "endLine": 56,
+        "treatment": "context",
+        "reason": "旅程结束的标题。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 58,
+        "endLine": 58,
+        "treatment": "represented",
+        "reason": "旅程完成而非素材耗尽是结束标准；允许剩余碎片。",
+        "nodeIds": [
+          "finished",
+          "ending-rule"
+        ],
+        "edgeIds": [
+          "c-end-test"
+        ]
+      },
+      {
+        "startLine": 60,
+        "endLine": 60,
+        "treatment": "context",
+        "reason": "写作节奏规则的标题。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 62,
+        "endLine": 63,
+        "treatment": "represented",
+        "reason": "一次一拍、禁止抢写、每次写前重读、保留用户修改；约束适用于追加和原位改写。",
+        "nodeIds": [
+          "write-rhythm"
+        ],
+        "edgeIds": [
+          "c-rhythm-write",
+          "c-rhythm-rewrite"
+        ]
+      },
+      {
+        "startLine": 64,
+        "endLine": 64,
+        "treatment": "represented",
+        "reason": "用户大幅改动影响后续拍。",
+        "nodeIds": [
+          "user-edits"
+        ],
+        "edgeIds": [
+          "c-edits-next"
+        ]
+      },
+      {
+        "startLine": 65,
+        "endLine": 65,
+        "treatment": "represented",
+        "reason": "条件改写原位修改且其余不动，未知进入/返回只记警告。",
+        "nodeIds": [
+          "rewrite"
+        ],
+        "edgeIds": [
+          "r-rewrite-file"
+        ]
+      },
+      {
+        "startLine": 67,
+        "endLine": 67,
+        "treatment": "context",
+        "reason": "supporting-info 结束标记。",
+        "nodeIds": [],
+        "edgeIds": []
+      }
+    ]
+  }
+}

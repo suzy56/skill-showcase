@@ -1,0 +1,17 @@
+{
+  "skill": "writing-fragments",
+  "source": {
+    "repo": "mattpocock/skills",
+    "url": "https://github.com/mattpocock/skills",
+    "license": "MIT"
+  },
+  "sourceSha256": "3be6ffe9386ddd6de8b320c331295953995792fd65d0972aa2a28524ead73e90",
+  "nodes": 19,
+  "edges": 19,
+  "warnings": 6,
+  "auditedAt": "2026-11-15",
+  "auditedBy": "omp",
+  "reviewedBy": "claude",
+  "reviewedAt": "2026-11-16",
+  "reviewNotes": "Reviewed against the source; no changes."
+}

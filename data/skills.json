@@ -15,6 +15,13 @@
    "source": {
     "label": "penglonghuang/chinese-novelist-skill",
     "url": "https://github.com/penglonghuang/chinese-novelist-skill"
+   },
+   "circuit": {
+    "href": "circuits/chinese-novelist/",
+    "nodes": 49,
+    "edges": 52,
+    "warnings": 7,
+    "license": "MIT"
    }
   },
   {
@@ -168,6 +175,13 @@
    "source": {
     "label": "mattpocock/skills",
     "url": "https://github.com/mattpocock/skills"
+   },
+   "circuit": {
+    "href": "circuits/writing-beats/",
+    "nodes": 21,
+    "edges": 25,
+    "warnings": 5,
+    "license": "MIT"
    }
   },
   {
@@ -177,6 +191,13 @@
    "source": {
     "label": "mattpocock/skills",
     "url": "https://github.com/mattpocock/skills"
+   },
+   "circuit": {
+    "href": "circuits/writing-fragments/",
+    "nodes": 19,
+    "edges": 19,
+    "warnings": 6,
+    "license": "MIT"
    }
   },
   {

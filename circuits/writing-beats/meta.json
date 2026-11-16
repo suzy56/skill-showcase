@@ -1,0 +1,17 @@
+{
+  "skill": "writing-beats",
+  "source": {
+    "repo": "mattpocock/skills",
+    "url": "https://github.com/mattpocock/skills",
+    "license": "MIT"
+  },
+  "sourceSha256": "b23f7851987dab7828c83d42df98090ccebff586b64908ce6a5e772440214621",
+  "nodes": 21,
+  "edges": 25,
+  "warnings": 5,
+  "auditedAt": "2026-11-15",
+  "auditedBy": "omp",
+  "reviewedBy": "claude",
+  "reviewedAt": "2026-11-16",
+  "reviewNotes": "Reviewed against the source; no changes."
+}

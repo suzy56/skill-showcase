@@ -1,0 +1,17 @@
+{
+  "skill": "chinese-novelist",
+  "source": {
+    "repo": "penglonghuang/chinese-novelist-skill",
+    "url": "https://github.com/penglonghuang/chinese-novelist-skill",
+    "license": "MIT"
+  },
+  "sourceSha256": "2c1a87df984c215a56b27665b6117337f8e6132e489660fd300b30c6f22a9f49",
+  "nodes": 49,
+  "edges": 52,
+  "warnings": 7,
+  "auditedAt": "2026-11-15",
+  "auditedBy": "omp",
+  "reviewedBy": "claude",
+  "reviewedAt": "2026-11-16",
+  "reviewNotes": "Reviewed against the source; no changes."
+}

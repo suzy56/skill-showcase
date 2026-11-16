@@ -1,0 +1,560 @@
+{
+  "title": "writing-fragments — 源文档审计语义图",
+  "description": "用持续追问拓展写作可能，从最初提示起收集对话双方的片段，静默追加到同一 Markdown 文件。保留探索边界、文件格式、每次写前重读及随时定点编辑要求；未说明的阶段顺序、条件入口与返回位置不补线。",
+  "sourceMarkdown": "---\r\nname: writing-fragments\r\ndescription: \"Writing, explore: mine raw fragments, no structure yet.\"\r\ndisable-model-invocation: true\r\n---\r\n\r\n<what-to-do>\r\n\r\nThis is pure **explore**: widen the space of what could be written without committing to structure. Committing is _exploit_, a separate skill's job. Run a grilling session that produces fragments, interviewing the user relentlessly about whatever they want to write about. Imposing phases, outlines, or article structure is out of scope here.\r\n\r\nAs fragments emerge from either side of the conversation, append them to a single markdown file.\r\n\r\nIf the user did not pass a path, ask once where to save the document, then remember it for the rest of the session.\r\n\r\nCapture fragments from the very first thing the user says, including the initial prompt.\r\n\r\nOn first write, put a single H1 at the top with a working title (it can change later) and nothing else: no metadata, no TOC, no date.\r\n\r\n</what-to-do>\r\n\r\n<supporting-info>\r\n\r\n## What is a fragment\r\n\r\nA fragment is any piece of text that might survive into the final article. It must be _readable by the author_ (the author can tell what it means), but it does not need to define its terms or be comprehensible to a cold reader. The bar is \"is this a piece of good writing?\", not \"is this a self-contained argument?\"\r\n\r\nFragments are deliberately heterogeneous. Examples of what could be a fragment:\r\n\r\n- A sharp sentence you'd want to deploy somewhere but don't yet know where.\r\n- A claim with a one-line justification.\r\n- A vignette: a thing that happened, a code snippet, a scenario, an analogy.\r\n- A half-thought: \"something about how X feels like Y, work this out later.\"\r\n- A quote, a piece of dialogue, an overheard line.\r\n- A list of related observations that hang together by feel.\r\n- A complaint, a confession, a punchline.\r\n- A **leading word**: a compact metaphor or coinage the whole piece can hang on (one term that names the idea, the way _tracer bullets_ or _fog of war_ names a whole pattern).\r\n\r\nOf these, the leading word is the most valuable fragment to land. It is load-bearing: name the right one in explore and it shapes the structure, the transitions, and the title later, paying dividends through the entire exploit phase. When the conversation circles a recurring idea, push to coin a word for it.\r\n\r\nThe novelist's diary is the model: years of unstructured noticings that later get mined for raw material. Fragments are noticings.\r\n\r\n## File format\r\n\r\n```markdown\r\n# Working title\r\n\r\nA first fragment lives here.\r\n\r\nIt can be multiple paragraphs. It can include lists, code, quotes: whatever\r\nshape the fragment naturally takes.\r\n\r\n---\r\n\r\nA second fragment.\r\n\r\n---\r\n\r\n> A quoted line that the user wants to keep around.\r\n\r\nA reaction to it.\r\n\r\n---\r\n\r\n- A cluster of related observations\r\n- That hang together by feel\r\n- And want to be near each other\r\n```\r\n\r\nFragments are separated by a horizontal rule (`\\n---\\n`). No headings inside the body. No tags. No order beyond the order they were added.\r\n\r\n## Writing rhythm\r\n\r\nAppend silently. Don't ask permission for each fragment. Mention what you added in passing (\"adding that\"), but don't interrupt the conversation with save dialogs.\r\n\r\nBefore every write: re-read the file from disk. The user may have edited, reordered, or deleted fragments between turns, so preserve their changes. Never overwrite the file; only append (or, if the user asks, edit a specific fragment in place).\r\n\r\nThe user can say \"cut the last one\", \"rewrite that one sharper\", \"merge those two\" at any time. Treat those as first-class instructions.\r\n\r\n</supporting-info>\r\n",
+  "provenance": {
+    "kind": "semantic",
+    "mode": "完整 79 行原文审计；只保留明示动作与关系，路径询问、首次写入和命名条件保持独立，不补循环或阶段序列。",
+    "sourceSha256": "3be6ffe9386ddd6de8b320c331295953995792fd65d0972aa2a28524ead73e90",
+    "url": "https://github.com/mattpocock/skills"
+  },
+  "recommendationsRequested": false,
+  "nodes": [
+    {
+      "id": "initial",
+      "kind": "input",
+      "label": "用户的最初表达",
+      "description": "从用户说的第一句话就开始捕捉，包含最初提示；不是等访谈进行后才开始。",
+      "basis": "source",
+      "evidence": "SKILL.md:15-15\nCapture fragments from the very first thing the user says, including the initial prompt."
+    },
+    {
+      "id": "grill",
+      "kind": "processing",
+      "label": "持续追问，拓展可能",
+      "description": "围绕用户想写的任何内容持续访谈，产生片段；完成目标是拓展可写空间，不承诺结构。原文没有终止条件。",
+      "basis": "source",
+      "evidence": "SKILL.md:9-9\nThis is pure **explore**: widen the space of what could be written without committing to structure. Committing is _exploit_, a separate skill's job. Run a grilling session that produces fragments, interviewing the user relentlessly about whatever they want to write about. Imposing phases, outlines, or article structure is out of scope here."
+    },
+    {
+      "id": "capture",
+      "kind": "processing",
+      "label": "从初始提示捕捉片段",
+      "description": "把用户最初表达（包括初始提示）中的可用片段也纳入捕捉。",
+      "basis": "source",
+      "evidence": "SKILL.md:15-15\nCapture fragments from the very first thing the user says, including the initial prompt."
+    },
+    {
+      "id": "append",
+      "kind": "processing",
+      "label": "双方片段涌现即追加",
+      "description": "对话任一方产生片段时，追加到同一个 Markdown 文件，而非分别保存双方内容。",
+      "basis": "source",
+      "evidence": "SKILL.md:11-11\nAs fragments emerge from either side of the conversation, append them to a single markdown file."
+    },
+    {
+      "id": "document",
+      "kind": "resource",
+      "label": "同一个 Markdown 文件",
+      "description": "对话双方片段共同写入的单一文档；路径缺失时仅询问一次并记住。",
+      "basis": "source",
+      "evidence": "SKILL.md:11-13\nAs fragments emerge from either side of the conversation, append them to a single markdown file.\n\nIf the user did not pass a path, ask once where to save the document, then remember it for the rest of the session."
+    },
+    {
+      "id": "explore-only",
+      "kind": "config",
+      "label": "仅探索，不定结构",
+      "description": "扩大可能写作空间，不做 exploit 式承诺；不得强加阶段、大纲或文章结构。原文提到其他技能职责，但本图不添加系列衔接。",
+      "basis": "source",
+      "evidence": "SKILL.md:9-9\nThis is pure **explore**: widen the space of what could be written without committing to structure. Committing is _exploit_, a separate skill's job. Run a grilling session that produces fragments, interviewing the user relentlessly about whatever they want to write about. Imposing phases, outlines, or article structure is out of scope here."
+    },
+    {
+      "id": "fragment-bar",
+      "kind": "config",
+      "label": "作者可读，文字值得保留",
+      "description": "片段是可能留在成文中的文字：作者知道它是什么意思即可，无需定义术语或让陌生读者完全理解。判断标准是好文字，而非自足论证。",
+      "basis": "source",
+      "evidence": "SKILL.md:25-25\nA fragment is any piece of text that might survive into the final article. It must be _readable by the author_ (the author can tell what it means), but it does not need to define its terms or be comprehensible to a cold reader. The bar is \"is this a piece of good writing?\", not \"is this a self-contained argument?\""
+    },
+    {
+      "id": "body-format",
+      "kind": "config",
+      "label": "横线分隔，不设正文标题或标签",
+      "description": "片段间用换行—三短横线—换行分隔；正文无标题、无标签，除了追加次序不强加其他顺序。示例允许多段、列表、代码、引文等自然形态。",
+      "basis": "source",
+      "evidence": "SKILL.md:44-69\n```markdown\n# Working title\n\nA first fragment lives here.\n\nIt can be multiple paragraphs. It can include lists, code, quotes: whatever\nshape the fragment naturally takes.\n\n---\n\nA second fragment.\n\n---\n\n> A quoted line that the user wants to keep around.\n\nA reaction to it.\n\n---\n\n- A cluster of related observations\n- That hang together by feel\n- And want to be near each other\n```\n\nFragments are separated by a horizontal rule (`\\n---\\n`). No headings inside the body. No tags. No order beyond the order they were added."
+    },
+    {
+      "id": "silent",
+      "kind": "config",
+      "label": "静默追加，不打断对话",
+      "description": "不逐片请求许可、不弹保存式对话；可顺口提到「正在加上这段」，但不得打断交流。静默不等于完全不能提及保存。",
+      "basis": "source",
+      "evidence": "SKILL.md:73-73\nAppend silently. Don't ask permission for each fragment. Mention what you added in passing (\"adding that\"), but don't interrupt the conversation with save dialogs."
+    },
+    {
+      "id": "reread",
+      "kind": "config",
+      "label": "每次写前重读，保留用户改动",
+      "description": "每一次写入前从磁盘重读；保留用户在轮次间的编辑、重排、删除。不得覆盖整个文件：只追加；用户要求时才定点修改特定片段。该前置约束也适用于首次写与随时编辑，不作为任意阶段后的执行分支。",
+      "basis": "source",
+      "evidence": "SKILL.md:75-75\nBefore every write: re-read the file from disk. The user may have edited, reordered, or deleted fragments between turns, so preserve their changes. Never overwrite the file; only append (or, if the user asks, edit a specific fragment in place)."
+    },
+    {
+      "id": "missing-path",
+      "kind": "decision",
+      "label": "用户没有提供路径？",
+      "description": "仅保留原文明示的缺路径条件，不指定检查出现在主流程何处，也不补已有路径分支。",
+      "basis": "source",
+      "evidence": "SKILL.md:13-13\nIf the user did not pass a path, ask once where to save the document, then remember it for the rest of the session."
+    },
+    {
+      "id": "ask-path",
+      "kind": "processing",
+      "label": "问一次路径，并在本会话记住",
+      "description": "用户未给路径时，只问一次文档存放位置，然后在本会话后续记住。原文未写询问无答复时如何继续。",
+      "basis": "source",
+      "evidence": "SKILL.md:13-13\nIf the user did not pass a path, ask once where to save the document, then remember it for the rest of the session."
+    },
+    {
+      "id": "first-write",
+      "kind": "decision",
+      "label": "这是首次写入？",
+      "description": "首次写入时触发标题要求；不把该条件插入某个任意的访谈阶段。",
+      "basis": "source",
+      "evidence": "SKILL.md:17-17\nOn first write, put a single H1 at the top with a working title (it can change later) and nothing else: no metadata, no TOC, no date."
+    },
+    {
+      "id": "working-title",
+      "kind": "processing",
+      "label": "顶部仅放一个工作标题 H1",
+      "description": "首次写入时在顶部放一个可日后更改的工作标题 H1。首次标题初始化不另添其他内容，尤其不加元数据、目录或日期；这不取消持续捕捉、追加片段的独立要求。",
+      "basis": "source",
+      "evidence": "SKILL.md:17-17\nOn first write, put a single H1 at the top with a working title (it can change later) and nothing else: no metadata, no TOC, no date."
+    },
+    {
+      "id": "initial-format",
+      "kind": "config",
+      "label": "首次标题不附元数据、目录或日期",
+      "description": "顶部单一 H1 的首次写入规则是「nothing else」；不把样例内容误作额外的初始化模板。",
+      "basis": "source",
+      "evidence": "SKILL.md:17-17\nOn first write, put a single H1 at the top with a working title (it can change later) and nothing else: no metadata, no TOC, no date."
+    },
+    {
+      "id": "recurring",
+      "kind": "decision",
+      "label": "对话围绕反复出现的想法？",
+      "description": "这是原文明示的造词触发条件；其检查时点及完成后的返回位置未指定。",
+      "basis": "source",
+      "evidence": "SKILL.md:38-38\nOf these, the leading word is the most valuable fragment to land. It is load-bearing: name the right one in explore and it shapes the structure, the transitions, and the title later, paying dividends through the entire exploit phase. When the conversation circles a recurring idea, push to coin a word for it."
+    },
+    {
+      "id": "coin",
+      "kind": "processing",
+      "label": "推动为反复出现的想法造词",
+      "description": "推动凝练一个主导词：紧凑的隐喻或新词，可承载整个想法。主导词是最值得获得的片段；正确命名会惠及后续结构、过渡和标题，但这里不执行后续 exploit 工作。",
+      "basis": "source",
+      "evidence": "SKILL.md:36-38\n- A **leading word**: a compact metaphor or coinage the whole piece can hang on (one term that names the idea, the way _tracer bullets_ or _fog of war_ names a whole pattern).\n\nOf these, the leading word is the most valuable fragment to land. It is load-bearing: name the right one in explore and it shapes the structure, the transitions, and the title later, paying dividends through the entire exploit phase. When the conversation circles a recurring idea, push to coin a word for it."
+    },
+    {
+      "id": "edit-request",
+      "kind": "input",
+      "label": "随时提出剪裁、改写或合并",
+      "description": "用户可在任何时候要求「剪掉最后一条」「那条改得更锋利」「把这两条合并」。它是独立请求入口，不接在主流程的任意阶段之后。",
+      "basis": "source",
+      "evidence": "SKILL.md:77-77\nThe user can say \"cut the last one\", \"rewrite that one sharper\", \"merge those two\" at any time. Treat those as first-class instructions."
+    },
+    {
+      "id": "specific-edit",
+      "kind": "processing",
+      "label": "优先落实特定片段编辑请求",
+      "description": "把用户随时提出的剪裁、改写、合并视作一等指令；仅在其要求范围内编辑对应片段，同时遵守写前重读和保留改动规则。原文未指定编辑后返回哪里。",
+      "basis": "abstraction",
+      "rationale": "把第 75 行的用户授权定点修改例外与第 77 行的一等编辑请求合成单个独立动作，不增加编辑发生时点或返回路线。",
+      "evidence": "SKILL.md:75-77\nBefore every write: re-read the file from disk. The user may have edited, reordered, or deleted fragments between turns, so preserve their changes. Never overwrite the file; only append (or, if the user asks, edit a specific fragment in place).\n\nThe user can say \"cut the last one\", \"rewrite that one sharper\", \"merge those two\" at any time. Treat those as first-class instructions."
+    }
+  ],
+  "edges": [
+    {
+      "id": "f-initial-capture",
+      "source": "initial",
+      "target": "capture",
+      "label": "从第一句话起（含初始提示）",
+      "relation": "flow",
+      "basis": "source",
+      "evidence": "SKILL.md:15-15\nCapture fragments from the very first thing the user says, including the initial prompt."
+    },
+    {
+      "id": "f-capture-append",
+      "source": "capture",
+      "target": "append",
+      "label": "捕捉到的片段也须追加",
+      "relation": "flow",
+      "basis": "abstraction",
+      "rationale": "第 15 行要求捕捉最初输入，第 11 行规定任一方片段涌现即追加；这里只将这一写入规则应用于最初捕捉，不规定路径询问或首次标题的插入顺序。",
+      "evidence": "SKILL.md:11-15\nAs fragments emerge from either side of the conversation, append them to a single markdown file.\n\nIf the user did not pass a path, ask once where to save the document, then remember it for the rest of the session.\n\nCapture fragments from the very first thing the user says, including the initial prompt."
+    },
+    {
+      "id": "f-initial-grill",
+      "source": "initial",
+      "target": "grill",
+      "label": "围绕用户想写的内容持续访谈",
+      "relation": "flow",
+      "basis": "abstraction",
+      "rationale": "将第 9 行的访谈对象展开为用户输入入口；不声明先捕捉后访谈或先访谈后捕捉。",
+      "evidence": "SKILL.md:9-9\nThis is pure **explore**: widen the space of what could be written without committing to structure. Committing is _exploit_, a separate skill's job. Run a grilling session that produces fragments, interviewing the user relentlessly about whatever they want to write about. Imposing phases, outlines, or article structure is out of scope here."
+    },
+    {
+      "id": "f-grill-append",
+      "source": "grill",
+      "target": "append",
+      "label": "对话任一方涌现片段时",
+      "relation": "flow",
+      "basis": "source",
+      "evidence": "SKILL.md:11-11\nAs fragments emerge from either side of the conversation, append them to a single markdown file."
+    },
+    {
+      "id": "c-explore",
+      "source": "explore-only",
+      "target": "grill",
+      "label": "禁止强加阶段、大纲或结构",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:9-9\nThis is pure **explore**: widen the space of what could be written without committing to structure. Committing is _exploit_, a separate skill's job. Run a grilling session that produces fragments, interviewing the user relentlessly about whatever they want to write about. Imposing phases, outlines, or article structure is out of scope here."
+    },
+    {
+      "id": "c-quality",
+      "source": "fragment-bar",
+      "target": "append",
+      "label": "保留作者可读的好文字",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:25-25\nA fragment is any piece of text that might survive into the final article. It must be _readable by the author_ (the author can tell what it means), but it does not need to define its terms or be comprehensible to a cold reader. The bar is \"is this a piece of good writing?\", not \"is this a self-contained argument?\""
+    },
+    {
+      "id": "c-body",
+      "source": "body-format",
+      "target": "append",
+      "label": "横线分隔；无正文标题、标签或另行排序",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:69-69\nFragments are separated by a horizontal rule (`\\n---\\n`). No headings inside the body. No tags. No order beyond the order they were added."
+    },
+    {
+      "id": "c-silent",
+      "source": "silent",
+      "target": "append",
+      "label": "不逐片请示，不打断对话",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:73-73\nAppend silently. Don't ask permission for each fragment. Mention what you added in passing (\"adding that\"), but don't interrupt the conversation with save dialogs."
+    },
+    {
+      "id": "c-reread-append",
+      "source": "reread",
+      "target": "append",
+      "label": "每次写前重读；仅追加并保留用户修改",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:75-75\nBefore every write: re-read the file from disk. The user may have edited, reordered, or deleted fragments between turns, so preserve their changes. Never overwrite the file; only append (or, if the user asks, edit a specific fragment in place)."
+    },
+    {
+      "id": "c-reread-title",
+      "source": "reread",
+      "target": "working-title",
+      "label": "每次写前重读（也包括首次写）",
+      "relation": "constraint",
+      "basis": "abstraction",
+      "rationale": "将原文 every write 的全称前置要求用于首次标题写入；不规定尚未存在的文件如何读取。",
+      "evidence": "SKILL.md:75-75\nBefore every write: re-read the file from disk. The user may have edited, reordered, or deleted fragments between turns, so preserve their changes. Never overwrite the file; only append (or, if the user asks, edit a specific fragment in place)."
+    },
+    {
+      "id": "c-reread-edit",
+      "source": "reread",
+      "target": "specific-edit",
+      "label": "重读并保留修改；仅按用户要求定点编辑",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:75-75\nBefore every write: re-read the file from disk. The user may have edited, reordered, or deleted fragments between turns, so preserve their changes. Never overwrite the file; only append (or, if the user asks, edit a specific fragment in place)."
+    },
+    {
+      "id": "c-initial-title",
+      "source": "initial-format",
+      "target": "working-title",
+      "label": "单个 H1，不附其他初始化内容",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:17-17\nOn first write, put a single H1 at the top with a working title (it can change later) and nothing else: no metadata, no TOC, no date."
+    },
+    {
+      "id": "f-missing-ask",
+      "source": "missing-path",
+      "target": "ask-path",
+      "label": "用户没有传入路径时",
+      "relation": "flow",
+      "basis": "source",
+      "evidence": "SKILL.md:13-13\nIf the user did not pass a path, ask once where to save the document, then remember it for the rest of the session."
+    },
+    {
+      "id": "f-first-title",
+      "source": "first-write",
+      "target": "working-title",
+      "label": "首次写入时",
+      "relation": "flow",
+      "basis": "source",
+      "evidence": "SKILL.md:17-17\nOn first write, put a single H1 at the top with a working title (it can change later) and nothing else: no metadata, no TOC, no date."
+    },
+    {
+      "id": "f-recurring-coin",
+      "source": "recurring",
+      "target": "coin",
+      "label": "对话围绕某个反复出现的想法时",
+      "relation": "flow",
+      "basis": "source",
+      "evidence": "SKILL.md:38-38\nOf these, the leading word is the most valuable fragment to land. It is load-bearing: name the right one in explore and it shapes the structure, the transitions, and the title later, paying dividends through the entire exploit phase. When the conversation circles a recurring idea, push to coin a word for it."
+    },
+    {
+      "id": "f-request-edit",
+      "source": "edit-request",
+      "target": "specific-edit",
+      "label": "用户随时要求剪裁、改写或合并时",
+      "relation": "flow",
+      "basis": "source",
+      "evidence": "SKILL.md:77-77\nThe user can say \"cut the last one\", \"rewrite that one sharper\", \"merge those two\" at any time. Treat those as first-class instructions."
+    },
+    {
+      "id": "r-append-file",
+      "source": "append",
+      "target": "document",
+      "label": "双方片段写入同一文档",
+      "relation": "resource",
+      "basis": "source",
+      "evidence": "SKILL.md:11-11\nAs fragments emerge from either side of the conversation, append them to a single markdown file."
+    },
+    {
+      "id": "r-title-file",
+      "source": "working-title",
+      "target": "document",
+      "label": "首次在文档顶部放标题",
+      "relation": "resource",
+      "basis": "source",
+      "evidence": "SKILL.md:17-17\nOn first write, put a single H1 at the top with a working title (it can change later) and nothing else: no metadata, no TOC, no date."
+    },
+    {
+      "id": "r-edit-file",
+      "source": "specific-edit",
+      "target": "document",
+      "label": "用户要求时定点修改文件片段",
+      "relation": "resource",
+      "basis": "source",
+      "evidence": "SKILL.md:75-75\nBefore every write: re-read the file from disk. The user may have edited, reordered, or deleted fragments between turns, so preserve their changes. Never overwrite the file; only append (or, if the user asks, edit a specific fragment in place)."
+    }
+  ],
+  "warnings": [
+    "第 9、11、15 行描述持续访谈与从初始提示起收集、追加双方片段，但没有停止条件或循环返回目标；不添加终点或回环，也不把段落顺序当作执行顺序。",
+    "第 13 行没有说明缺路径检查在何处进入、已有路径的分支或询问后的主流程返回位置；路径条件与询问保持独立片段，仅连接明确的缺路径结果。",
+    "第 17 行没有指定首次写入条件在主流程何处检查、非首次写入的去向，或标题初始化与首次片段追加之间的精确边界；仅连接首次写入到 H1，不补前后线。",
+    "第 38 行没有给出反复想法检查的进入位置、条件未满足的去向或造词后的返回位置；只保留条件成立时推动造词的边，不强制先造词再追加。",
+    "第 77 行允许随时剪裁、改写、合并，但没有指定主流程触发点或完成后的返回位置；保留独立请求入口，不从任意阶段引线。",
+    "第 75 行要求每次写前重读，但未说明首次写入且文件尚不存在时如何满足；仅保留全称前置约束，不发明创建、跳过或异常处理分支。"
+  ],
+  "coverage": {
+    "sourceSha256": "3be6ffe9386ddd6de8b320c331295953995792fd65d0972aa2a28524ead73e90",
+    "entries": [
+      {
+        "startLine": 1,
+        "endLine": 7,
+        "treatment": "context",
+        "reason": "技能名称、探索用途、禁用模型自动调用的包配置及区段标记；不当作文档输出元数据或运行步骤。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 9,
+        "endLine": 9,
+        "treatment": "represented",
+        "reason": "持续访谈与纯探索边界；输入到访谈不代表捕捉和访谈的先后顺序。",
+        "nodeIds": [
+          "grill",
+          "explore-only"
+        ],
+        "edgeIds": [
+          "f-initial-grill",
+          "c-explore"
+        ]
+      },
+      {
+        "startLine": 11,
+        "endLine": 11,
+        "treatment": "represented",
+        "reason": "双方片段涌现即追加到同一 Markdown；初始捕捉也是该通用规则的实例。",
+        "nodeIds": [
+          "append",
+          "document"
+        ],
+        "edgeIds": [
+          "f-capture-append",
+          "f-grill-append",
+          "r-append-file"
+        ]
+      },
+      {
+        "startLine": 13,
+        "endLine": 13,
+        "treatment": "represented",
+        "reason": "只问一次缺失路径并记住；未知入口、另一条件结果及返回位置见 warning，不补主流程边。",
+        "nodeIds": [
+          "missing-path",
+          "ask-path"
+        ],
+        "edgeIds": [
+          "f-missing-ask"
+        ]
+      },
+      {
+        "startLine": 15,
+        "endLine": 15,
+        "treatment": "represented",
+        "reason": "初始提示即开始捕捉，不把捕捉延后到访谈中途。",
+        "nodeIds": [
+          "initial",
+          "capture"
+        ],
+        "edgeIds": [
+          "f-initial-capture"
+        ]
+      },
+      {
+        "startLine": 17,
+        "endLine": 17,
+        "treatment": "represented",
+        "reason": "首次写入条件、顶部单个可变工作标题与禁止其他初始化内容；精确边界和前后顺序未指定，见 warning。",
+        "nodeIds": [
+          "first-write",
+          "working-title",
+          "initial-format"
+        ],
+        "edgeIds": [
+          "f-first-title",
+          "c-initial-title",
+          "r-title-file"
+        ]
+      },
+      {
+        "startLine": 19,
+        "endLine": 23,
+        "treatment": "context",
+        "reason": "区段标记与片段定义标题只是源文档组织，不建立阶段顺序。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 25,
+        "endLine": 25,
+        "treatment": "represented",
+        "reason": "作者可读、无须对陌生读者自足的片段质量门槛。",
+        "nodeIds": [
+          "fragment-bar"
+        ],
+        "edgeIds": [
+          "c-quality"
+        ]
+      },
+      {
+        "startLine": 27,
+        "endLine": 35,
+        "treatment": "example",
+        "reason": "异质片段示例：锐句、简要论据、场景或代码或类比、半成想法、引语或对白、观察列表、抱怨自白与包袱；不是顺序阶段、必要清单或穷尽分支。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 36,
+        "endLine": 38,
+        "treatment": "represented",
+        "reason": "主导词的定义和优先价值，以及反复想法出现时推动造词的条件；不把后续 exploit 收益变成当前动作。",
+        "nodeIds": [
+          "recurring",
+          "coin"
+        ],
+        "edgeIds": [
+          "f-recurring-coin"
+        ]
+      },
+      {
+        "startLine": 40,
+        "endLine": 42,
+        "treatment": "context",
+        "reason": "小说家日记是长期无结构观察的类比，不是多年等待步骤；文件格式标题不是执行阶段。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 44,
+        "endLine": 67,
+        "treatment": "example",
+        "reason": "Markdown 样例保留在原文；演示工作 H1、自然多段、列表、代码、引文及横线分隔，不执行、不复制为实际初始化内容。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 69,
+        "endLine": 69,
+        "treatment": "represented",
+        "reason": "横线分隔、无正文标题/标签及只保留追加次序的格式约束；格式节点包含上文示例允许的自然形态。",
+        "nodeIds": [
+          "body-format"
+        ],
+        "edgeIds": [
+          "c-body"
+        ]
+      },
+      {
+        "startLine": 71,
+        "endLine": 71,
+        "treatment": "context",
+        "reason": "写入节奏标题不建立访谈之后的独立执行阶段。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 73,
+        "endLine": 73,
+        "treatment": "represented",
+        "reason": "静默追加、不逐片请示但可顺口提及保存，不用保存对话打断访谈。",
+        "nodeIds": [
+          "silent"
+        ],
+        "edgeIds": [
+          "c-silent"
+        ]
+      },
+      {
+        "startLine": 75,
+        "endLine": 75,
+        "treatment": "represented",
+        "reason": "所有写入前从磁盘重读，保留用户编辑/重排/删除；仅追加与按请求定点编辑的例外，作为前置约束而非任意流程位置。初次文件不存在的缺口见 warning。",
+        "nodeIds": [
+          "reread"
+        ],
+        "edgeIds": [
+          "c-reread-append",
+          "c-reread-title",
+          "c-reread-edit",
+          "r-edit-file"
+        ]
+      },
+      {
+        "startLine": 77,
+        "endLine": 77,
+        "treatment": "represented",
+        "reason": "随时剪裁、改写、合并是一等指令，独立请求入口与具体编辑；未知完成后返回路线见 warning。",
+        "nodeIds": [
+          "edit-request",
+          "specific-edit"
+        ],
+        "edgeIds": [
+          "f-request-edit"
+        ]
+      },
+      {
+        "startLine": 79,
+        "endLine": 79,
+        "treatment": "context",
+        "reason": "源文档区段结束标记，不是访谈结束条件。",
+        "nodeIds": [],
+        "edgeIds": []
+      }
+    ]
+  }
+}

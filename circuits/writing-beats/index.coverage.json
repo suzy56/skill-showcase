@@ -1,0 +1,284 @@
+{
+  "sourceSha256": "b23f7851987dab7828c83d42df98090ccebff586b64908ce6a5e772440214621",
+  "entries": [
+    {
+      "startLine": 1,
+      "endLine": 5,
+      "treatment": "context",
+      "reason": "YAML 标识、用途概述与禁用自动模型调用元数据；不是文章写作阶段。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 7,
+      "endLine": 7,
+      "treatment": "context",
+      "reason": "what-to-do 结构标记。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 9,
+      "endLine": 9,
+      "treatment": "represented",
+      "reason": "固定素材输入与利用阶段约束；不执行源指令。",
+      "nodeIds": [
+        "material",
+        "fixed-pile"
+      ],
+      "edgeIds": [
+        "c-fixed-start"
+      ]
+    },
+    {
+      "startLine": 11,
+      "endLine": 11,
+      "treatment": "represented",
+      "reason": "路径缺失时询问一次并记住；未说明接入点见 warning。",
+      "nodeIds": [
+        "ask-path"
+      ],
+      "edgeIds": []
+    },
+    {
+      "startLine": 13,
+      "endLine": 15,
+      "treatment": "represented",
+      "reason": "旅程引导与第 1 步先验协商。",
+      "nodeIds": [
+        "prerequisites"
+      ],
+      "edgeIds": [
+        "f-start"
+      ]
+    },
+    {
+      "startLine": 16,
+      "endLine": 16,
+      "treatment": "represented",
+      "reason": "起始候选、展示、用户选择、后续预览，保留先验约束。",
+      "nodeIds": [
+        "starting-beats"
+      ],
+      "edgeIds": [
+        "f-prereq-starts",
+        "c-ground-start"
+      ]
+    },
+    {
+      "startLine": 17,
+      "endLine": 17,
+      "treatment": "represented",
+      "reason": "只写选中的一拍到文章文件，然后停止。",
+      "nodeIds": [
+        "write-one"
+      ],
+      "edgeIds": [
+        "f-chosen-write",
+        "r-write-file"
+      ]
+    },
+    {
+      "startLine": 18,
+      "endLine": 18,
+      "treatment": "represented",
+      "reason": "写后磁盘重读，再给出可达的下一拍。",
+      "nodeIds": [
+        "disk-reread",
+        "next-beats",
+        "article-file"
+      ],
+      "edgeIds": [
+        "f-write-reread",
+        "f-reread-next",
+        "r-read-file"
+      ]
+    },
+    {
+      "startLine": 19,
+      "endLine": 19,
+      "treatment": "represented",
+      "reason": "按第 5 步循环第 3–5 步直到自然结束；后续拍授权复用为有理由抽象。",
+      "nodeIds": [
+        "natural-end"
+      ],
+      "edgeIds": [
+        "f-next-check",
+        "f-loop",
+        "f-end"
+      ]
+    },
+    {
+      "startLine": 21,
+      "endLine": 25,
+      "treatment": "context",
+      "reason": "结构结束/开始标记及 Grounding 标题；不是执行步骤。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 27,
+      "endLine": 32,
+      "treatment": "represented",
+      "reason": "按概念而非术语判断已知；先验与引入两种扎根方式。",
+      "nodeIds": [
+        "grounding"
+      ],
+      "edgeIds": [
+        "c-ground-next",
+        "c-set-prereq"
+      ]
+    },
+    {
+      "startLine": 34,
+      "endLine": 34,
+      "treatment": "represented",
+      "reason": "每拍的依赖与新增概念、持续集合和每次落地后的更新。",
+      "nodeIds": [
+        "grounded-set"
+      ],
+      "edgeIds": [
+        "c-set-write"
+      ]
+    },
+    {
+      "startLine": 36,
+      "endLine": 36,
+      "treatment": "represented",
+      "reason": "候选可达及每拍解锁关系；不额外画概念级执行流。",
+      "nodeIds": [
+        "reachable"
+      ],
+      "edgeIds": [
+        "c-reach-next"
+      ]
+    },
+    {
+      "startLine": 38,
+      "endLine": 38,
+      "treatment": "represented",
+      "reason": "先验取舍与未扎根依赖修复；触发和回程未知，不补执行路由。",
+      "nodeIds": [
+        "prerequisite-balance"
+      ],
+      "edgeIds": [
+        "c-balance-prereq",
+        "c-balance-next"
+      ]
+    },
+    {
+      "startLine": 40,
+      "endLine": 40,
+      "treatment": "context",
+      "reason": "一拍定义的标题。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 42,
+      "endLine": 50,
+      "treatment": "grouped",
+      "reason": "一拍一动作、三种长度与必须拆分的反例；其中示例句作为定义细节而非执行操作。",
+      "nodeIds": [
+        "beat-unit"
+      ],
+      "edgeIds": [
+        "c-unit-write"
+      ]
+    },
+    {
+      "startLine": 52,
+      "endLine": 52,
+      "treatment": "context",
+      "reason": "从素材堆取材的标题。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 54,
+      "endLine": 54,
+      "treatment": "represented",
+      "reason": "转述、拆分、重组、引用均可用于填充拍。",
+      "nodeIds": [
+        "quarry"
+      ],
+      "edgeIds": [
+        "c-quarry-write"
+      ]
+    },
+    {
+      "startLine": 56,
+      "endLine": 56,
+      "treatment": "context",
+      "reason": "旅程结束的标题。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 58,
+      "endLine": 58,
+      "treatment": "represented",
+      "reason": "旅程完成而非素材耗尽是结束标准；允许剩余碎片。",
+      "nodeIds": [
+        "finished",
+        "ending-rule"
+      ],
+      "edgeIds": [
+        "c-end-test"
+      ]
+    },
+    {
+      "startLine": 60,
+      "endLine": 60,
+      "treatment": "context",
+      "reason": "写作节奏规则的标题。",
+      "nodeIds": [],
+      "edgeIds": []
+    },
+    {
+      "startLine": 62,
+      "endLine": 63,
+      "treatment": "represented",
+      "reason": "一次一拍、禁止抢写、每次写前重读、保留用户修改；约束适用于追加和原位改写。",
+      "nodeIds": [
+        "write-rhythm"
+      ],
+      "edgeIds": [
+        "c-rhythm-write",
+        "c-rhythm-rewrite"
+      ]
+    },
+    {
+      "startLine": 64,
+      "endLine": 64,
+      "treatment": "represented",
+      "reason": "用户大幅改动影响后续拍。",
+      "nodeIds": [
+        "user-edits"
+      ],
+      "edgeIds": [
+        "c-edits-next"
+      ]
+    },
+    {
+      "startLine": 65,
+      "endLine": 65,
+      "treatment": "represented",
+      "reason": "条件改写原位修改且其余不动，未知进入/返回只记警告。",
+      "nodeIds": [
+        "rewrite"
+      ],
+      "edgeIds": [
+        "r-rewrite-file"
+      ]
+    },
+    {
+      "startLine": 67,
+      "endLine": 67,
+      "treatment": "context",
+      "reason": "supporting-info 结束标记。",
+      "nodeIds": [],
+      "edgeIds": []
+    }
+  ]
+}

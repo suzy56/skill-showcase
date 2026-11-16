@@ -1,0 +1,2272 @@
+{
+  "title": "chinese-novelist — 源文档审计语义图",
+  "description": "通过五问确认、规划与用户确认，按顺序逐章创作中文小说，并保留写前分析、字数检查、连贯性核对、深度润色和摘要状态维护。仅解释原文及两份被引用检查文件；没有执行写作、检查脚本或模板命令。",
+  "sourceMarkdown": "---\r\nname: chinese-novelist\r\ndescription: |\r\n  分章节创作引人入胜的中文小说。支持各种题材（悬疑/言情/奇幻/科幻/历史等），支持10-50章长篇创作，每章3000-5000字，结尾设置悬念钩子。强调深度润色去除AI痕迹，确保文字自然流畅。\r\n  当用户要求：写小说、创作故事、分章节写作、连续剧情、章节悬念、长篇小说时使用。\r\nmetadata:\r\n  trigger: 创作中文小说、分章节故事、长篇小说创作\r\n  source: 基于小说创作最佳实践设计\r\n---\r\n\r\n# Chinese Novelist: 中文小说创作助手\r\n\r\n## 核心流程\r\n\r\n### 第一阶段：5问确认\r\n\r\n**使用 AskUserQuestion 工具逐一询问用户，每个问题提供选项供用户选择。**\r\n\r\n---\r\n\r\n**问题1：题材与风格**\r\n\r\n```\r\nQuestion: 你想要创作什么题材的小说？\r\nOptions:\r\n- 悬疑推理（侦探、破案、解谜）\r\n- 现代言情（都市、职场、恋爱）\r\n- 古代言情（宫廷、江湖、穿越）\r\n- 奇幻玄幻（魔法、异世界、修真）\r\n- 科幻未来（科技、太空、末世）\r\n- 武侠仙侠（江湖、门派、飞升）\r\n- 历史架空（朝堂、战争、权谋）\r\n- 都市现实（生活、成长、社会）\r\n```\r\n\r\n用户选择后记录：`题材 = [用户选择]`\r\n\r\n---\r\n\r\n**问题2：主角设定**\r\n\r\n```\r\nQuestion: 主角是什么设定？\r\nOptions:\r\n- 男性主角（独角戏）\r\n- 女性主角（独角戏）\r\n- 双主角（男女双线）\r\n- 群像戏（多线叙事）\r\n```\r\n\r\n用户选择后，如需进一步询问职业/身份，继续追问。\r\n\r\n记录：`主角 = [用户选择]` + `职业/身份 = [用户回答]`\r\n\r\n---\r\n\r\n**问题3：主角性格**\r\n\r\n```\r\nQuestion: 主角的核心性格是？\r\nOptions:\r\n- 热血正义（积极、勇敢、有担当）\r\n- 冷静智慧（理性、谋略、高智商）\r\n- 温暖治愈（善良、温柔、有同理心）\r\n- 高冷孤傲（冷漠、独立、强大）\r\n- 阴暗腹黑（心机、算计、复仇）\r\n- 成长逆袭（从弱到强、打脸升级）\r\n```\r\n\r\n记录：`性格 = [用户选择]`\r\n\r\n---\r\n\r\n**问题4：核心冲突**\r\n\r\n```\r\nQuestion: 小说的核心冲突是什么？\r\nOptions:\r\n- 生死存亡（生存危机、逃出生天）\r\n- 查明真相（寻找答案、揭露秘密）\r\n- 爱情阻碍（追求真爱、克服阻碍）\r\n- 复仇雪恨（复仇计划、伸张正义）\r\n- 权力争夺（竞争上位、资源争夺）\r\n- 成长突破（自我突破、实现价值）\r\n- 守护保护（守护重要的人或事）\r\n```\r\n\r\n记录：`核心冲突 = [用户选择]`\r\n\r\n---\r\n\r\n**问题5：章节数量**\r\n\r\n```\r\nQuestion: 你计划创作多少章？\r\nOptions:\r\n- 10章（短篇，约3-5万字）\r\n- 15章（中短篇，约4.5-7.5万字）\r\n- 20章（中篇，约6-10万字）\r\n- 30章（中长篇，约9-15万字）\r\n- 50章（长篇，约15-25万字）\r\n- 自定义（输入具体章节数）\r\n```\r\n\r\n记录：`章节数 = [用户选择]`\r\n\r\n---\r\n\r\n**5问收集完成后**然后进入\"第二阶段：规划\"。\r\n\r\n---\r\n\r\n### 第二阶段：规划 + 二次确认\r\n\r\n执行以下步骤：\r\n\r\n1. **创建项目文件夹**：`novels/[小说名称]/`\r\n2. **生成大纲**：创建 `00-大纲.md`，使用 `references/outline-template.md` 模板，填入完整的章节规划\r\n3. **生成人物档案**：创建 `01-人物档案.md`，使用 `references/character-template.md` 模板，创建主角、反派、配角档案\r\n\r\n完成后，向用户展示规划摘要并请求确认，等待用户确认。用户同意后，进入\"第三阶段：疯狂创作\"。\r\n\r\n---\r\n\r\n### 第三阶段：疯狂创作\r\n\r\n**重要：全程无需再次向用户确认，必须逐一章创作**\r\n\r\n按顺序逐章创作，每章执行完整的创作流程（见下方\"逐章创作\"），完成一章后自动继续下一章，直到所有章节完成。\r\n\r\n---\r\n\r\n## 疯狂创作——逐章创作流程\r\n\r\n每章创作时严格执行以下步骤：\r\n\r\n#### 1. 写前分析\r\n\r\n1. 读取 `00-大纲.md` - 查看TODO list和已完成章节的摘要\r\n2. 读取 `00-大纲.md` 中上一章的摘要\r\n3. 更新`00-大纲.md` 中 TODO list - 将本章标记为\"进行中\"\r\n4. 设计开头钩子 - **最关键**：前20%必须有即时冲突 → [chapter-guide.md](references/chapter-guide.md)（10种开头技巧）\r\n5. 规划场景 - 确定本章需要3-5个场景\r\n\r\n#### 2. 撰写\r\n\r\n6. 创建章节文件 - 使用`references/chapter-template.md` 模板\r\n7. 撰写正文 - **每章必须达到3000-5000字**\r\n   - 开头检查：前20%是否极其吸引人？\r\n   - 对话规范 → [dialogue-writing.md](references/dialogue-writing.md)\r\n   - 内容不足？使用 [content-expansion.md](references/content-expansion.md) 扩充技巧\r\n8. 设置结尾钩子 → [hook-techniques.md](references/hook-techniques.md)（10种钩子类型）\r\n9. **字数检查** - 必须使用脚本检查字数：`python scripts/check_chapter_wordcount.py <章节文件路径>` 低于3000字必须使用扩充技巧重写\r\n\r\n#### 3. 撰写后优化\r\n\r\n10. 连贯性检查 → [consistency.md](references/consistency.md) - 人物一致性、情节连贯、节奏控制\r\n11. **深度润色（去除AI味）** - 重点检查并修改：\r\n    - **去除过度修饰的形容词**：删减\"璀璨\"、\"瑰丽\"、\"绚烂\"等AI常用词堆砌\r\n    - **减少抽象陈述**：把\"心中涌起复杂的情感\"改为具体动作/对话\r\n    - **打破四字格律**：避免\"心潮澎湃、热血沸腾\"等陈词滥调\r\n    - **增加口语化表达**：人物对话要有个性，避免\"书面语套话\"\r\n    - **优化节奏感**：长句和短句交替，避免句式单调\r\n    - **细节具象化**：用具体的视觉/听觉/嗅觉细节替代笼统描述\r\n12. **字数检查** - 必须使用脚本检查字数：`python scripts/check_chapter_wordcount.py <章节文件路径>` 低于3000字必须使用扩充技巧重写\r\n\r\n#### 4. 最后收尾\r\n\r\n13. 生成章节摘要 - 在 `00-大纲.md` 添加摘要（300-500字）\r\n14. 更新状态 - `00-大纲.md` 中 TODO list - 将本章标记为\"完成\"\r\n\r\n---\r\n\r\n## 三大黄金法则\r\n\r\n1. **展示而非讲述** - 用动作和对话表现，不要直接陈述\r\n2. **冲突驱动剧情** - 每章必须有冲突或转折\r\n3. **悬念承上启下** - 每章结尾必须留下钩子\r\n\r\n### 字数检查脚本\r\n\r\n使用 `scripts/check_chapter_wordcount.py` 检查章节字数：\r\n\r\n```bash\r\n# 检查单个章节\r\npython scripts/check_chapter_wordcount.py novels/小说名/第01章.md\r\n\r\n# 检查所有章节\r\npython scripts/check_chapter_wordcount.py --all novels/小说名/\r\n\r\n# 自定义最小字数\r\npython scripts/check_chapter_wordcount.py novels/小说名/第01章.md 3500\r\n```\r\n\r\n低于3000字的章节必须使用 [content-expansion.md](references/content-expansion.md) 的扩充技巧进行扩充。\r\n",
+  "sourceFiles": {
+    "references/chapter-guide.md": {
+      "text": "# 章节写作指南\r\n\r\n每一章都应该是一个完整的叙事单元，同时推动整体故事向前发展。\r\n\r\n## ⚠️ 关键原则：前 20% 决定生死\r\n\r\n**读者在前 20% 的内容决定是否继续阅读。**\r\n\r\n如果开头不够吸引人，读者会放弃，无论后面写得多么精彩。\r\n\r\n### 前 20% 必须达到的效果\r\n\r\n1. **即时紧张感** - 读者立即感受到危机/冲突\r\n2. **重大事件** - 发生推动剧情的重要事情\r\n3. **情感冲击** - 读者产生强烈情绪（好奇、震惊、担忧）\r\n4. **继续阅读的欲望** - 迫切想知道接下来发生什么\r\n\r\n### 开头致命错误（绝对避免）\r\n\r\n| 错误类型 | 示例 | 为什么致命 |\r\n|---------|------|-----------|\r\n| 天气描写 | \"那天天气晴朗，万里无云...\" | 与故事无关，读者无耐心 |\r\n| 日常流程 | \"李明醒来，刷牙洗脸，吃早餐...\" | 无聊，没有冲突 |\r\n| 回顾上章 | \"上一章我们说到...\" | 读者已经知道，浪费时间 |\r\n| 缓慢铺垫 | \"先介绍一下这个城市的背景...\" | 信息倾倒，没有行动 |\r\n| 平淡对话 | \"你好，你好吗？我很好。\" | 无意义对话，没有张力 |\r\n| 过度解释 | \"这是因为，所以，然后...\" | 讲述而非展示 |\r\n\r\n---\r\n\r\n## 十种强力开头技巧\r\n\r\n### 1. 行动中开场（In Media Res）\r\n\r\n直接从冲突/动作的高潮点开始。\r\n\r\n**示例：**\r\n> 子弹擦过他的耳边，击碎了身后的花瓶。李明没有回头，翻滚躲到沙发后面。\r\n\r\n**为什么有效：** 立即建立紧张感，读者想知道为什么被打。\r\n\r\n### 2. 反常情境\r\n\r\n呈现一个不符合常理的场景，激发好奇。\r\n\r\n**示例：**\r\n> 死人坐在办公桌前，正在写一份报告。\r\n\r\n**为什么有效：** 不可能的事物，读者想了解怎么回事。\r\n\r\n### 3. 震撼对话\r\n\r\n用一句惊人的对话开场。\r\n\r\n**示例：**\r\n> \"我把孩子卖了。\" 妻子平静地说，继续翻阅杂志。\r\n\r\n**为什么有效：** 立即制造情感冲击和悬念。\r\n\r\n### 4. 倒计时开场\r\n\r\n从时间压力开始。\r\n\r\n**示例：**\r\n> 还有三分钟，炸弹就会爆炸。而拆弹包里少了一根红线。\r\n\r\n**为什么有效：** 紧迫感，读者想知道能否及时。\r\n\r\n### 5. 重大发现\r\n\r\n从发现关键线索/真相开始。\r\n\r\n**示例：**\r\n> 法医报告摊在桌上。死因不是意外，是精心策划的谋杀。而嫌疑人只有一个——他自己。\r\n\r\n**为什么有效：** 重大转折，重新理解之前的事件。\r\n\r\n### 6. 危机时刻\r\n\r\n从角色面临最大危机开始。\r\n\r\n**示例：**\r\n> 门被踹开的瞬间，她知道藏不住了。保险箱里的秘密即将曝光。\r\n\r\n**为什么有效：** 高风险，读者关心角色命运。\r\n\r\n### 7. 谜团浮现\r\n\r\n从无法解释的现象开始。\r\n\r\n**示例：**\r\n> 醒来时，他发现右手背上出现了一个从未见过的纹身。而他不记得昨晚发生了什么。\r\n\r\n**为什么有效：** 神秘感，读者想解开谜题。\r\n\r\n### 8. 背叛开场\r\n\r\n从背叛/信任崩塌开始。\r\n\r\n**示例：**\r\n> 枪口对准他的后背。\"对不起，\" 他信任了十年的搭档说，\"他们给的太多了。\"\r\n\r\n**为什么有效：** 情感冲击，角色陷入绝境。\r\n\r\n### 9. 重大选择\r\n\r\n从角色的艰难决定开始。\r\n\r\n**示例：**\r\n> 救生艇只能载一个人。她的丈夫和女儿都在冰冷的海水里挣扎。她伸出手——\r\n\r\n**为什么有效：** 道德困境，读者想知道她如何选择。\r\n\r\n### 10. 结局预告\r\n\r\n从未来的某个关键时刻开始，然后倒叙。\r\n\r\n**示例：**\r\n> 三天后，所有人都会后悔今天的决定。但此刻，会议室里的每个人都在微笑。\r\n\r\n**为什么有效：** 预示灾难，读者想知道如何发生。\r\n\r\n---\r\n\r\n## 标准章节结构\r\n\r\n### 1. 开头钩子（前 20%）⚠️ 最关键\r\n\r\n**必须包含：**\r\n- ✅ 即时冲突/危机\r\n- ✅ 重大事件/信息\r\n- ✅ 强烈情感冲击\r\n- ✅ 行动场景\r\n\r\n**使用上述十种技巧之一，或组合使用。**\r\n\r\n### 2. 发展推进（中间 50-60%）\r\n\r\n本章的核心内容，必须推进剧情或深化人物。\r\n\r\n**推进方式：**\r\n- **新信息揭示**：让读者/主角获得重要信息\r\n- **关系变化**：人物关系发生转变\r\n- **问题升级**：现状恶化，新危机出现\r\n- **角色成长**：主角获得新技能、新认知\r\n\r\n**避免：**\r\n- 纯粹的场景描写（风景、房间布局等）\r\n- 与剧情无关的人物互动\r\n- 重复已知的对话\r\n\r\n### 3. 高潮时刻（后 15-20%）\r\n\r\n本章的情感或动作最高点。\r\n\r\n**高潮类型：**\r\n- **动作高潮**：战斗、追逐、对抗\r\n- **情感高潮**：重大发现、背叛、告白、牺牲\r\n- **心理高潮**：主角的内心转折点\r\n\r\n### 4. 结尾钩子（最后 5-10%）\r\n\r\n留下悬念，让读者想看下一章。详见 [hook-techniques.md](hook-techniques.md)\r\n\r\n---\r\n\r\n## 章节类型分类\r\n\r\n### 情节推进章\r\n\r\n**目的**：推动主线剧情发展\r\n**特征**：有明确的事件进展、重要信息揭示\r\n**示例**：主角发现线索、敌人发动攻击、盟友背叛\r\n\r\n### 人物深化章\r\n\r\n**目的**：深化读者对人物的理解\r\n**特征**：揭示人物背景、动机、内心冲突\r\n**示例**：回忆片段、私密对话、独处时刻\r\n**注意**：必须与主线相关，不能是纯粹的人物小传\r\n\r\n### 氛围营造章\r\n\r\n**目的**：建立特定情绪或紧张感\r\n**特征**：注重感官描写、节奏控制\r\n**示例**：暴风雨前的宁静、潜伏行动、等待审判\r\n\r\n### 过渡衔接章\r\n\r\n**目的**：连接两个重大事件\r\n**特征**：信息整理、位置转换、时间跳跃\r\n**注意**：保持简洁，避免拖沓\r\n\r\n---\r\n\r\n## 章节节奏控制\r\n\r\n### 节奏变化\r\n\r\n同一章内应包含节奏变化：\r\n\r\n```\r\n紧张 → 缓解 → 新紧张 → 更紧张\r\n```\r\n\r\n示例：\r\n```\r\n紧张：主角被追捕\r\n缓解：躲进安全屋，短暂喘息\r\n新紧张：发现安全屋已被入侵\r\n更紧张：必须立即逃离\r\n```\r\n\r\n### 信息密度\r\n\r\n- **高密度**：动作场面、大量对话、快速事件\r\n- **低密度**：内心独白、环境描写、情感沉淀\r\n\r\n**原则**：高低密度交替，避免持续高密度（读者疲劳）或持续低密度（读者无聊）\r\n\r\n---\r\n\r\n## 章节长度与内容密度对照\r\n\r\n| 章节字数 | 核心事件数量 | 场景数量 |\r\n|---------|-------------|---------|\r\n| 800-1500 | 1 个主要事件 | 1-2 个场景 |\r\n| 1500-3000 | 1-2 个主要事件 | 2-3 个场景 |\r\n| 3000-5000 | 2-3 个主要事件 | 3-5 个场景 |\r\n\r\n**原则**：每章至少包含一个不可删除的核心事件。如果一个事件可以移除而不影响理解，则应删除。\r\n\r\n---\r\n\r\n## 章节写作检查清单\r\n\r\n撰写每章后自查：\r\n\r\n### ⚠️ 开头检查（最关键）\r\n- [ ] **前 20% 是否极其吸引人？**（如果不是，重写）\r\n- [ ] 是否在第一段就建立冲突/紧张？\r\n- [ ] 是否有重大事件或信息揭示？\r\n- [ ] 是否有强烈的情感冲击？\r\n- [ ] 读者是否会迫切想知道接下来发生什么？\r\n- [ ] 是否避免了所有\"致命错误\"？（天气、日常、回顾等）\r\n\r\n### 内容检查\r\n- [ ] 本章是否推进了主线剧情或深化了人物？\r\n- [ ] 是否有冲突或转折？\r\n- [ ] 对话是否推动情节或揭示人物？\r\n- [ ] 是否展示了而非讲述了关键信息？\r\n- [ ] 结尾是否留下悬念钩子？\r\n- [ ] 是否为下一章埋下伏笔？\r\n\r\n### 开头自测问题\r\n如果对开头有任何问题回答\"否\"，必须重写：\r\n1. 读者读了前三段后，会想继续读吗？\r\n2. 开头是否有冲突或危机？\r\n3. 开头是否有意外或转折？\r\n4. 开头是否让读者产生强烈情绪？\r\n5. 开头是否避免了平淡的日常/天气/背景说明？\r\n",
+      "sha256": "a7f85647e4f3f191e41732c8e1f5d4dbce488c9e031906792453cc9cf8a383e1"
+    },
+    "references/consistency.md": {
+      "text": "# 连贯性保证机制\r\n\r\n为确保长时间创作的故事连贯性：\r\n\r\n## 写前必读\r\n\r\n每次开始写新章节前：\r\n1. 阅读 `00-大纲.md` 中所有已完成章节的摘要\r\n2. 读取上一章文件，了解当前悬念\r\n3. 检查人物状态（位置、情绪、关系）\r\n\r\n## 穿针引线\r\n\r\n在新章节中：\r\n- 呼应前文埋下的伏笔和线索\r\n- 提及之前发生的事件（自然融入）\r\n- 让人物行为与之前保持一致\r\n\r\n## 人物状态跟踪\r\n\r\n注意人物在各章节中的变化和成长：\r\n- 位置变化（人在哪里）\r\n- 情绪状态（当前心情）\r\n- 关系变化（与其他角色关系）\r\n- 能力变化（获得新技能/信息）\r\n\r\n## 悬念线延续\r\n\r\n确保主线悬念逐步推进：\r\n- 每章至少回应一个旧悬念\r\n- 提出新悬念或升级现有悬念\r\n- 不要遗忘任何未解的悬念\r\n\r\n## 一致性检查清单\r\n\r\n- [ ] 人物行为符合其性格设定\r\n- [ ] 前后伏笔有呼应，逻辑闭环\r\n- [ ] 高潮低谷分布合理，节奏恰当\r\n- [ ] 时间线连贯（没有时间跳跃错误）\r\n- [ ] 场景转换自然（没有凭空出现）\r\n",
+      "sha256": "a366ab0c900047f9b0b763abccbd894e989344fc485765323837efb5d0df410e"
+    }
+  },
+  "provenance": {
+    "kind": "semantic",
+    "mode": "逐行审计 SKILL.md 与 chapter-guide、consistency 两份快照；编号顺序仅保留原文后继，未知分支衔接不补线。",
+    "sourceSha256": "2c1a87df984c215a56b27665b6117337f8e6132e489660fd300b30c6f22a9f49",
+    "url": "https://github.com/penglonghuang/chinese-novelist-skill"
+  },
+  "recommendationsRequested": false,
+  "nodes": [
+    {
+      "id": "request",
+      "kind": "input",
+      "label": "用户请求中文小说或分章节故事",
+      "description": "写小说、创作故事、分章节写作、连续剧情、章节悬念和长篇小说等请求触发本技能。",
+      "basis": "source",
+      "evidence": "SKILL.md:4-7\n  分章节创作引人入胜的中文小说。支持各种题材（悬疑/言情/奇幻/科幻/历史等），支持10-50章长篇创作，每章3000-5000字，结尾设置悬念钩子。强调深度润色去除AI痕迹，确保文字自然流畅。\n  当用户要求：写小说、创作故事、分章节写作、连续剧情、章节悬念、长篇小说时使用。\nmetadata:\n  trigger: 创作中文小说、分章节故事、长篇小说创作"
+    },
+    {
+      "id": "q-genre",
+      "kind": "processing",
+      "label": "第 1 问 · 题材与风格",
+      "description": "使用 AskUserQuestion 的选项询问题材：悬疑推理、现代言情、古代言情、奇幻玄幻、科幻未来、武侠仙侠、历史架空、都市现实；用户选择后记录题材。完成标准：题材已记录。",
+      "basis": "source",
+      "evidence": "SKILL.md:21-36\n**问题1：题材与风格**\n\n```\nQuestion: 你想要创作什么题材的小说？\nOptions:\n- 悬疑推理（侦探、破案、解谜）\n- 现代言情（都市、职场、恋爱）\n- 古代言情（宫廷、江湖、穿越）\n- 奇幻玄幻（魔法、异世界、修真）\n- 科幻未来（科技、太空、末世）\n- 武侠仙侠（江湖、门派、飞升）\n- 历史架空（朝堂、战争、权谋）\n- 都市现实（生活、成长、社会）\n```\n\n用户选择后记录：`题材 = [用户选择]`"
+    },
+    {
+      "id": "q-lead",
+      "kind": "processing",
+      "label": "第 2 问 · 主角与身份",
+      "description": "选项为男性主角、女性主角、双主角、群像；选择后如需职业或身份继续追问，记录主角和职业/身份。追问保留在本问内部，不假定每次都要问。完成标准：本问所需信息已记录。",
+      "basis": "source",
+      "evidence": "SKILL.md:40-53\n**问题2：主角设定**\n\n```\nQuestion: 主角是什么设定？\nOptions:\n- 男性主角（独角戏）\n- 女性主角（独角戏）\n- 双主角（男女双线）\n- 群像戏（多线叙事）\n```\n\n用户选择后，如需进一步询问职业/身份，继续追问。\n\n记录：`主角 = [用户选择]` + `职业/身份 = [用户回答]`"
+    },
+    {
+      "id": "q-personality",
+      "kind": "processing",
+      "label": "第 3 问 · 主角核心性格",
+      "description": "选项为热血正义、冷静智慧、温暖治愈、高冷孤傲、阴暗腹黑、成长逆袭；记录用户选择的性格。完成标准：性格已记录。",
+      "basis": "source",
+      "evidence": "SKILL.md:57-70\n**问题3：主角性格**\n\n```\nQuestion: 主角的核心性格是？\nOptions:\n- 热血正义（积极、勇敢、有担当）\n- 冷静智慧（理性、谋略、高智商）\n- 温暖治愈（善良、温柔、有同理心）\n- 高冷孤傲（冷漠、独立、强大）\n- 阴暗腹黑（心机、算计、复仇）\n- 成长逆袭（从弱到强、打脸升级）\n```\n\n记录：`性格 = [用户选择]`"
+    },
+    {
+      "id": "q-conflict",
+      "kind": "processing",
+      "label": "第 4 问 · 核心冲突",
+      "description": "选项为生死存亡、查明真相、爱情阻碍、复仇雪恨、权力争夺、成长突破、守护保护；记录用户选择。完成标准：核心冲突已记录。",
+      "basis": "source",
+      "evidence": "SKILL.md:74-88\n**问题4：核心冲突**\n\n```\nQuestion: 小说的核心冲突是什么？\nOptions:\n- 生死存亡（生存危机、逃出生天）\n- 查明真相（寻找答案、揭露秘密）\n- 爱情阻碍（追求真爱、克服阻碍）\n- 复仇雪恨（复仇计划、伸张正义）\n- 权力争夺（竞争上位、资源争夺）\n- 成长突破（自我突破、实现价值）\n- 守护保护（守护重要的人或事）\n```\n\n记录：`核心冲突 = [用户选择]`"
+    },
+    {
+      "id": "q-count",
+      "kind": "processing",
+      "label": "第 5 问 · 章节数量",
+      "description": "选项为 10、15、20、30、50 章或用户输入自定义数；示例估算篇幅依次约 3–5、4.5–7.5、6–10、9–15、15–25 万字。记录章节数。完成标准：第五问收集完成。",
+      "basis": "source",
+      "evidence": "SKILL.md:92-109\n**问题5：章节数量**\n\n```\nQuestion: 你计划创作多少章？\nOptions:\n- 10章（短篇，约3-5万字）\n- 15章（中短篇，约4.5-7.5万字）\n- 20章（中篇，约6-10万字）\n- 30章（中长篇，约9-15万字）\n- 50章（长篇，约15-25万字）\n- 自定义（输入具体章节数）\n```\n\n记录：`章节数 = [用户选择]`\n\n---\n\n**5问收集完成后**然后进入\"第二阶段：规划\"。"
+    },
+    {
+      "id": "mkdir",
+      "kind": "processing",
+      "label": "创建小说项目文件夹",
+      "description": "在 novels/[小说名称]/ 创建项目文件夹。完成标准：该项目文件夹已创建。",
+      "basis": "source",
+      "evidence": "SKILL.md:117-117\n1. **创建项目文件夹**：`novels/[小说名称]/`"
+    },
+    {
+      "id": "outline",
+      "kind": "processing",
+      "label": "创建完整章节大纲",
+      "description": "按 outline-template 模板创建 00-大纲.md，填入完整章节规划。完成标准：大纲文件与章节规划已生成。",
+      "basis": "source",
+      "evidence": "SKILL.md:118-118\n2. **生成大纲**：创建 `00-大纲.md`，使用 `references/outline-template.md` 模板，填入完整的章节规划"
+    },
+    {
+      "id": "cast",
+      "kind": "processing",
+      "label": "创建人物档案",
+      "description": "按 character-template 模板创建 01-人物档案.md，包括主角、反派、配角。完成标准：人物档案已生成。",
+      "basis": "source",
+      "evidence": "SKILL.md:119-119\n3. **生成人物档案**：创建 `01-人物档案.md`，使用 `references/character-template.md` 模板，创建主角、反派、配角档案"
+    },
+    {
+      "id": "confirm",
+      "kind": "decision",
+      "label": "展示规划并等待用户同意",
+      "description": "规划完成后展示摘要并请求确认；只画原文规定的用户同意出口，不自行处理拒绝或未回应。",
+      "basis": "source",
+      "evidence": "SKILL.md:121-121\n完成后，向用户展示规划摘要并请求确认，等待用户确认。用户同意后，进入\"第三阶段：疯狂创作\"。"
+    },
+    {
+      "id": "read-outline",
+      "kind": "processing",
+      "label": "读大纲、已完成摘要与上一章摘要",
+      "description": "查看 00-大纲.md 的 TODO 和已完成章节摘要，再读其中上一章摘要。完成标准：本章所需的大纲与摘要已读。第一章没有上一章的情形原文未规定。",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:139-140\n1. 读取 `00-大纲.md` - 查看TODO list和已完成章节的摘要\n2. 读取 `00-大纲.md` 中上一章的摘要",
+      "rationale": "将同一文件上的连续读取动作合并为写前信息核对，保留全部阅读对象和原顺序，不引入额外文件。"
+    },
+    {
+      "id": "in-progress",
+      "kind": "processing",
+      "label": "将本章标为进行中",
+      "description": "在 00-大纲.md 的 TODO list 中把本章状态改为进行中。完成标准：本章状态已更新。",
+      "basis": "source",
+      "evidence": "SKILL.md:141-141\n3. 更新`00-大纲.md` 中 TODO list - 将本章标记为\"进行中\""
+    },
+    {
+      "id": "opening",
+      "kind": "processing",
+      "label": "设计前 20% 的开头钩子",
+      "description": "前 20% 必须有即时冲突；使用 chapter-guide 的十种开头技巧。完成标准：本章开头钩子已设计。",
+      "basis": "source",
+      "evidence": "SKILL.md:142-142\n4. 设计开头钩子 - **最关键**：前20%必须有即时冲突 → [chapter-guide.md](references/chapter-guide.md)（10种开头技巧）"
+    },
+    {
+      "id": "scenes",
+      "kind": "processing",
+      "label": "规划本章 3–5 个场景",
+      "description": "确定本章需要的 3–5 个场景。完成标准：本章场景计划已确定。",
+      "basis": "source",
+      "evidence": "SKILL.md:143-143\n5. 规划场景 - 确定本章需要3-5个场景"
+    },
+    {
+      "id": "chapter-file",
+      "kind": "processing",
+      "label": "按模板创建章节文件",
+      "description": "使用 chapter-template.md 创建章节文件；模板只作为资源，不执行其中任何内容。完成标准：本章文件已创建。",
+      "basis": "source",
+      "evidence": "SKILL.md:147-147\n6. 创建章节文件 - 使用`references/chapter-template.md` 模板"
+    },
+    {
+      "id": "draft",
+      "kind": "processing",
+      "label": "写本章正文并检查开头",
+      "description": "正文每章必须达到 3000–5000 字；检查前 20% 是否极其吸引人，参考对话规范。内容不足时使用 content-expansion 扩充技巧。完成标准：本章正文已撰写，开头已检查，必要的内容扩充已处理。",
+      "basis": "source",
+      "evidence": "SKILL.md:148-151\n7. 撰写正文 - **每章必须达到3000-5000字**\n   - 开头检查：前20%是否极其吸引人？\n   - 对话规范 → [dialogue-writing.md](references/dialogue-writing.md)\n   - 内容不足？使用 [content-expansion.md](references/content-expansion.md) 扩充技巧"
+    },
+    {
+      "id": "ending",
+      "kind": "processing",
+      "label": "设置本章结尾悬念",
+      "description": "参考 hook-techniques 中的十种钩子类型设置结尾钩子。完成标准：本章结尾钩子已设置。",
+      "basis": "source",
+      "evidence": "SKILL.md:152-152\n8. 设置结尾钩子 → [hook-techniques.md](references/hook-techniques.md)（10种钩子类型）"
+    },
+    {
+      "id": "count-draft",
+      "kind": "processing",
+      "label": "脚本检查字数，低于 3000 则重写",
+      "description": "必须用 scripts/check_chapter_wordcount.py 检查当前章节；低于 3000 字必须按扩充技巧重写。检查与条件性修补属于原文同一编号项；未补任何重检次数、回跳或超过 5000 字分支。完成标准：脚本检查已做，若不足则已执行要求的扩充重写。",
+      "basis": "source",
+      "evidence": "SKILL.md:153-153\n9. **字数检查** - 必须使用脚本检查字数：`python scripts/check_chapter_wordcount.py <章节文件路径>` 低于3000字必须使用扩充技巧重写"
+    },
+    {
+      "id": "continuity",
+      "kind": "processing",
+      "label": "核对人物、情节和节奏连贯性",
+      "description": "按 consistency.md 检查人物一致性、情节连贯与节奏控制。完成标准：该轮连贯性检查已执行；不通过后应回到哪里原文没有规定。",
+      "basis": "source",
+      "evidence": "SKILL.md:157-157\n10. 连贯性检查 → [consistency.md](references/consistency.md) - 人物一致性、情节连贯、节奏控制"
+    },
+    {
+      "id": "polish",
+      "kind": "processing",
+      "label": "深度润色，去除 AI 味",
+      "description": "检查并修改：删去璀璨/瑰丽/绚烂等过度形容词堆砌；将抽象情感改为具体动作或对话；打破四字套话；让口语化对话有个性；交替长短句；以视听嗅等细节替代笼统描述。完成标准：六项润色已处理。",
+      "basis": "source",
+      "evidence": "SKILL.md:158-164\n11. **深度润色（去除AI味）** - 重点检查并修改：\n    - **去除过度修饰的形容词**：删减\"璀璨\"、\"瑰丽\"、\"绚烂\"等AI常用词堆砌\n    - **减少抽象陈述**：把\"心中涌起复杂的情感\"改为具体动作/对话\n    - **打破四字格律**：避免\"心潮澎湃、热血沸腾\"等陈词滥调\n    - **增加口语化表达**：人物对话要有个性，避免\"书面语套话\"\n    - **优化节奏感**：长句和短句交替，避免句式单调\n    - **细节具象化**：用具体的视觉/听觉/嗅觉细节替代笼统描述"
+    },
+    {
+      "id": "count-polished",
+      "kind": "processing",
+      "label": "润色后再查字数，不足则扩充重写",
+      "description": "必须再次用字数脚本检查；若低于 3000 字，必须使用扩充技巧重写。该检查与第 9 项各自保留，不合并成一个；原文没有写重写后重新润色或复检的返回步骤。完成标准：第二轮检查已做且必要重写已处理。",
+      "basis": "source",
+      "evidence": "SKILL.md:165-165\n12. **字数检查** - 必须使用脚本检查字数：`python scripts/check_chapter_wordcount.py <章节文件路径>` 低于3000字必须使用扩充技巧重写"
+    },
+    {
+      "id": "summary",
+      "kind": "processing",
+      "label": "在大纲中添加 300–500 字摘要",
+      "description": "在 00-大纲.md 中为本章添加 300–500 字摘要。完成标准：章节摘要已写入。",
+      "basis": "source",
+      "evidence": "SKILL.md:169-169\n13. 生成章节摘要 - 在 `00-大纲.md` 添加摘要（300-500字）"
+    },
+    {
+      "id": "complete",
+      "kind": "processing",
+      "label": "将本章状态标为完成",
+      "description": "更新 00-大纲.md 的 TODO list，把本章标为完成。完成标准：本章状态已标完成。",
+      "basis": "source",
+      "evidence": "SKILL.md:170-170\n14. 更新状态 - `00-大纲.md` 中 TODO list - 将本章标记为\"完成\""
+    },
+    {
+      "id": "all-done",
+      "kind": "decision",
+      "label": "所有章节都完成了吗？",
+      "description": "按顺序逐章执行完整流程，一章完成后自动继续下一章，直到所有章节完成；此处只表达原文循环条件。",
+      "basis": "source",
+      "evidence": "SKILL.md:129-129\n按顺序逐章创作，每章执行完整的创作流程（见下方\"逐章创作\"），完成一章后自动继续下一章，直到所有章节完成。"
+    },
+    {
+      "id": "novel",
+      "kind": "output",
+      "label": "全部章节完成的小说项目",
+      "description": "所有预定章节已完成，项目中保留大纲、人物档案及章节文件；不增加原文未写的发布、交付审批或打包流程。",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:129-129\n按顺序逐章创作，每章执行完整的创作流程（见下方\"逐章创作\"），完成一章后自动继续下一章，直到所有章节完成。",
+      "rationale": "将直到所有章节完成的终止状态显式表示为输出，不新增终稿合并或发布动作。"
+    },
+    {
+      "id": "guide-check",
+      "kind": "decision",
+      "label": "章后开头检查是否要求重写？",
+      "description": "每章撰写后自查：前 20% 是否吸引人、首段冲突、重大事件/信息、强烈情感、继续阅读欲望、避免天气/日常/回顾等错误；开头自测还问前三段能否让人继续读、是否有危机、意外或转折、情绪冲击、是否避开平淡说明。前 20% 不吸引人或任一开头自测答否时必须重写。与两次字数检查的相对排程未说明，不接主链。",
+      "basis": "source",
+      "evidence": "references/chapter-guide.md:235-261\n## 章节写作检查清单\n\n撰写每章后自查：\n\n### ⚠️ 开头检查（最关键）\n- [ ] **前 20% 是否极其吸引人？**（如果不是，重写）\n- [ ] 是否在第一段就建立冲突/紧张？\n- [ ] 是否有重大事件或信息揭示？\n- [ ] 是否有强烈的情感冲击？\n- [ ] 读者是否会迫切想知道接下来发生什么？\n- [ ] 是否避免了所有\"致命错误\"？（天气、日常、回顾等）\n\n### 内容检查\n- [ ] 本章是否推进了主线剧情或深化了人物？\n- [ ] 是否有冲突或转折？\n- [ ] 对话是否推动情节或揭示人物？\n- [ ] 是否展示了而非讲述了关键信息？\n- [ ] 结尾是否留下悬念钩子？\n- [ ] 是否为下一章埋下伏笔？\n\n### 开头自测问题\n如果对开头有任何问题回答\"否\"，必须重写：\n1. 读者读了前三段后，会想继续读吗？\n2. 开头是否有冲突或危机？\n3. 开头是否有意外或转折？\n4. 开头是否让读者产生强烈情绪？\n5. 开头是否避免了平淡的日常/天气/背景说明？"
+    },
+    {
+      "id": "rewrite-opening",
+      "kind": "processing",
+      "label": "按开头检查要求重写",
+      "description": "开头检查未达要求时执行重写；原文没有限定重写范围、指定重检次数或写出返回节点。完成标准：按要求执行重写，不声称已重新通过检查。",
+      "basis": "source",
+      "evidence": "references/chapter-guide.md:255-261\n### 开头自测问题\n如果对开头有任何问题回答\"否\"，必须重写：\n1. 读者读了前三段后，会想继续读吗？\n2. 开头是否有冲突或危机？\n3. 开头是否有意外或转折？\n4. 开头是否让读者产生强烈情绪？\n5. 开头是否避免了平淡的日常/天气/背景说明？"
+    },
+    {
+      "id": "c-question",
+      "kind": "config",
+      "label": "五问逐一提供选项",
+      "description": "使用 AskUserQuestion 工具逐一询问用户，每个问题提供选项；不是把代码围栏中的 Question/Options 当作可执行命令。",
+      "basis": "source",
+      "evidence": "SKILL.md:17-17\n**使用 AskUserQuestion 工具逐一询问用户，每个问题提供选项供用户选择。**"
+    },
+    {
+      "id": "c-autonomy",
+      "kind": "config",
+      "label": "确认后无需再问，逐章完整执行",
+      "description": "第三阶段全程无需再次向用户确认，必须逐一章创作；每一章都执行完整的逐章流程，完成一章自动继续下一章。",
+      "basis": "source",
+      "evidence": "SKILL.md:127-129\n**重要：全程无需再次向用户确认，必须逐一章创作**\n\n按顺序逐章创作，每章执行完整的创作流程（见下方\"逐章创作\"），完成一章后自动继续下一章，直到所有章节完成。"
+    },
+    {
+      "id": "c-golden",
+      "kind": "config",
+      "label": "展示、冲突、结尾悬念三原则",
+      "description": "用动作和对话展示而非直接陈述；每章必须有冲突或转折；每章结尾必须留钩子。",
+      "basis": "source",
+      "evidence": "SKILL.md:176-178\n1. **展示而非讲述** - 用动作和对话表现，不要直接陈述\n2. **冲突驱动剧情** - 每章必须有冲突或转折\n3. **悬念承上启下** - 每章结尾必须留下钩子"
+    },
+    {
+      "id": "c-opening",
+      "kind": "config",
+      "label": "开头即时冲突与四种阅读效果",
+      "description": "前 20% 应有紧张、重大事件、情感冲击及继续阅读的欲望；绝对避免天气、日常流程、回顾上章、缓慢铺垫、平淡对话和过度解释。",
+      "basis": "source",
+      "evidence": "references/chapter-guide.md:11-27\n### 前 20% 必须达到的效果\n\n1. **即时紧张感** - 读者立即感受到危机/冲突\n2. **重大事件** - 发生推动剧情的重要事情\n3. **情感冲击** - 读者产生强烈情绪（好奇、震惊、担忧）\n4. **继续阅读的欲望** - 迫切想知道接下来发生什么\n\n### 开头致命错误（绝对避免）\n\n| 错误类型 | 示例 | 为什么致命 |\n|---------|------|-----------|\n| 天气描写 | \"那天天气晴朗，万里无云...\" | 与故事无关，读者无耐心 |\n| 日常流程 | \"李明醒来，刷牙洗脸，吃早餐...\" | 无聊，没有冲突 |\n| 回顾上章 | \"上一章我们说到...\" | 读者已经知道，浪费时间 |\n| 缓慢铺垫 | \"先介绍一下这个城市的背景...\" | 信息倾倒，没有行动 |\n| 平淡对话 | \"你好，你好吗？我很好。\" | 无意义对话，没有张力 |\n| 过度解释 | \"这是因为，所以，然后...\" | 讲述而非展示 |"
+    },
+    {
+      "id": "c-techniques",
+      "kind": "config",
+      "label": "十种开头技巧是选项，不是十个步骤",
+      "description": "可选择或组合：行动中开场、反常情境、震撼对话、倒计时、重大发现、危机时刻、谜团浮现、背叛、重大选择、结局预告。各段示例只是技巧示意，不是当前小说事实或执行记录。",
+      "basis": "abstraction",
+      "evidence": "references/chapter-guide.md:31-121\n## 十种强力开头技巧\n\n### 1. 行动中开场（In Media Res）\n\n直接从冲突/动作的高潮点开始。\n\n**示例：**\n> 子弹擦过他的耳边，击碎了身后的花瓶。李明没有回头，翻滚躲到沙发后面。\n\n**为什么有效：** 立即建立紧张感，读者想知道为什么被打。\n\n### 2. 反常情境\n\n呈现一个不符合常理的场景，激发好奇。\n\n**示例：**\n> 死人坐在办公桌前，正在写一份报告。\n\n**为什么有效：** 不可能的事物，读者想了解怎么回事。\n\n### 3. 震撼对话\n\n用一句惊人的对话开场。\n\n**示例：**\n> \"我把孩子卖了。\" 妻子平静地说，继续翻阅杂志。\n\n**为什么有效：** 立即制造情感冲击和悬念。\n\n### 4. 倒计时开场\n\n从时间压力开始。\n\n**示例：**\n> 还有三分钟，炸弹就会爆炸。而拆弹包里少了一根红线。\n\n**为什么有效：** 紧迫感，读者想知道能否及时。\n\n### 5. 重大发现\n\n从发现关键线索/真相开始。\n\n**示例：**\n> 法医报告摊在桌上。死因不是意外，是精心策划的谋杀。而嫌疑人只有一个——他自己。\n\n**为什么有效：** 重大转折，重新理解之前的事件。\n\n### 6. 危机时刻\n\n从角色面临最大危机开始。\n\n**示例：**\n> 门被踹开的瞬间，她知道藏不住了。保险箱里的秘密即将曝光。\n\n**为什么有效：** 高风险，读者关心角色命运。\n\n### 7. 谜团浮现\n\n从无法解释的现象开始。\n\n**示例：**\n> 醒来时，他发现右手背上出现了一个从未见过的纹身。而他不记得昨晚发生了什么。\n\n**为什么有效：** 神秘感，读者想解开谜题。\n\n### 8. 背叛开场\n\n从背叛/信任崩塌开始。\n\n**示例：**\n> 枪口对准他的后背。\"对不起，\" 他信任了十年的搭档说，\"他们给的太多了。\"\n\n**为什么有效：** 情感冲击，角色陷入绝境。\n\n### 9. 重大选择\n\n从角色的艰难决定开始。\n\n**示例：**\n> 救生艇只能载一个人。她的丈夫和女儿都在冰冷的海水里挣扎。她伸出手——\n\n**为什么有效：** 道德困境，读者想知道她如何选择。\n\n### 10. 结局预告\n\n从未来的某个关键时刻开始，然后倒叙。\n\n**示例：**\n> 三天后，所有人都会后悔今天的决定。但此刻，会议室里的每个人都在微笑。\n\n**为什么有效：** 预示灾难，读者想知道如何发生。",
+      "rationale": "将十个可选技巧汇总为同一开头设计约束，不把列表误画为十个顺序动作或强制选择分支。"
+    },
+    {
+      "id": "c-structure",
+      "kind": "config",
+      "label": "章节四段结构与推进要求",
+      "description": "前 20% 为开头钩子，必须有即时冲突/危机、重大事件/信息、情感冲击和行动场景，选用或组合十种开头技巧；中间 50–60% 推进剧情或深化人物，可揭示信息、变更关系、升级问题、体现成长，避免纯景物、无关互动、重复对话；后 15–20% 为动作/情感/心理高潮；最后 5–10% 留结尾钩子。比例照录为结构参考，不强行归一化。",
+      "basis": "source",
+      "evidence": "references/chapter-guide.md:125-163\n## 标准章节结构\n\n### 1. 开头钩子（前 20%）⚠️ 最关键\n\n**必须包含：**\n- ✅ 即时冲突/危机\n- ✅ 重大事件/信息\n- ✅ 强烈情感冲击\n- ✅ 行动场景\n\n**使用上述十种技巧之一，或组合使用。**\n\n### 2. 发展推进（中间 50-60%）\n\n本章的核心内容，必须推进剧情或深化人物。\n\n**推进方式：**\n- **新信息揭示**：让读者/主角获得重要信息\n- **关系变化**：人物关系发生转变\n- **问题升级**：现状恶化，新危机出现\n- **角色成长**：主角获得新技能、新认知\n\n**避免：**\n- 纯粹的场景描写（风景、房间布局等）\n- 与剧情无关的人物互动\n- 重复已知的对话\n\n### 3. 高潮时刻（后 15-20%）\n\n本章的情感或动作最高点。\n\n**高潮类型：**\n- **动作高潮**：战斗、追逐、对抗\n- **情感高潮**：重大发现、背叛、告白、牺牲\n- **心理高潮**：主角的内心转折点\n\n### 4. 结尾钩子（最后 5-10%）\n\n留下悬念，让读者想看下一章。详见 [hook-techniques.md](hook-techniques.md)"
+    },
+    {
+      "id": "c-chapter-type",
+      "kind": "config",
+      "label": "按章节目的组织，不强行分流",
+      "description": "情节推进章推动主线；人物深化章揭示背景/动机/内心冲突且必须关联主线，不能成为纯小传；氛围章建立情绪或紧张；过渡章连接事件、整理信息/位置/时间且要简洁不拖沓。示例只说明各类用途。",
+      "basis": "source",
+      "evidence": "references/chapter-guide.md:167-192\n## 章节类型分类\n\n### 情节推进章\n\n**目的**：推动主线剧情发展\n**特征**：有明确的事件进展、重要信息揭示\n**示例**：主角发现线索、敌人发动攻击、盟友背叛\n\n### 人物深化章\n\n**目的**：深化读者对人物的理解\n**特征**：揭示人物背景、动机、内心冲突\n**示例**：回忆片段、私密对话、独处时刻\n**注意**：必须与主线相关，不能是纯粹的人物小传\n\n### 氛围营造章\n\n**目的**：建立特定情绪或紧张感\n**特征**：注重感官描写、节奏控制\n**示例**：暴风雨前的宁静、潜伏行动、等待审判\n\n### 过渡衔接章\n\n**目的**：连接两个重大事件\n**特征**：信息整理、位置转换、时间跳跃\n**注意**：保持简洁，避免拖沓"
+    },
+    {
+      "id": "c-rhythm",
+      "kind": "config",
+      "label": "节奏与信息密度交替",
+      "description": "一章内应有紧张→缓解→新紧张→更紧张的变化；动作/大量对话/快速事件属高密度，独白/环境/情感沉淀属低密度，高低交替，避免持续过高或过低。追捕到逃离的示例不作为流程执行。",
+      "basis": "source",
+      "evidence": "references/chapter-guide.md:196-219\n## 章节节奏控制\n\n### 节奏变化\n\n同一章内应包含节奏变化：\n\n```\n紧张 → 缓解 → 新紧张 → 更紧张\n```\n\n示例：\n```\n紧张：主角被追捕\n缓解：躲进安全屋，短暂喘息\n新紧张：发现安全屋已被入侵\n更紧张：必须立即逃离\n```\n\n### 信息密度\n\n- **高密度**：动作场面、大量对话、快速事件\n- **低密度**：内心独白、环境描写、情感沉淀\n\n**原则**：高低密度交替，避免持续高密度（读者疲劳）或持续低密度（读者无聊）"
+    },
+    {
+      "id": "c-density",
+      "kind": "config",
+      "label": "字数、事件、场景密度参照",
+      "description": "800–1500 字参考 1 个事件/1–2 场景，1500–3000 字参考 1–2 事件/2–3 场景，3000–5000 字参考 2–3 事件/3–5 场景；每章至少一个不可删除的核心事件，可移除而不影响理解的事件应删。短章参考不是取消 SKILL.md 的 3000–5000 字要求。",
+      "basis": "source",
+      "evidence": "references/chapter-guide.md:223-231\n## 章节长度与内容密度对照\n\n| 章节字数 | 核心事件数量 | 场景数量 |\n|---------|-------------|---------|\n| 800-1500 | 1 个主要事件 | 1-2 个场景 |\n| 1500-3000 | 1-2 个主要事件 | 2-3 个场景 |\n| 3000-5000 | 2-3 个主要事件 | 3-5 个场景 |\n\n**原则**：每章至少包含一个不可删除的核心事件。如果一个事件可以移除而不影响理解，则应删除。"
+    },
+    {
+      "id": "c-content-check",
+      "kind": "config",
+      "label": "章后内容清单",
+      "description": "撰写每章后自查：推进主线或深化人物、有冲突或转折、对话推进情节或揭示人物、展示关键信息而非讲述、结尾钩子、为下一章伏笔。没有给出清单未通过时的修复返回点。",
+      "basis": "source",
+      "evidence": "references/chapter-guide.md:247-253\n### 内容检查\n- [ ] 本章是否推进了主线剧情或深化了人物？\n- [ ] 是否有冲突或转折？\n- [ ] 对话是否推动情节或揭示人物？\n- [ ] 是否展示了而非讲述了关键信息？\n- [ ] 结尾是否留下悬念钩子？\n- [ ] 是否为下一章埋下伏笔？"
+    },
+    {
+      "id": "c-preflight",
+      "kind": "config",
+      "label": "每次新章前的连贯性必读",
+      "description": "每次新章开始前，按列表读完大纲中全部已完成章节摘要、读取上一章文件了解当前悬念、检查人物位置/情绪/关系；这些是写前前置要求，不臆造与主文 TODO 更新之间的精确插入次序。",
+      "basis": "source",
+      "evidence": "references/consistency.md:7-10\n每次开始写新章节前：\n1. 阅读 `00-大纲.md` 中所有已完成章节的摘要\n2. 读取上一章文件，了解当前悬念\n3. 检查人物状态（位置、情绪、关系）"
+    },
+    {
+      "id": "c-continuity",
+      "kind": "config",
+      "label": "前文呼应、状态跟踪与悬念延续",
+      "description": "新章自然呼应前文伏笔/线索、提及既有事件、行为保持一致；跟踪人物位置、情绪、关系和能力变化；每章至少回应一个旧悬念，提出新悬念或升级旧悬念，不遗忘未解悬念。",
+      "basis": "source",
+      "evidence": "references/consistency.md:12-32\n## 穿针引线\n\n在新章节中：\n- 呼应前文埋下的伏笔和线索\n- 提及之前发生的事件（自然融入）\n- 让人物行为与之前保持一致\n\n## 人物状态跟踪\n\n注意人物在各章节中的变化和成长：\n- 位置变化（人在哪里）\n- 情绪状态（当前心情）\n- 关系变化（与其他角色关系）\n- 能力变化（获得新技能/信息）\n\n## 悬念线延续\n\n确保主线悬念逐步推进：\n- 每章至少回应一个旧悬念\n- 提出新悬念或升级现有悬念\n- 不要遗忘任何未解的悬念"
+    },
+    {
+      "id": "c-continuity-check",
+      "kind": "config",
+      "label": "连贯性五项核对清单",
+      "description": "核对人物行为符合性格、伏笔呼应逻辑闭环、高潮低谷节奏合理、时间线无跳跃错误、场景转换自然无凭空出现。",
+      "basis": "source",
+      "evidence": "references/consistency.md:34-40\n## 一致性检查清单\n\n- [ ] 人物行为符合其性格设定\n- [ ] 前后伏笔有呼应，逻辑闭环\n- [ ] 高潮低谷分布合理，节奏恰当\n- [ ] 时间线连贯（没有时间跳跃错误）\n- [ ] 场景转换自然（没有凭空出现）"
+    },
+    {
+      "id": "r-outline",
+      "kind": "resource",
+      "label": "大纲模板",
+      "description": "references/outline-template.md；输出模板，仅保留引用，不纳入语义快照。",
+      "basis": "source",
+      "evidence": "SKILL.md:118-118\n2. **生成大纲**：创建 `00-大纲.md`，使用 `references/outline-template.md` 模板，填入完整的章节规划"
+    },
+    {
+      "id": "r-cast",
+      "kind": "resource",
+      "label": "人物档案模板",
+      "description": "references/character-template.md；输出模板，仅保留引用，不纳入语义快照。",
+      "basis": "source",
+      "evidence": "SKILL.md:119-119\n3. **生成人物档案**：创建 `01-人物档案.md`，使用 `references/character-template.md` 模板，创建主角、反派、配角档案"
+    },
+    {
+      "id": "r-chapter",
+      "kind": "resource",
+      "label": "章节模板",
+      "description": "references/chapter-template.md；输出模板，仅保留引用，不将模板字段另画步骤。",
+      "basis": "source",
+      "evidence": "SKILL.md:147-147\n6. 创建章节文件 - 使用`references/chapter-template.md` 模板"
+    },
+    {
+      "id": "r-guide",
+      "kind": "resource",
+      "label": "章节写作指南",
+      "description": "references/chapter-guide.md；纳入快照以审计开头检查、章后清单与条件性重写。",
+      "basis": "source",
+      "evidence": "SKILL.md:142-142\n4. 设计开头钩子 - **最关键**：前20%必须有即时冲突 → [chapter-guide.md](references/chapter-guide.md)（10种开头技巧）"
+    },
+    {
+      "id": "r-dialogue",
+      "kind": "resource",
+      "label": "对话写作规范",
+      "description": "references/dialogue-writing.md；纯写作技法资源，本图不展开其内部检查，不纳入快照。",
+      "basis": "source",
+      "evidence": "SKILL.md:150-150\n   - 对话规范 → [dialogue-writing.md](references/dialogue-writing.md)"
+    },
+    {
+      "id": "r-expansion",
+      "kind": "resource",
+      "label": "内容扩充技巧",
+      "description": "references/content-expansion.md；不足时参考的技法资源，不纳入快照，不自行执行。",
+      "basis": "source",
+      "evidence": "SKILL.md:151-151\n   - 内容不足？使用 [content-expansion.md](references/content-expansion.md) 扩充技巧"
+    },
+    {
+      "id": "r-hook",
+      "kind": "resource",
+      "label": "结尾钩子技巧",
+      "description": "references/hook-techniques.md；十种钩子技法资源，不纳入快照。",
+      "basis": "source",
+      "evidence": "SKILL.md:152-152\n8. 设置结尾钩子 → [hook-techniques.md](references/hook-techniques.md)（10种钩子类型）"
+    },
+    {
+      "id": "r-consistency",
+      "kind": "resource",
+      "label": "连贯性机制",
+      "description": "references/consistency.md；纳入快照以审计写前必读与检查清单。",
+      "basis": "source",
+      "evidence": "SKILL.md:157-157\n10. 连贯性检查 → [consistency.md](references/consistency.md) - 人物一致性、情节连贯、节奏控制"
+    },
+    {
+      "id": "r-wordcount",
+      "kind": "resource",
+      "label": "章节字数检查脚本",
+      "description": "scripts/check_chapter_wordcount.py；原文引用的资源，本次仅解释，不执行。",
+      "basis": "source",
+      "evidence": "SKILL.md:182-182\n使用 `scripts/check_chapter_wordcount.py` 检查章节字数："
+    }
+  ],
+  "edges": [
+    {
+      "id": "f-q1",
+      "source": "request",
+      "target": "q-genre",
+      "label": "进入五问确认",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:15-17\n### 第一阶段：5问确认\n\n**使用 AskUserQuestion 工具逐一询问用户，每个问题提供选项供用户选择。**",
+      "rationale": "源文第一阶段为五问确认；问 1 是该阶段第一个问题，不增加其他入口步骤。"
+    },
+    {
+      "id": "f-q2",
+      "source": "q-genre",
+      "target": "q-lead",
+      "label": "按问题 1→2 逐一询问",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:36-40\n用户选择后记录：`题材 = [用户选择]`\n\n---\n\n**问题2：主角设定**",
+      "rationale": "按已标号的问题顺序衔接，用户选择后的记录保留在对应问题节点。"
+    },
+    {
+      "id": "f-q3",
+      "source": "q-lead",
+      "target": "q-personality",
+      "label": "按问题 2→3 逐一询问",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:53-57\n记录：`主角 = [用户选择]` + `职业/身份 = [用户回答]`\n\n---\n\n**问题3：主角性格**",
+      "rationale": "同一阶段问题编号给出顺序；职业/身份的条件追问仍归问题 2。"
+    },
+    {
+      "id": "f-q4",
+      "source": "q-personality",
+      "target": "q-conflict",
+      "label": "按问题 3→4 逐一询问",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:70-74\n记录：`性格 = [用户选择]`\n\n---\n\n**问题4：核心冲突**",
+      "rationale": "保留同一阶段的问题编号次序。"
+    },
+    {
+      "id": "f-q5",
+      "source": "q-conflict",
+      "target": "q-count",
+      "label": "按问题 4→5 逐一询问",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:88-92\n记录：`核心冲突 = [用户选择]`\n\n---\n\n**问题5：章节数量**",
+      "rationale": "保留同一阶段的问题编号次序。"
+    },
+    {
+      "id": "f-plan",
+      "source": "q-count",
+      "target": "mkdir",
+      "label": "5问收集完成后进入规划",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:109-117\n**5问收集完成后**然后进入\"第二阶段：规划\"。\n\n---\n\n### 第二阶段：规划 + 二次确认\n\n执行以下步骤：\n\n1. **创建项目文件夹**：`novels/[小说名称]/`",
+      "rationale": "原文明确进入第二阶段，将其入口落到该阶段明确编号的第一步。"
+    },
+    {
+      "id": "f-outline",
+      "source": "mkdir",
+      "target": "outline",
+      "label": "规划第 1→2 步",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:117-118\n1. **创建项目文件夹**：`novels/[小说名称]/`\n2. **生成大纲**：创建 `00-大纲.md`，使用 `references/outline-template.md` 模板，填入完整的章节规划",
+      "rationale": "按同一编号列表顺序组织，不增加条件。"
+    },
+    {
+      "id": "f-cast",
+      "source": "outline",
+      "target": "cast",
+      "label": "规划第 2→3 步",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:118-119\n2. **生成大纲**：创建 `00-大纲.md`，使用 `references/outline-template.md` 模板，填入完整的章节规划\n3. **生成人物档案**：创建 `01-人物档案.md`，使用 `references/character-template.md` 模板，创建主角、反派、配角档案",
+      "rationale": "按同一编号列表顺序组织，不增加条件。"
+    },
+    {
+      "id": "f-confirm",
+      "source": "cast",
+      "target": "confirm",
+      "label": "完成后展示摘要，请求确认并等待",
+      "relation": "flow",
+      "basis": "source",
+      "evidence": "SKILL.md:119-121\n3. **生成人物档案**：创建 `01-人物档案.md`，使用 `references/character-template.md` 模板，创建主角、反派、配角档案\n\n完成后，向用户展示规划摘要并请求确认，等待用户确认。用户同意后，进入\"第三阶段：疯狂创作\"。"
+    },
+    {
+      "id": "f-write",
+      "source": "confirm",
+      "target": "read-outline",
+      "label": "用户同意后",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:121-121\n完成后，向用户展示规划摘要并请求确认，等待用户确认。用户同意后，进入\"第三阶段：疯狂创作\"。",
+      "rationale": "用户同意后进入第三阶段，入口为逐章流程的第一项读取；不添加用户不同意的路线。"
+    },
+    {
+      "id": "f-progress",
+      "source": "read-outline",
+      "target": "in-progress",
+      "label": "写前分析第 2→3 项",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:140-141\n2. 读取 `00-大纲.md` 中上一章的摘要\n3. 更新`00-大纲.md` 中 TODO list - 将本章标记为\"进行中\"",
+      "rationale": "连续同文件读取作为一节点后，按原编号进入状态更新。"
+    },
+    {
+      "id": "f-opening",
+      "source": "in-progress",
+      "target": "opening",
+      "label": "写前分析第 3→4 项",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:141-142\n3. 更新`00-大纲.md` 中 TODO list - 将本章标记为\"进行中\"\n4. 设计开头钩子 - **最关键**：前20%必须有即时冲突 → [chapter-guide.md](references/chapter-guide.md)（10种开头技巧）",
+      "rationale": "保留编号顺序。"
+    },
+    {
+      "id": "f-scenes",
+      "source": "opening",
+      "target": "scenes",
+      "label": "写前分析第 4→5 项",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:142-143\n4. 设计开头钩子 - **最关键**：前20%必须有即时冲突 → [chapter-guide.md](references/chapter-guide.md)（10种开头技巧）\n5. 规划场景 - 确定本章需要3-5个场景",
+      "rationale": "保留编号顺序。"
+    },
+    {
+      "id": "f-chapter-file",
+      "source": "scenes",
+      "target": "chapter-file",
+      "label": "逐章第 5→6 项",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:143-147\n5. 规划场景 - 确定本章需要3-5个场景\n\n#### 2. 撰写\n\n6. 创建章节文件 - 使用`references/chapter-template.md` 模板",
+      "rationale": "保留跨写前分析/撰写两小节连续编号的顺序，不增加检查点。"
+    },
+    {
+      "id": "f-draft",
+      "source": "chapter-file",
+      "target": "draft",
+      "label": "逐章第 6→7 项",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:147-148\n6. 创建章节文件 - 使用`references/chapter-template.md` 模板\n7. 撰写正文 - **每章必须达到3000-5000字**",
+      "rationale": "保留编号顺序。"
+    },
+    {
+      "id": "f-ending",
+      "source": "draft",
+      "target": "ending",
+      "label": "逐章第 7→8 项",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:148-152\n7. 撰写正文 - **每章必须达到3000-5000字**\n   - 开头检查：前20%是否极其吸引人？\n   - 对话规范 → [dialogue-writing.md](references/dialogue-writing.md)\n   - 内容不足？使用 [content-expansion.md](references/content-expansion.md) 扩充技巧\n8. 设置结尾钩子 → [hook-techniques.md](references/hook-techniques.md)（10种钩子类型）",
+      "rationale": "第 7 项的开头、对话和不足扩充要求属于正文步骤，完成后再设置结尾钩子。"
+    },
+    {
+      "id": "f-count-draft",
+      "source": "ending",
+      "target": "count-draft",
+      "label": "逐章第 8→9 项",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:152-153\n8. 设置结尾钩子 → [hook-techniques.md](references/hook-techniques.md)（10种钩子类型）\n9. **字数检查** - 必须使用脚本检查字数：`python scripts/check_chapter_wordcount.py <章节文件路径>` 低于3000字必须使用扩充技巧重写",
+      "rationale": "保留编号顺序。"
+    },
+    {
+      "id": "f-continuity",
+      "source": "count-draft",
+      "target": "continuity",
+      "label": "第 9 项完成后进入第 10 项",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:153-157\n9. **字数检查** - 必须使用脚本检查字数：`python scripts/check_chapter_wordcount.py <章节文件路径>` 低于3000字必须使用扩充技巧重写\n\n#### 3. 撰写后优化\n\n10. 连贯性检查 → [consistency.md](references/consistency.md) - 人物一致性、情节连贯、节奏控制",
+      "rationale": "保留编号后继；第 9 项内部必须完成检查和低字数时的重写，不是给低字数放行，也不增加重写后的重检路线。"
+    },
+    {
+      "id": "f-polish",
+      "source": "continuity",
+      "target": "polish",
+      "label": "逐章第 10→11 项",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:157-158\n10. 连贯性检查 → [consistency.md](references/consistency.md) - 人物一致性、情节连贯、节奏控制\n11. **深度润色（去除AI味）** - 重点检查并修改：",
+      "rationale": "保留编号顺序；连贯性不通过的返回位置原文没有写。"
+    },
+    {
+      "id": "f-count-polished",
+      "source": "polish",
+      "target": "count-polished",
+      "label": "逐章第 11→12 项",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:164-165\n    - **细节具象化**：用具体的视觉/听觉/嗅觉细节替代笼统描述\n12. **字数检查** - 必须使用脚本检查字数：`python scripts/check_chapter_wordcount.py <章节文件路径>` 低于3000字必须使用扩充技巧重写",
+      "rationale": "原文第 11 项六项润色后为第 12 项字数检查。"
+    },
+    {
+      "id": "f-summary",
+      "source": "count-polished",
+      "target": "summary",
+      "label": "第 12 项完成后进入第 13 项",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:165-169\n12. **字数检查** - 必须使用脚本检查字数：`python scripts/check_chapter_wordcount.py <章节文件路径>` 低于3000字必须使用扩充技巧重写\n\n#### 4. 最后收尾\n\n13. 生成章节摘要 - 在 `00-大纲.md` 添加摘要（300-500字）",
+      "rationale": "保留编号后继；低字数时的必需扩充重写仍在第 12 项内部，不补重检或返回润色的边。"
+    },
+    {
+      "id": "f-complete",
+      "source": "summary",
+      "target": "complete",
+      "label": "逐章第 13→14 项",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:169-170\n13. 生成章节摘要 - 在 `00-大纲.md` 添加摘要（300-500字）\n14. 更新状态 - `00-大纲.md` 中 TODO list - 将本章标记为\"完成\"",
+      "rationale": "保留编号顺序。"
+    },
+    {
+      "id": "f-loop-check",
+      "source": "complete",
+      "target": "all-done",
+      "label": "完成一章后",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:129-129\n按顺序逐章创作，每章执行完整的创作流程（见下方\"逐章创作\"），完成一章后自动继续下一章，直到所有章节完成。",
+      "rationale": "把完成本章后自动继续直到全部完成的源文循环条件，放在本章流程末尾。"
+    },
+    {
+      "id": "f-next",
+      "source": "all-done",
+      "target": "read-outline",
+      "label": "完成一章后自动继续下一章（直到所有章节完成）",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:129-129\n按顺序逐章创作，每章执行完整的创作流程（见下方\"逐章创作\"），完成一章后自动继续下一章，直到所有章节完成。",
+      "rationale": "只回到原文要求每章都执行的流程起点，条件是尚有下一章，不新增轮数。"
+    },
+    {
+      "id": "f-output",
+      "source": "all-done",
+      "target": "novel",
+      "label": "所有章节完成",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "SKILL.md:129-129\n按顺序逐章创作，每章执行完整的创作流程（见下方\"逐章创作\"），完成一章后自动继续下一章，直到所有章节完成。",
+      "rationale": "把原文直到所有章节完成的终止条件显式连到输出。"
+    },
+    {
+      "id": "f-rewrite-opening",
+      "source": "guide-check",
+      "target": "rewrite-opening",
+      "label": "前20%如果不是极其吸引人；或开头任一问题回答否",
+      "relation": "flow",
+      "basis": "abstraction",
+      "evidence": "references/chapter-guide.md:240-261\n- [ ] **前 20% 是否极其吸引人？**（如果不是，重写）\n- [ ] 是否在第一段就建立冲突/紧张？\n- [ ] 是否有重大事件或信息揭示？\n- [ ] 是否有强烈的情感冲击？\n- [ ] 读者是否会迫切想知道接下来发生什么？\n- [ ] 是否避免了所有\"致命错误\"？（天气、日常、回顾等）\n\n### 内容检查\n- [ ] 本章是否推进了主线剧情或深化了人物？\n- [ ] 是否有冲突或转折？\n- [ ] 对话是否推动情节或揭示人物？\n- [ ] 是否展示了而非讲述了关键信息？\n- [ ] 结尾是否留下悬念钩子？\n- [ ] 是否为下一章埋下伏笔？\n\n### 开头自测问题\n如果对开头有任何问题回答\"否\"，必须重写：\n1. 读者读了前三段后，会想继续读吗？\n2. 开头是否有冲突或危机？\n3. 开头是否有意外或转折？\n4. 开头是否让读者产生强烈情绪？\n5. 开头是否避免了平淡的日常/天气/背景说明？",
+      "rationale": "同一章后检查区域给出两个必须重写的失败谓词，合并为一个失败出口；不画未给出的通过出口或重写返回。"
+    },
+    {
+      "id": "k-question",
+      "source": "c-question",
+      "target": "q-genre",
+      "label": "每问使用工具提供选项",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:17-17\n**使用 AskUserQuestion 工具逐一询问用户，每个问题提供选项供用户选择。**"
+    },
+    {
+      "id": "k-autonomy",
+      "source": "c-autonomy",
+      "target": "read-outline",
+      "label": "第三阶段无需再确认，逐章完整执行",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:127-129\n**重要：全程无需再次向用户确认，必须逐一章创作**\n\n按顺序逐章创作，每章执行完整的创作流程（见下方\"逐章创作\"），完成一章后自动继续下一章，直到所有章节完成。"
+    },
+    {
+      "id": "k-golden",
+      "source": "c-golden",
+      "target": "draft",
+      "label": "展示、冲突与悬念必须保留",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "SKILL.md:176-178\n1. **展示而非讲述** - 用动作和对话表现，不要直接陈述\n2. **冲突驱动剧情** - 每章必须有冲突或转折\n3. **悬念承上启下** - 每章结尾必须留下钩子"
+    },
+    {
+      "id": "k-opening",
+      "source": "c-opening",
+      "target": "opening",
+      "label": "四种效果，避免六类致命错误",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "references/chapter-guide.md:11-27\n### 前 20% 必须达到的效果\n\n1. **即时紧张感** - 读者立即感受到危机/冲突\n2. **重大事件** - 发生推动剧情的重要事情\n3. **情感冲击** - 读者产生强烈情绪（好奇、震惊、担忧）\n4. **继续阅读的欲望** - 迫切想知道接下来发生什么\n\n### 开头致命错误（绝对避免）\n\n| 错误类型 | 示例 | 为什么致命 |\n|---------|------|-----------|\n| 天气描写 | \"那天天气晴朗，万里无云...\" | 与故事无关，读者无耐心 |\n| 日常流程 | \"李明醒来，刷牙洗脸，吃早餐...\" | 无聊，没有冲突 |\n| 回顾上章 | \"上一章我们说到...\" | 读者已经知道，浪费时间 |\n| 缓慢铺垫 | \"先介绍一下这个城市的背景...\" | 信息倾倒，没有行动 |\n| 平淡对话 | \"你好，你好吗？我很好。\" | 无意义对话，没有张力 |\n| 过度解释 | \"这是因为，所以，然后...\" | 讲述而非展示 |"
+    },
+    {
+      "id": "k-techniques",
+      "source": "c-techniques",
+      "target": "opening",
+      "label": "十种技巧可单用或组合",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "references/chapter-guide.md:135-135\n**使用上述十种技巧之一，或组合使用。**"
+    },
+    {
+      "id": "k-structure",
+      "source": "c-structure",
+      "target": "draft",
+      "label": "按章节四段结构组织",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "references/chapter-guide.md:125-163\n## 标准章节结构\n\n### 1. 开头钩子（前 20%）⚠️ 最关键\n\n**必须包含：**\n- ✅ 即时冲突/危机\n- ✅ 重大事件/信息\n- ✅ 强烈情感冲击\n- ✅ 行动场景\n\n**使用上述十种技巧之一，或组合使用。**\n\n### 2. 发展推进（中间 50-60%）\n\n本章的核心内容，必须推进剧情或深化人物。\n\n**推进方式：**\n- **新信息揭示**：让读者/主角获得重要信息\n- **关系变化**：人物关系发生转变\n- **问题升级**：现状恶化，新危机出现\n- **角色成长**：主角获得新技能、新认知\n\n**避免：**\n- 纯粹的场景描写（风景、房间布局等）\n- 与剧情无关的人物互动\n- 重复已知的对话\n\n### 3. 高潮时刻（后 15-20%）\n\n本章的情感或动作最高点。\n\n**高潮类型：**\n- **动作高潮**：战斗、追逐、对抗\n- **情感高潮**：重大发现、背叛、告白、牺牲\n- **心理高潮**：主角的内心转折点\n\n### 4. 结尾钩子（最后 5-10%）\n\n留下悬念，让读者想看下一章。详见 [hook-techniques.md](hook-techniques.md)"
+    },
+    {
+      "id": "k-type",
+      "source": "c-chapter-type",
+      "target": "draft",
+      "label": "章节目的与主线相关",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "references/chapter-guide.md:167-192\n## 章节类型分类\n\n### 情节推进章\n\n**目的**：推动主线剧情发展\n**特征**：有明确的事件进展、重要信息揭示\n**示例**：主角发现线索、敌人发动攻击、盟友背叛\n\n### 人物深化章\n\n**目的**：深化读者对人物的理解\n**特征**：揭示人物背景、动机、内心冲突\n**示例**：回忆片段、私密对话、独处时刻\n**注意**：必须与主线相关，不能是纯粹的人物小传\n\n### 氛围营造章\n\n**目的**：建立特定情绪或紧张感\n**特征**：注重感官描写、节奏控制\n**示例**：暴风雨前的宁静、潜伏行动、等待审判\n\n### 过渡衔接章\n\n**目的**：连接两个重大事件\n**特征**：信息整理、位置转换、时间跳跃\n**注意**：保持简洁，避免拖沓"
+    },
+    {
+      "id": "k-rhythm",
+      "source": "c-rhythm",
+      "target": "draft",
+      "label": "节奏变化，高低密度交替",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "references/chapter-guide.md:196-219\n## 章节节奏控制\n\n### 节奏变化\n\n同一章内应包含节奏变化：\n\n```\n紧张 → 缓解 → 新紧张 → 更紧张\n```\n\n示例：\n```\n紧张：主角被追捕\n缓解：躲进安全屋，短暂喘息\n新紧张：发现安全屋已被入侵\n更紧张：必须立即逃离\n```\n\n### 信息密度\n\n- **高密度**：动作场面、大量对话、快速事件\n- **低密度**：内心独白、环境描写、情感沉淀\n\n**原则**：高低密度交替，避免持续高密度（读者疲劳）或持续低密度（读者无聊）"
+    },
+    {
+      "id": "k-density",
+      "source": "c-density",
+      "target": "scenes",
+      "label": "3000–5000 字参照 2–3 事件、3–5 场景",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "references/chapter-guide.md:223-231\n## 章节长度与内容密度对照\n\n| 章节字数 | 核心事件数量 | 场景数量 |\n|---------|-------------|---------|\n| 800-1500 | 1 个主要事件 | 1-2 个场景 |\n| 1500-3000 | 1-2 个主要事件 | 2-3 个场景 |\n| 3000-5000 | 2-3 个主要事件 | 3-5 个场景 |\n\n**原则**：每章至少包含一个不可删除的核心事件。如果一个事件可以移除而不影响理解，则应删除。"
+    },
+    {
+      "id": "k-content-check",
+      "source": "c-content-check",
+      "target": "guide-check",
+      "label": "章后内容自查清单",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "references/chapter-guide.md:247-253\n### 内容检查\n- [ ] 本章是否推进了主线剧情或深化了人物？\n- [ ] 是否有冲突或转折？\n- [ ] 对话是否推动情节或揭示人物？\n- [ ] 是否展示了而非讲述了关键信息？\n- [ ] 结尾是否留下悬念钩子？\n- [ ] 是否为下一章埋下伏笔？"
+    },
+    {
+      "id": "k-preflight",
+      "source": "c-preflight",
+      "target": "draft",
+      "label": "每次新章前读摘要、前章与人物状态",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "references/consistency.md:7-10\n每次开始写新章节前：\n1. 阅读 `00-大纲.md` 中所有已完成章节的摘要\n2. 读取上一章文件，了解当前悬念\n3. 检查人物状态（位置、情绪、关系）"
+    },
+    {
+      "id": "k-continuity",
+      "source": "c-continuity",
+      "target": "draft",
+      "label": "新章呼应前文、跟踪状态与悬念",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "references/consistency.md:12-32\n## 穿针引线\n\n在新章节中：\n- 呼应前文埋下的伏笔和线索\n- 提及之前发生的事件（自然融入）\n- 让人物行为与之前保持一致\n\n## 人物状态跟踪\n\n注意人物在各章节中的变化和成长：\n- 位置变化（人在哪里）\n- 情绪状态（当前心情）\n- 关系变化（与其他角色关系）\n- 能力变化（获得新技能/信息）\n\n## 悬念线延续\n\n确保主线悬念逐步推进：\n- 每章至少回应一个旧悬念\n- 提出新悬念或升级现有悬念\n- 不要遗忘任何未解的悬念"
+    },
+    {
+      "id": "k-continuity-check",
+      "source": "c-continuity-check",
+      "target": "continuity",
+      "label": "逐项核对连贯性清单",
+      "relation": "constraint",
+      "basis": "source",
+      "evidence": "references/consistency.md:34-40\n## 一致性检查清单\n\n- [ ] 人物行为符合其性格设定\n- [ ] 前后伏笔有呼应，逻辑闭环\n- [ ] 高潮低谷分布合理，节奏恰当\n- [ ] 时间线连贯（没有时间跳跃错误）\n- [ ] 场景转换自然（没有凭空出现）"
+    },
+    {
+      "id": "r-use-outline",
+      "source": "outline",
+      "target": "r-outline",
+      "label": "使用大纲模板",
+      "relation": "resource",
+      "basis": "source",
+      "evidence": "SKILL.md:118-118\n2. **生成大纲**：创建 `00-大纲.md`，使用 `references/outline-template.md` 模板，填入完整的章节规划"
+    },
+    {
+      "id": "r-use-cast",
+      "source": "cast",
+      "target": "r-cast",
+      "label": "使用人物档案模板",
+      "relation": "resource",
+      "basis": "source",
+      "evidence": "SKILL.md:119-119\n3. **生成人物档案**：创建 `01-人物档案.md`，使用 `references/character-template.md` 模板，创建主角、反派、配角档案"
+    },
+    {
+      "id": "r-use-chapter",
+      "source": "chapter-file",
+      "target": "r-chapter",
+      "label": "使用章节模板",
+      "relation": "resource",
+      "basis": "source",
+      "evidence": "SKILL.md:147-147\n6. 创建章节文件 - 使用`references/chapter-template.md` 模板"
+    },
+    {
+      "id": "r-use-guide",
+      "source": "opening",
+      "target": "r-guide",
+      "label": "十种开头技巧",
+      "relation": "resource",
+      "basis": "source",
+      "evidence": "SKILL.md:142-142\n4. 设计开头钩子 - **最关键**：前20%必须有即时冲突 → [chapter-guide.md](references/chapter-guide.md)（10种开头技巧）"
+    },
+    {
+      "id": "r-use-dialogue",
+      "source": "draft",
+      "target": "r-dialogue",
+      "label": "参考对话规范",
+      "relation": "resource",
+      "basis": "source",
+      "evidence": "SKILL.md:150-150\n   - 对话规范 → [dialogue-writing.md](references/dialogue-writing.md)"
+    },
+    {
+      "id": "r-use-expansion",
+      "source": "draft",
+      "target": "r-expansion",
+      "label": "内容不足时参考扩充技巧",
+      "relation": "resource",
+      "basis": "source",
+      "evidence": "SKILL.md:151-151\n   - 内容不足？使用 [content-expansion.md](references/content-expansion.md) 扩充技巧"
+    },
+    {
+      "id": "r-use-hook",
+      "source": "ending",
+      "target": "r-hook",
+      "label": "参考十种结尾钩子",
+      "relation": "resource",
+      "basis": "source",
+      "evidence": "SKILL.md:152-152\n8. 设置结尾钩子 → [hook-techniques.md](references/hook-techniques.md)（10种钩子类型）"
+    },
+    {
+      "id": "r-use-continuity",
+      "source": "continuity",
+      "target": "r-consistency",
+      "label": "按连贯性机制检查",
+      "relation": "resource",
+      "basis": "source",
+      "evidence": "SKILL.md:157-157\n10. 连贯性检查 → [consistency.md](references/consistency.md) - 人物一致性、情节连贯、节奏控制"
+    },
+    {
+      "id": "r-count-draft",
+      "source": "count-draft",
+      "target": "r-wordcount",
+      "label": "必须使用脚本检查字数（仅引用）",
+      "relation": "resource",
+      "basis": "source",
+      "evidence": "SKILL.md:153-153\n9. **字数检查** - 必须使用脚本检查字数：`python scripts/check_chapter_wordcount.py <章节文件路径>` 低于3000字必须使用扩充技巧重写"
+    },
+    {
+      "id": "r-count-polished",
+      "source": "count-polished",
+      "target": "r-wordcount",
+      "label": "润色后必须再用脚本检查（仅引用）",
+      "relation": "resource",
+      "basis": "source",
+      "evidence": "SKILL.md:165-165\n12. **字数检查** - 必须使用脚本检查字数：`python scripts/check_chapter_wordcount.py <章节文件路径>` 低于3000字必须使用扩充技巧重写"
+    },
+    {
+      "id": "r-expand-draft",
+      "source": "count-draft",
+      "target": "r-expansion",
+      "label": "低于3000字必须使用扩充技巧重写",
+      "relation": "resource",
+      "basis": "source",
+      "evidence": "SKILL.md:153-153\n9. **字数检查** - 必须使用脚本检查字数：`python scripts/check_chapter_wordcount.py <章节文件路径>` 低于3000字必须使用扩充技巧重写"
+    },
+    {
+      "id": "r-expand-polished",
+      "source": "count-polished",
+      "target": "r-expansion",
+      "label": "低于3000字必须使用扩充技巧重写",
+      "relation": "resource",
+      "basis": "source",
+      "evidence": "SKILL.md:165-165\n12. **字数检查** - 必须使用脚本检查字数：`python scripts/check_chapter_wordcount.py <章节文件路径>` 低于3000字必须使用扩充技巧重写"
+    },
+    {
+      "id": "r-hook-guide",
+      "source": "c-structure",
+      "target": "r-hook",
+      "label": "结尾钩子详见技法文件",
+      "relation": "resource",
+      "basis": "source",
+      "evidence": "references/chapter-guide.md:161-163\n### 4. 结尾钩子（最后 5-10%）\n\n留下悬念，让读者想看下一章。详见 [hook-techniques.md](hook-techniques.md)"
+    }
+  ],
+  "warnings": [
+    "规划确认（SKILL.md:121）只规定用户同意后继续，未说明不同意、修改建议或未回应时的去向，因此不补拒绝、修改或等待恢复边。",
+    "两个字数检查（153、165）各自把低于3000字的扩充重写保留在同一编号项内；源文未写重检次数、重写后的回跳或超过5000字时的处理，不补复检循环或上限分支。",
+    "chapter-guide:237–261 要求每章后自查并在开头不合格时重写，但未指定与主文两次字数检查、连贯性检查及润色的相对位置，也没有通过出口或重写后返回点，因此该条件片段不接主链。",
+    "consistency:7–10 的写前必读和人物状态核对是每章前置要求，但未规定相对主文 TODO 进行中标记的插入位置；保留为写前约束而不另造执行次序。",
+    "首章没有上一章时，主文上一章摘要（140）和 consistency 的上一章文件、旧悬念要求（9、30）如何适用没有说明；不添加跳过、虚拟前章或默认旧悬念。",
+    "连贯性与章后内容清单未通过时，原文没有指定修复目标或返回步骤；只保留检查要求，不补重试路线。",
+    "第三阶段要求每章3000–5000字，chapter-guide 的密度表同时列短章与比例区间；图将表格保留为写作参照，不把短章档位画成豁免字数要求的分支，也不归一化结构百分比。"
+  ],
+  "coverage": {
+    "sourceSha256": "2c1a87df984c215a56b27665b6117337f8e6132e489660fd300b30c6f22a9f49",
+    "entries": [
+      {
+        "startLine": 1,
+        "endLine": 3,
+        "treatment": "context",
+        "reason": "Frontmatter 标记、名称与多行描述声明，不是执行步骤。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 4,
+        "endLine": 7,
+        "treatment": "represented",
+        "reason": "节点 request：写小说、创作故事、分章节写作、连续剧情、章节悬念和长篇小说等请求触发本技能。",
+        "nodeIds": [
+          "request"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 8,
+        "endLine": 13,
+        "treatment": "context",
+        "reason": "来源元数据、容器边界和主标题。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 15,
+        "endLine": 17,
+        "treatment": "grouped",
+        "reason": "关系 f-q1：源文第一阶段为五问确认；问 1 是该阶段第一个问题，不增加其他入口步骤。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-q1"
+        ]
+      },
+      {
+        "startLine": 17,
+        "endLine": 17,
+        "treatment": "represented",
+        "reason": "节点 c-question：使用 AskUserQuestion 工具逐一询问用户，每个问题提供选项；不是把代码围栏中的 Question/Options 当作可执行命令。",
+        "nodeIds": [
+          "c-question"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 17,
+        "endLine": 17,
+        "treatment": "represented",
+        "reason": "关系 k-question：每问使用工具提供选项",
+        "nodeIds": [],
+        "edgeIds": [
+          "k-question"
+        ]
+      },
+      {
+        "startLine": 19,
+        "endLine": 19,
+        "treatment": "context",
+        "reason": "章节标题、分隔线或引导文本，顺序与要求由其归属节点/边表达。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 21,
+        "endLine": 36,
+        "treatment": "represented",
+        "reason": "节点 q-genre：使用 AskUserQuestion 的选项询问题材：悬疑推理、现代言情、古代言情、奇幻玄幻、科幻未来、武侠仙侠、历史架空、都市现实；用户选择后记录题材。完成标准：题材已记录。",
+        "nodeIds": [
+          "q-genre"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 36,
+        "endLine": 40,
+        "treatment": "grouped",
+        "reason": "关系 f-q2：按已标号的问题顺序衔接，用户选择后的记录保留在对应问题节点。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-q2"
+        ]
+      },
+      {
+        "startLine": 38,
+        "endLine": 38,
+        "treatment": "context",
+        "reason": "章节标题、分隔线或引导文本，顺序与要求由其归属节点/边表达。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 40,
+        "endLine": 53,
+        "treatment": "represented",
+        "reason": "节点 q-lead：选项为男性主角、女性主角、双主角、群像；选择后如需职业或身份继续追问，记录主角和职业/身份。追问保留在本问内部，不假定每次都要问。完成标准：本问所需信息已记录。",
+        "nodeIds": [
+          "q-lead"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 53,
+        "endLine": 57,
+        "treatment": "grouped",
+        "reason": "关系 f-q3：同一阶段问题编号给出顺序；职业/身份的条件追问仍归问题 2。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-q3"
+        ]
+      },
+      {
+        "startLine": 55,
+        "endLine": 55,
+        "treatment": "context",
+        "reason": "章节标题、分隔线或引导文本，顺序与要求由其归属节点/边表达。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 57,
+        "endLine": 70,
+        "treatment": "represented",
+        "reason": "节点 q-personality：选项为热血正义、冷静智慧、温暖治愈、高冷孤傲、阴暗腹黑、成长逆袭；记录用户选择的性格。完成标准：性格已记录。",
+        "nodeIds": [
+          "q-personality"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 70,
+        "endLine": 74,
+        "treatment": "grouped",
+        "reason": "关系 f-q4：保留同一阶段的问题编号次序。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-q4"
+        ]
+      },
+      {
+        "startLine": 72,
+        "endLine": 72,
+        "treatment": "context",
+        "reason": "章节标题、分隔线或引导文本，顺序与要求由其归属节点/边表达。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 74,
+        "endLine": 88,
+        "treatment": "represented",
+        "reason": "节点 q-conflict：选项为生死存亡、查明真相、爱情阻碍、复仇雪恨、权力争夺、成长突破、守护保护；记录用户选择。完成标准：核心冲突已记录。",
+        "nodeIds": [
+          "q-conflict"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 88,
+        "endLine": 92,
+        "treatment": "grouped",
+        "reason": "关系 f-q5：保留同一阶段的问题编号次序。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-q5"
+        ]
+      },
+      {
+        "startLine": 90,
+        "endLine": 90,
+        "treatment": "context",
+        "reason": "章节标题、分隔线或引导文本，顺序与要求由其归属节点/边表达。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 92,
+        "endLine": 109,
+        "treatment": "represented",
+        "reason": "节点 q-count：选项为 10、15、20、30、50 章或用户输入自定义数；示例估算篇幅依次约 3–5、4.5–7.5、6–10、9–15、15–25 万字。记录章节数。完成标准：第五问收集完成。",
+        "nodeIds": [
+          "q-count"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 109,
+        "endLine": 117,
+        "treatment": "grouped",
+        "reason": "关系 f-plan：原文明确进入第二阶段，将其入口落到该阶段明确编号的第一步。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-plan"
+        ]
+      },
+      {
+        "startLine": 111,
+        "endLine": 115,
+        "treatment": "context",
+        "reason": "章节标题、分隔线或引导文本，顺序与要求由其归属节点/边表达。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 117,
+        "endLine": 117,
+        "treatment": "represented",
+        "reason": "节点 mkdir：在 novels/[小说名称]/ 创建项目文件夹。完成标准：该项目文件夹已创建。",
+        "nodeIds": [
+          "mkdir"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 117,
+        "endLine": 118,
+        "treatment": "grouped",
+        "reason": "关系 f-outline：按同一编号列表顺序组织，不增加条件。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-outline"
+        ]
+      },
+      {
+        "startLine": 118,
+        "endLine": 118,
+        "treatment": "represented",
+        "reason": "节点 outline：按 outline-template 模板创建 00-大纲.md，填入完整章节规划。完成标准：大纲文件与章节规划已生成。",
+        "nodeIds": [
+          "outline"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 118,
+        "endLine": 118,
+        "treatment": "represented",
+        "reason": "节点 r-outline：references/outline-template.md；输出模板，仅保留引用，不纳入语义快照。",
+        "nodeIds": [
+          "r-outline"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 118,
+        "endLine": 119,
+        "treatment": "grouped",
+        "reason": "关系 f-cast：按同一编号列表顺序组织，不增加条件。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-cast"
+        ]
+      },
+      {
+        "startLine": 118,
+        "endLine": 118,
+        "treatment": "represented",
+        "reason": "关系 r-use-outline：使用大纲模板",
+        "nodeIds": [],
+        "edgeIds": [
+          "r-use-outline"
+        ]
+      },
+      {
+        "startLine": 119,
+        "endLine": 119,
+        "treatment": "represented",
+        "reason": "节点 cast：按 character-template 模板创建 01-人物档案.md，包括主角、反派、配角。完成标准：人物档案已生成。",
+        "nodeIds": [
+          "cast"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 119,
+        "endLine": 119,
+        "treatment": "represented",
+        "reason": "节点 r-cast：references/character-template.md；输出模板，仅保留引用，不纳入语义快照。",
+        "nodeIds": [
+          "r-cast"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 119,
+        "endLine": 121,
+        "treatment": "represented",
+        "reason": "关系 f-confirm：完成后展示摘要，请求确认并等待",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-confirm"
+        ]
+      },
+      {
+        "startLine": 119,
+        "endLine": 119,
+        "treatment": "represented",
+        "reason": "关系 r-use-cast：使用人物档案模板",
+        "nodeIds": [],
+        "edgeIds": [
+          "r-use-cast"
+        ]
+      },
+      {
+        "startLine": 121,
+        "endLine": 121,
+        "treatment": "represented",
+        "reason": "节点 confirm：规划完成后展示摘要并请求确认；只画原文规定的用户同意出口，不自行处理拒绝或未回应。",
+        "nodeIds": [
+          "confirm"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 121,
+        "endLine": 121,
+        "treatment": "grouped",
+        "reason": "关系 f-write：用户同意后进入第三阶段，入口为逐章流程的第一项读取；不添加用户不同意的路线。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-write"
+        ]
+      },
+      {
+        "startLine": 123,
+        "endLine": 125,
+        "treatment": "context",
+        "reason": "章节标题、分隔线或引导文本，顺序与要求由其归属节点/边表达。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 127,
+        "endLine": 129,
+        "treatment": "represented",
+        "reason": "节点 c-autonomy：第三阶段全程无需再次向用户确认，必须逐一章创作；每一章都执行完整的逐章流程，完成一章自动继续下一章。",
+        "nodeIds": [
+          "c-autonomy"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 127,
+        "endLine": 129,
+        "treatment": "represented",
+        "reason": "关系 k-autonomy：第三阶段无需再确认，逐章完整执行",
+        "nodeIds": [],
+        "edgeIds": [
+          "k-autonomy"
+        ]
+      },
+      {
+        "startLine": 129,
+        "endLine": 129,
+        "treatment": "represented",
+        "reason": "节点 all-done：按顺序逐章执行完整流程，一章完成后自动继续下一章，直到所有章节完成；此处只表达原文循环条件。",
+        "nodeIds": [
+          "all-done"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 129,
+        "endLine": 129,
+        "treatment": "grouped",
+        "reason": "节点 novel：将直到所有章节完成的终止状态显式表示为输出，不新增终稿合并或发布动作。",
+        "nodeIds": [
+          "novel"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 129,
+        "endLine": 129,
+        "treatment": "grouped",
+        "reason": "关系 f-loop-check：把完成本章后自动继续直到全部完成的源文循环条件，放在本章流程末尾。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-loop-check"
+        ]
+      },
+      {
+        "startLine": 129,
+        "endLine": 129,
+        "treatment": "grouped",
+        "reason": "关系 f-next：只回到原文要求每章都执行的流程起点，条件是尚有下一章，不新增轮数。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-next"
+        ]
+      },
+      {
+        "startLine": 129,
+        "endLine": 129,
+        "treatment": "grouped",
+        "reason": "关系 f-output：把原文直到所有章节完成的终止条件显式连到输出。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-output"
+        ]
+      },
+      {
+        "startLine": 131,
+        "endLine": 137,
+        "treatment": "context",
+        "reason": "章节标题、分隔线或引导文本，顺序与要求由其归属节点/边表达。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 139,
+        "endLine": 140,
+        "treatment": "grouped",
+        "reason": "节点 read-outline：将同一文件上的连续读取动作合并为写前信息核对，保留全部阅读对象和原顺序，不引入额外文件。",
+        "nodeIds": [
+          "read-outline"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 140,
+        "endLine": 141,
+        "treatment": "grouped",
+        "reason": "关系 f-progress：连续同文件读取作为一节点后，按原编号进入状态更新。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-progress"
+        ]
+      },
+      {
+        "startLine": 141,
+        "endLine": 141,
+        "treatment": "represented",
+        "reason": "节点 in-progress：在 00-大纲.md 的 TODO list 中把本章状态改为进行中。完成标准：本章状态已更新。",
+        "nodeIds": [
+          "in-progress"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 141,
+        "endLine": 142,
+        "treatment": "grouped",
+        "reason": "关系 f-opening：保留编号顺序。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-opening"
+        ]
+      },
+      {
+        "startLine": 142,
+        "endLine": 142,
+        "treatment": "represented",
+        "reason": "节点 opening：前 20% 必须有即时冲突；使用 chapter-guide 的十种开头技巧。完成标准：本章开头钩子已设计。",
+        "nodeIds": [
+          "opening"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 142,
+        "endLine": 142,
+        "treatment": "represented",
+        "reason": "节点 r-guide：references/chapter-guide.md；纳入快照以审计开头检查、章后清单与条件性重写。",
+        "nodeIds": [
+          "r-guide"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 142,
+        "endLine": 143,
+        "treatment": "grouped",
+        "reason": "关系 f-scenes：保留编号顺序。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-scenes"
+        ]
+      },
+      {
+        "startLine": 142,
+        "endLine": 142,
+        "treatment": "represented",
+        "reason": "关系 r-use-guide：十种开头技巧",
+        "nodeIds": [],
+        "edgeIds": [
+          "r-use-guide"
+        ]
+      },
+      {
+        "startLine": 143,
+        "endLine": 143,
+        "treatment": "represented",
+        "reason": "节点 scenes：确定本章需要的 3–5 个场景。完成标准：本章场景计划已确定。",
+        "nodeIds": [
+          "scenes"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 143,
+        "endLine": 147,
+        "treatment": "grouped",
+        "reason": "关系 f-chapter-file：保留跨写前分析/撰写两小节连续编号的顺序，不增加检查点。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-chapter-file"
+        ]
+      },
+      {
+        "startLine": 145,
+        "endLine": 145,
+        "treatment": "context",
+        "reason": "章节标题、分隔线或引导文本，顺序与要求由其归属节点/边表达。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 147,
+        "endLine": 147,
+        "treatment": "represented",
+        "reason": "节点 chapter-file：使用 chapter-template.md 创建章节文件；模板只作为资源，不执行其中任何内容。完成标准：本章文件已创建。",
+        "nodeIds": [
+          "chapter-file"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 147,
+        "endLine": 147,
+        "treatment": "represented",
+        "reason": "节点 r-chapter：references/chapter-template.md；输出模板，仅保留引用，不将模板字段另画步骤。",
+        "nodeIds": [
+          "r-chapter"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 147,
+        "endLine": 148,
+        "treatment": "grouped",
+        "reason": "关系 f-draft：保留编号顺序。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-draft"
+        ]
+      },
+      {
+        "startLine": 147,
+        "endLine": 147,
+        "treatment": "represented",
+        "reason": "关系 r-use-chapter：使用章节模板",
+        "nodeIds": [],
+        "edgeIds": [
+          "r-use-chapter"
+        ]
+      },
+      {
+        "startLine": 148,
+        "endLine": 151,
+        "treatment": "represented",
+        "reason": "节点 draft：正文每章必须达到 3000–5000 字；检查前 20% 是否极其吸引人，参考对话规范。内容不足时使用 content-expansion 扩充技巧。完成标准：本章正文已撰写，开头已检查，必要的内容扩充已处理。",
+        "nodeIds": [
+          "draft"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 148,
+        "endLine": 152,
+        "treatment": "grouped",
+        "reason": "关系 f-ending：第 7 项的开头、对话和不足扩充要求属于正文步骤，完成后再设置结尾钩子。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-ending"
+        ]
+      },
+      {
+        "startLine": 150,
+        "endLine": 150,
+        "treatment": "represented",
+        "reason": "节点 r-dialogue：references/dialogue-writing.md；纯写作技法资源，本图不展开其内部检查，不纳入快照。",
+        "nodeIds": [
+          "r-dialogue"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 150,
+        "endLine": 150,
+        "treatment": "represented",
+        "reason": "关系 r-use-dialogue：参考对话规范",
+        "nodeIds": [],
+        "edgeIds": [
+          "r-use-dialogue"
+        ]
+      },
+      {
+        "startLine": 151,
+        "endLine": 151,
+        "treatment": "represented",
+        "reason": "节点 r-expansion：references/content-expansion.md；不足时参考的技法资源，不纳入快照，不自行执行。",
+        "nodeIds": [
+          "r-expansion"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 151,
+        "endLine": 151,
+        "treatment": "represented",
+        "reason": "关系 r-use-expansion：内容不足时参考扩充技巧",
+        "nodeIds": [],
+        "edgeIds": [
+          "r-use-expansion"
+        ]
+      },
+      {
+        "startLine": 152,
+        "endLine": 152,
+        "treatment": "represented",
+        "reason": "节点 ending：参考 hook-techniques 中的十种钩子类型设置结尾钩子。完成标准：本章结尾钩子已设置。",
+        "nodeIds": [
+          "ending"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 152,
+        "endLine": 152,
+        "treatment": "represented",
+        "reason": "节点 r-hook：references/hook-techniques.md；十种钩子技法资源，不纳入快照。",
+        "nodeIds": [
+          "r-hook"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 152,
+        "endLine": 153,
+        "treatment": "grouped",
+        "reason": "关系 f-count-draft：保留编号顺序。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-count-draft"
+        ]
+      },
+      {
+        "startLine": 152,
+        "endLine": 152,
+        "treatment": "represented",
+        "reason": "关系 r-use-hook：参考十种结尾钩子",
+        "nodeIds": [],
+        "edgeIds": [
+          "r-use-hook"
+        ]
+      },
+      {
+        "startLine": 153,
+        "endLine": 153,
+        "treatment": "represented",
+        "reason": "节点 count-draft：必须用 scripts/check_chapter_wordcount.py 检查当前章节；低于 3000 字必须按扩充技巧重写。检查与条件性修补属于原文同一编号项；未补任何重检次数、回跳或超过 5000 字分支。完成标准：脚本检查已做，若不足则已执行要求的扩充重写。",
+        "nodeIds": [
+          "count-draft"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 153,
+        "endLine": 157,
+        "treatment": "grouped",
+        "reason": "关系 f-continuity：保留编号后继；第 9 项内部必须完成检查和低字数时的重写，不是给低字数放行，也不增加重写后的重检路线。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-continuity"
+        ]
+      },
+      {
+        "startLine": 153,
+        "endLine": 153,
+        "treatment": "represented",
+        "reason": "关系 r-count-draft：必须使用脚本检查字数（仅引用）",
+        "nodeIds": [],
+        "edgeIds": [
+          "r-count-draft"
+        ]
+      },
+      {
+        "startLine": 153,
+        "endLine": 153,
+        "treatment": "represented",
+        "reason": "关系 r-expand-draft：低于3000字必须使用扩充技巧重写",
+        "nodeIds": [],
+        "edgeIds": [
+          "r-expand-draft"
+        ]
+      },
+      {
+        "startLine": 155,
+        "endLine": 155,
+        "treatment": "context",
+        "reason": "章节标题、分隔线或引导文本，顺序与要求由其归属节点/边表达。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 157,
+        "endLine": 157,
+        "treatment": "represented",
+        "reason": "节点 continuity：按 consistency.md 检查人物一致性、情节连贯与节奏控制。完成标准：该轮连贯性检查已执行；不通过后应回到哪里原文没有规定。",
+        "nodeIds": [
+          "continuity"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 157,
+        "endLine": 157,
+        "treatment": "represented",
+        "reason": "节点 r-consistency：references/consistency.md；纳入快照以审计写前必读与检查清单。",
+        "nodeIds": [
+          "r-consistency"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 157,
+        "endLine": 158,
+        "treatment": "grouped",
+        "reason": "关系 f-polish：保留编号顺序；连贯性不通过的返回位置原文没有写。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-polish"
+        ]
+      },
+      {
+        "startLine": 157,
+        "endLine": 157,
+        "treatment": "represented",
+        "reason": "关系 r-use-continuity：按连贯性机制检查",
+        "nodeIds": [],
+        "edgeIds": [
+          "r-use-continuity"
+        ]
+      },
+      {
+        "startLine": 158,
+        "endLine": 164,
+        "treatment": "represented",
+        "reason": "节点 polish：检查并修改：删去璀璨/瑰丽/绚烂等过度形容词堆砌；将抽象情感改为具体动作或对话；打破四字套话；让口语化对话有个性；交替长短句；以视听嗅等细节替代笼统描述。完成标准：六项润色已处理。",
+        "nodeIds": [
+          "polish"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 164,
+        "endLine": 165,
+        "treatment": "grouped",
+        "reason": "关系 f-count-polished：原文第 11 项六项润色后为第 12 项字数检查。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-count-polished"
+        ]
+      },
+      {
+        "startLine": 165,
+        "endLine": 165,
+        "treatment": "represented",
+        "reason": "节点 count-polished：必须再次用字数脚本检查；若低于 3000 字，必须使用扩充技巧重写。该检查与第 9 项各自保留，不合并成一个；原文没有写重写后重新润色或复检的返回步骤。完成标准：第二轮检查已做且必要重写已处理。",
+        "nodeIds": [
+          "count-polished"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 165,
+        "endLine": 169,
+        "treatment": "grouped",
+        "reason": "关系 f-summary：保留编号后继；低字数时的必需扩充重写仍在第 12 项内部，不补重检或返回润色的边。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-summary"
+        ]
+      },
+      {
+        "startLine": 165,
+        "endLine": 165,
+        "treatment": "represented",
+        "reason": "关系 r-count-polished：润色后必须再用脚本检查（仅引用）",
+        "nodeIds": [],
+        "edgeIds": [
+          "r-count-polished"
+        ]
+      },
+      {
+        "startLine": 165,
+        "endLine": 165,
+        "treatment": "represented",
+        "reason": "关系 r-expand-polished：低于3000字必须使用扩充技巧重写",
+        "nodeIds": [],
+        "edgeIds": [
+          "r-expand-polished"
+        ]
+      },
+      {
+        "startLine": 167,
+        "endLine": 167,
+        "treatment": "context",
+        "reason": "章节标题、分隔线或引导文本，顺序与要求由其归属节点/边表达。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 169,
+        "endLine": 169,
+        "treatment": "represented",
+        "reason": "节点 summary：在 00-大纲.md 中为本章添加 300–500 字摘要。完成标准：章节摘要已写入。",
+        "nodeIds": [
+          "summary"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 169,
+        "endLine": 170,
+        "treatment": "grouped",
+        "reason": "关系 f-complete：保留编号顺序。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-complete"
+        ]
+      },
+      {
+        "startLine": 170,
+        "endLine": 170,
+        "treatment": "represented",
+        "reason": "节点 complete：更新 00-大纲.md 的 TODO list，把本章标为完成。完成标准：本章状态已标完成。",
+        "nodeIds": [
+          "complete"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 172,
+        "endLine": 174,
+        "treatment": "context",
+        "reason": "章节标题、分隔线或引导文本，顺序与要求由其归属节点/边表达。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 176,
+        "endLine": 178,
+        "treatment": "represented",
+        "reason": "节点 c-golden：用动作和对话展示而非直接陈述；每章必须有冲突或转折；每章结尾必须留钩子。",
+        "nodeIds": [
+          "c-golden"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 176,
+        "endLine": 178,
+        "treatment": "represented",
+        "reason": "关系 k-golden：展示、冲突与悬念必须保留",
+        "nodeIds": [],
+        "edgeIds": [
+          "k-golden"
+        ]
+      },
+      {
+        "startLine": 180,
+        "endLine": 180,
+        "treatment": "context",
+        "reason": "章节标题、分隔线或引导文本，顺序与要求由其归属节点/边表达。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 182,
+        "endLine": 182,
+        "treatment": "represented",
+        "reason": "节点 r-wordcount：scripts/check_chapter_wordcount.py；原文引用的资源，本次仅解释，不执行。",
+        "nodeIds": [
+          "r-wordcount"
+        ],
+        "edgeIds": []
+      },
+      {
+        "startLine": 184,
+        "endLine": 193,
+        "treatment": "example",
+        "reason": "三个字数检查示例命令（单章、--all、自定义3500）仅展示脚本用法；没有执行，也不将示例变为新增工作流步骤。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 195,
+        "endLine": 195,
+        "treatment": "grouped",
+        "reason": "再次强调低于3000字须扩充，与两个字数检查节点中保留的同一要求一致。",
+        "nodeIds": [
+          "count-draft",
+          "count-polished"
+        ],
+        "edgeIds": []
+      },
+      {
+        "file": "references/chapter-guide.md",
+        "startLine": 1,
+        "endLine": 9,
+        "treatment": "context",
+        "reason": "章节指南标题及开头吸引力的背景解释；不是可执行动作。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 11,
+        "endLine": 27,
+        "treatment": "represented",
+        "reason": "节点 c-opening：前 20% 应有紧张、重大事件、情感冲击及继续阅读的欲望；绝对避免天气、日常流程、回顾上章、缓慢铺垫、平淡对话和过度解释。",
+        "nodeIds": [
+          "c-opening"
+        ],
+        "edgeIds": [],
+        "file": "references/chapter-guide.md"
+      },
+      {
+        "startLine": 11,
+        "endLine": 27,
+        "treatment": "represented",
+        "reason": "关系 k-opening：四种效果，避免六类致命错误",
+        "nodeIds": [],
+        "edgeIds": [
+          "k-opening"
+        ],
+        "file": "references/chapter-guide.md"
+      },
+      {
+        "file": "references/chapter-guide.md",
+        "startLine": 29,
+        "endLine": 29,
+        "treatment": "context",
+        "reason": "章节间分隔线。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 31,
+        "endLine": 121,
+        "treatment": "grouped",
+        "reason": "节点 c-techniques：将十个可选技巧汇总为同一开头设计约束，不把列表误画为十个顺序动作或强制选择分支。",
+        "nodeIds": [
+          "c-techniques"
+        ],
+        "edgeIds": [],
+        "file": "references/chapter-guide.md"
+      },
+      {
+        "file": "references/chapter-guide.md",
+        "startLine": 38,
+        "endLine": 38,
+        "treatment": "example",
+        "reason": "十种开头技巧的小说示例仅为写作示意，不是当前项目事实或已执行步骤。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "file": "references/chapter-guide.md",
+        "startLine": 47,
+        "endLine": 47,
+        "treatment": "example",
+        "reason": "十种开头技巧的小说示例仅为写作示意，不是当前项目事实或已执行步骤。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "file": "references/chapter-guide.md",
+        "startLine": 56,
+        "endLine": 56,
+        "treatment": "example",
+        "reason": "十种开头技巧的小说示例仅为写作示意，不是当前项目事实或已执行步骤。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "file": "references/chapter-guide.md",
+        "startLine": 65,
+        "endLine": 65,
+        "treatment": "example",
+        "reason": "十种开头技巧的小说示例仅为写作示意，不是当前项目事实或已执行步骤。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "file": "references/chapter-guide.md",
+        "startLine": 74,
+        "endLine": 74,
+        "treatment": "example",
+        "reason": "十种开头技巧的小说示例仅为写作示意，不是当前项目事实或已执行步骤。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "file": "references/chapter-guide.md",
+        "startLine": 83,
+        "endLine": 83,
+        "treatment": "example",
+        "reason": "十种开头技巧的小说示例仅为写作示意，不是当前项目事实或已执行步骤。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "file": "references/chapter-guide.md",
+        "startLine": 92,
+        "endLine": 92,
+        "treatment": "example",
+        "reason": "十种开头技巧的小说示例仅为写作示意，不是当前项目事实或已执行步骤。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "file": "references/chapter-guide.md",
+        "startLine": 101,
+        "endLine": 101,
+        "treatment": "example",
+        "reason": "十种开头技巧的小说示例仅为写作示意，不是当前项目事实或已执行步骤。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "file": "references/chapter-guide.md",
+        "startLine": 110,
+        "endLine": 110,
+        "treatment": "example",
+        "reason": "十种开头技巧的小说示例仅为写作示意，不是当前项目事实或已执行步骤。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "file": "references/chapter-guide.md",
+        "startLine": 119,
+        "endLine": 119,
+        "treatment": "example",
+        "reason": "十种开头技巧的小说示例仅为写作示意，不是当前项目事实或已执行步骤。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "file": "references/chapter-guide.md",
+        "startLine": 123,
+        "endLine": 123,
+        "treatment": "context",
+        "reason": "章节间分隔线。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 125,
+        "endLine": 163,
+        "treatment": "represented",
+        "reason": "节点 c-structure：前 20% 为开头钩子，必须有即时冲突/危机、重大事件/信息、情感冲击和行动场景，选用或组合十种开头技巧；中间 50–60% 推进剧情或深化人物，可揭示信息、变更关系、升级问题、体现成长，避免纯景物、无关互动、重复对话；后 15–20% 为动作/情感/心理高潮；最后 5–10% 留结尾钩子。比例照录为结构参考，不强行归一化。",
+        "nodeIds": [
+          "c-structure"
+        ],
+        "edgeIds": [],
+        "file": "references/chapter-guide.md"
+      },
+      {
+        "startLine": 125,
+        "endLine": 163,
+        "treatment": "represented",
+        "reason": "关系 k-structure：按章节四段结构组织",
+        "nodeIds": [],
+        "edgeIds": [
+          "k-structure"
+        ],
+        "file": "references/chapter-guide.md"
+      },
+      {
+        "startLine": 135,
+        "endLine": 135,
+        "treatment": "represented",
+        "reason": "关系 k-techniques：十种技巧可单用或组合",
+        "nodeIds": [],
+        "edgeIds": [
+          "k-techniques"
+        ],
+        "file": "references/chapter-guide.md"
+      },
+      {
+        "startLine": 161,
+        "endLine": 163,
+        "treatment": "represented",
+        "reason": "关系 r-hook-guide：结尾钩子详见技法文件",
+        "nodeIds": [],
+        "edgeIds": [
+          "r-hook-guide"
+        ],
+        "file": "references/chapter-guide.md"
+      },
+      {
+        "file": "references/chapter-guide.md",
+        "startLine": 165,
+        "endLine": 165,
+        "treatment": "context",
+        "reason": "章节间分隔线。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 167,
+        "endLine": 192,
+        "treatment": "represented",
+        "reason": "节点 c-chapter-type：情节推进章推动主线；人物深化章揭示背景/动机/内心冲突且必须关联主线，不能成为纯小传；氛围章建立情绪或紧张；过渡章连接事件、整理信息/位置/时间且要简洁不拖沓。示例只说明各类用途。",
+        "nodeIds": [
+          "c-chapter-type"
+        ],
+        "edgeIds": [],
+        "file": "references/chapter-guide.md"
+      },
+      {
+        "startLine": 167,
+        "endLine": 192,
+        "treatment": "represented",
+        "reason": "关系 k-type：章节目的与主线相关",
+        "nodeIds": [],
+        "edgeIds": [
+          "k-type"
+        ],
+        "file": "references/chapter-guide.md"
+      },
+      {
+        "file": "references/chapter-guide.md",
+        "startLine": 194,
+        "endLine": 194,
+        "treatment": "context",
+        "reason": "章节间分隔线。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 196,
+        "endLine": 219,
+        "treatment": "represented",
+        "reason": "节点 c-rhythm：一章内应有紧张→缓解→新紧张→更紧张的变化；动作/大量对话/快速事件属高密度，独白/环境/情感沉淀属低密度，高低交替，避免持续过高或过低。追捕到逃离的示例不作为流程执行。",
+        "nodeIds": [
+          "c-rhythm"
+        ],
+        "edgeIds": [],
+        "file": "references/chapter-guide.md"
+      },
+      {
+        "startLine": 196,
+        "endLine": 219,
+        "treatment": "represented",
+        "reason": "关系 k-rhythm：节奏变化，高低密度交替",
+        "nodeIds": [],
+        "edgeIds": [
+          "k-rhythm"
+        ],
+        "file": "references/chapter-guide.md"
+      },
+      {
+        "file": "references/chapter-guide.md",
+        "startLine": 202,
+        "endLine": 212,
+        "treatment": "example",
+        "reason": "节奏示意与追捕/安全屋/逃离示例保留为文学结构示范，不是 Agent 执行路径。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "file": "references/chapter-guide.md",
+        "startLine": 221,
+        "endLine": 221,
+        "treatment": "context",
+        "reason": "章节间分隔线。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 223,
+        "endLine": 231,
+        "treatment": "represented",
+        "reason": "节点 c-density：800–1500 字参考 1 个事件/1–2 场景，1500–3000 字参考 1–2 事件/2–3 场景，3000–5000 字参考 2–3 事件/3–5 场景；每章至少一个不可删除的核心事件，可移除而不影响理解的事件应删。短章参考不是取消 SKILL.md 的 3000–5000 字要求。",
+        "nodeIds": [
+          "c-density"
+        ],
+        "edgeIds": [],
+        "file": "references/chapter-guide.md"
+      },
+      {
+        "startLine": 223,
+        "endLine": 231,
+        "treatment": "represented",
+        "reason": "关系 k-density：3000–5000 字参照 2–3 事件、3–5 场景",
+        "nodeIds": [],
+        "edgeIds": [
+          "k-density"
+        ],
+        "file": "references/chapter-guide.md"
+      },
+      {
+        "file": "references/chapter-guide.md",
+        "startLine": 233,
+        "endLine": 233,
+        "treatment": "context",
+        "reason": "章节间分隔线。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 235,
+        "endLine": 261,
+        "treatment": "represented",
+        "reason": "节点 guide-check：每章撰写后自查：前 20% 是否吸引人、首段冲突、重大事件/信息、强烈情感、继续阅读欲望、避免天气/日常/回顾等错误；开头自测还问前三段能否让人继续读、是否有危机、意外或转折、情绪冲击、是否避开平淡说明。前 20% 不吸引人或任一开头自测答否时必须重写。与两次字数检查的相对排程未说明，不接主链。",
+        "nodeIds": [
+          "guide-check"
+        ],
+        "edgeIds": [],
+        "file": "references/chapter-guide.md"
+      },
+      {
+        "startLine": 240,
+        "endLine": 261,
+        "treatment": "grouped",
+        "reason": "关系 f-rewrite-opening：同一章后检查区域给出两个必须重写的失败谓词，合并为一个失败出口；不画未给出的通过出口或重写返回。",
+        "nodeIds": [],
+        "edgeIds": [
+          "f-rewrite-opening"
+        ],
+        "file": "references/chapter-guide.md"
+      },
+      {
+        "startLine": 247,
+        "endLine": 253,
+        "treatment": "represented",
+        "reason": "节点 c-content-check：撰写每章后自查：推进主线或深化人物、有冲突或转折、对话推进情节或揭示人物、展示关键信息而非讲述、结尾钩子、为下一章伏笔。没有给出清单未通过时的修复返回点。",
+        "nodeIds": [
+          "c-content-check"
+        ],
+        "edgeIds": [],
+        "file": "references/chapter-guide.md"
+      },
+      {
+        "startLine": 247,
+        "endLine": 253,
+        "treatment": "represented",
+        "reason": "关系 k-content-check：章后内容自查清单",
+        "nodeIds": [],
+        "edgeIds": [
+          "k-content-check"
+        ],
+        "file": "references/chapter-guide.md"
+      },
+      {
+        "startLine": 255,
+        "endLine": 261,
+        "treatment": "represented",
+        "reason": "节点 rewrite-opening：开头检查未达要求时执行重写；原文没有限定重写范围、指定重检次数或写出返回节点。完成标准：按要求执行重写，不声称已重新通过检查。",
+        "nodeIds": [
+          "rewrite-opening"
+        ],
+        "edgeIds": [],
+        "file": "references/chapter-guide.md"
+      },
+      {
+        "file": "references/consistency.md",
+        "startLine": 1,
+        "endLine": 5,
+        "treatment": "context",
+        "reason": "连贯性文件标题、目的与写前必读标题。",
+        "nodeIds": [],
+        "edgeIds": []
+      },
+      {
+        "startLine": 7,
+        "endLine": 10,
+        "treatment": "represented",
+        "reason": "节点 c-preflight：每次新章开始前，按列表读完大纲中全部已完成章节摘要、读取上一章文件了解当前悬念、检查人物位置/情绪/关系；这些是写前前置要求，不臆造与主文 TODO 更新之间的精确插入次序。",
+        "nodeIds": [
+          "c-preflight"
+        ],
+        "edgeIds": [],
+        "file": "references/consistency.md"
+      },
+      {
+        "startLine": 7,
+        "endLine": 10,
+        "treatment": "represented",
+        "reason": "关系 k-preflight：每次新章前读摘要、前章与人物状态",
+        "nodeIds": [],
+        "edgeIds": [
+          "k-preflight"
+        ],
+        "file": "references/consistency.md"
+      },
+      {
+        "startLine": 12,
+        "endLine": 32,
+        "treatment": "represented",
+        "reason": "节点 c-continuity：新章自然呼应前文伏笔/线索、提及既有事件、行为保持一致；跟踪人物位置、情绪、关系和能力变化；每章至少回应一个旧悬念，提出新悬念或升级旧悬念，不遗忘未解悬念。",
+        "nodeIds": [
+          "c-continuity"
+        ],
+        "edgeIds": [],
+        "file": "references/consistency.md"
+      },
+      {
+        "startLine": 12,
+        "endLine": 32,
+        "treatment": "represented",
+        "reason": "关系 k-continuity：新章呼应前文、跟踪状态与悬念",
+        "nodeIds": [],
+        "edgeIds": [
+          "k-continuity"
+        ],
+        "file": "references/consistency.md"
+      },
+      {
+        "startLine": 34,
+        "endLine": 40,
+        "treatment": "represented",
+        "reason": "节点 c-continuity-check：核对人物行为符合性格、伏笔呼应逻辑闭环、高潮低谷节奏合理、时间线无跳跃错误、场景转换自然无凭空出现。",
+        "nodeIds": [
+          "c-continuity-check"
+        ],
+        "edgeIds": [],
+        "file": "references/consistency.md"
+      },
+      {
+        "startLine": 34,
+        "endLine": 40,
+        "treatment": "represented",
+        "reason": "关系 k-continuity-check：逐项核对连贯性清单",
+        "nodeIds": [],
+        "edgeIds": [
+          "k-continuity-check"
+        ],
+        "file": "references/consistency.md"
+      }
+    ]
+  }
+}
