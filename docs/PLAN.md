@@ -192,6 +192,10 @@
 
 选它做第一张图：MIT、篇幅短、单文件，适合先跑通 omp 执行 → Claude 审查 → 上线的完整链路。跑通后再做体量更大的 chinese-novelist（含 11 个 references 文件，用 `--include` 验证多文件证据）。
 
+### 9.4 审查责任
+
+逻辑图一律由 Claude 审查后才发布：omp 产出时 `meta.json` 的 `reviewedBy` 保持 `null`；Claude 对照原文复核（自跑 validate、核对快照与许可、抽查边和判断节点、确认缺口真实），并在浏览器验收后填 `reviewedBy: "claude"`。`tools/build-data.mjs` 只挂接已审查的图。omp 不得自行填写审查标记。
+
 ### 9.3 精选区：chinese-novelist + vibe-knowledge-film
 
 理由：两者都是许可明确的中文 skill，流程完整（多阶段、有检查点和分支），图的信息量足，上游也有一定关注度。前提是它们的图都通过第 6 节的质量门槛；若某张图有未解决的缺口过多，则换成通过门槛的其他白名单 skill。精选名单写在 `data/featured.json`，随时可改。
