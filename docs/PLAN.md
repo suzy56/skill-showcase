@@ -143,7 +143,7 @@
 
 前置事项：
 - omp 当前 skills 目录没有 `visualizing-skill-packages`，需要软链或复制 `~/.agents/skills/visualizing-skill-packages` 到 omp 可发现的位置，并确认它能找到 `scripts/*.mjs`（Node 18+ 即可，无需 npm）。
-- 先用 1 个已知 skill（如 `humanizer`）跑通一遍，对照本仓库已有的审计样例（nuwa、interview-recall-training）校准质量，再批量。
+- 先用 1 个许可明确的 skill（`writing-shape`）跑通一遍，对照本仓库已有的审计样例（nuwa、interview-recall-training）校准质量，再批量。
 
 ## 6. 质量门槛（每张图上线前）
 
@@ -166,13 +166,32 @@
 
 ## 8. 里程碑
 
-1. **M1 管线打通**：omp 能加载可视化 skill；`humanizer` 出图并通过质量门槛。
-2. **M2 写作类出图**：20 个写作 skill 中许可明确的部分全部出图；当前静态页加「查看逻辑图」链接（不改版也能先上线）。
+1. **M1 管线打通**：omp 能加载可视化 skill；`writing-shape` 出图并通过质量门槛，再做 `chinese-novelist`（多文件）。
+2. **M2 写作类出图**：白名单内的写作 skill 全部出图，同时完成其余 15 个的来源补查；当前静态页加「查看逻辑图」链接（不改版也能先上线）。
 3. **M3 改版**：Astro + neo-brutalism-ui 组件重做首页/分类/详情页，迁移现有数据和图。
 4. **M4 扩充分类**：按排除清单逐类上线其余分类，每类一批图。
 
-## 9. 待定问题
+## 9. 已定决策（2026-11-15）
 
-1. 来源未记录的 skill：是否先花一轮补查上游和许可？
-2. 你自己写的 skill（如 wewrite 系列，如果是你的）是否公开原文和逻辑图？
-3. 精选区放哪几个 skill？
+### 9.1 出图白名单：只给许可可核实的 skill 出图
+
+- **出图条件**：上游仓库可定位，且 LICENSE 允许再分发（MIT / Apache-2.0 / BSD / CC-BY 等）。详情页注明许可名称和上游链接。
+- **来源未记录或许可不明**：先做一轮补查（交给 omp：按 skill 名称和描述在 GitHub 搜索上游、读取 LICENSE，结果写入 `data/sources.json` 供 Claude 复核）。查实前**只展示名称和简介，不出图、不公开原文**。
+- **疑似自写的 skill**（例如 wewrite 系列、humanizer 等目前无上游记录的）：默认按「许可不明」处理，不公开原文。若之后确认是自己写的、愿意公开，在 `data/publish.json` 里逐个加 `allowCircuit: true` 即可，不需要改代码。
+- 已确认的写作类白名单（GitHub LICENSE 已核对）：
+
+| Skill | 上游 | 许可 |
+|---|---|---|
+| chinese-novelist | penglonghuang/chinese-novelist-skill | MIT |
+| vibe-knowledge-film | HeyChengC/vibe-knowledge-film | MIT |
+| writing-beats / writing-fragments / writing-shape | mattpocock/skills | MIT |
+
+注意：MIT 要求保留版权和许可声明，详情页和图的查看器旁边都要附上原许可文本链接。
+
+### 9.2 M1 试点：writing-shape
+
+选它做第一张图：MIT、篇幅短、单文件，适合先跑通 omp 执行 → Claude 审查 → 上线的完整链路。跑通后再做体量更大的 chinese-novelist（含 11 个 references 文件，用 `--include` 验证多文件证据）。
+
+### 9.3 精选区：chinese-novelist + vibe-knowledge-film
+
+理由：两者都是许可明确的中文 skill，流程完整（多阶段、有检查点和分支），图的信息量足，上游也有一定关注度。前提是它们的图都通过第 6 节的质量门槛；若某张图有未解决的缺口过多，则换成通过门槛的其他白名单 skill。精选名单写在 `data/featured.json`，随时可改。
